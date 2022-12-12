@@ -1,12 +1,13 @@
-import express, { Application, Request, Response } from 'express';
+import * as express from 'express';
+const port: number = 8080;
 
-const app: Application = express();
-const port = 8080;
+const app: express.Application = express();
 
 app
-  .get('/', (req: Request, res: Response) => {
-    res.end(`Server Start ${port} hipasspj`);
+  .get('/', (req: express.Request, res: express.Response) => {
+    res.send('하이패스 서버');
   })
-  .listen(port, () => {
-    console.log(`Server Start ${port} 하이패스 프로젝트`);
+  .listen(port, (err?: ErrorCallback) => {
+    if (err) throw err;
+    console.log(`start Server ${port}`);
   });
