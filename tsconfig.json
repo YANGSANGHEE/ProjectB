@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "ES2020",
+    "module": "ESNext",
     "outDir": "./dist",
     "target": "es5",
     "jsx": "react-jsx",
