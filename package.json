@@ -7,7 +7,7 @@
     "start": "webpack-dev-server --config config/webpack.dev.js",
     "build": "webpack --config config/webpack.prod.js",
     "predev": "tsc",
-    "dev": "nodemon --exec node --loader ts-node/esm backend/app.ts"
+    "server": "nodemon --exec node --loader ts-node/esm backend/app.ts"
   },
   "browserslist": [
     "ie 11"
