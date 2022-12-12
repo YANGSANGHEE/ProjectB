@@ -1,0 +1,4 @@
+* 서버실행 명령어
+
+react : npm run start
+express : npm run server
