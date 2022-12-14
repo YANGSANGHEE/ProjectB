@@ -4,7 +4,8 @@ const { kakao } = window;
 
 const Speedlimit = () => {
   const [vsl, setVsl] = useState([]);
-  const apiKey = '480dc33ea22b4f79ac3ea6368e1c9eac';
+  // const apiKey = REACT_APP_ITS_KEY;
+  const apiKey = process.env.REACT_APP_ITS_KEY;
   
   //컴포넌트가 처음 나타났을때
   useEffect(() => {
@@ -28,7 +29,7 @@ const Speedlimit = () => {
     coordY: vsl.map(item => { return item.coordX }),
     limitSpeed: vsl.map(item => {return item.limitSpeed})
   }
-  console.log(coordAndlimitS)
+  console.log(coordAndlimitS);
   // return coordAndlimitS;
 
   return (
