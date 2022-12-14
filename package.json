@@ -26,6 +26,7 @@
     "@types/styled-components": "^5.1.26",
     "axios": "^1.2.1",
     "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "mysql": "^2.18.1",
     "package": "^1.0.1",

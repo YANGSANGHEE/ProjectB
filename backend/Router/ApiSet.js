@@ -1,4 +1,5 @@
-const express = require('express')
+const express = require('express');
+const { default: test } = require('node:test');
 const connection = require('../dbconnect')
 const router = express.Router();
 
@@ -10,19 +11,20 @@ router.get('/:id', (req, res) => {
     switch (id) {
       case 'test':
         Query = 'SELECT * FROM hipasstest'
+        connection.query(
+          Query, (err, row, field) => {
+            if (err) throw err
+            res.send(row)
+          }
+        );
         break;
-      case 'test2':
-        Query = 'SELECT * FROM testing'
+      case 'testpost':
+        let Data = req.body
+        console.log(Data);
         break;
       default:
         return null
     }
-    connection.query(
-      Query, (err, row, field) => {
-        if (err) throw err
-        res.send(row)
-      }
-    );
   }
 });
 

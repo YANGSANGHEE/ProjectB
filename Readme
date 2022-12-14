@@ -28,3 +28,18 @@ const Test = styled.div`
 
 *이미지 경로 입력시 예시
 <img src="/img/CCTV.png" alt = "이미지">
+
+*axios 예시 AxiosExample 참고
+
+*api key 변수에 담아 사용하기
+ex) const MAP = process.env.REACT_APP_KAKAO_KEY;
+
+  useEffect(() => {
+     axiosSet
+      .get(`//dapi.kakao.com/v2/maps/sdk.js?appkey=${MAP}`) // API url 입력
+       .then((res) => console.log(res.data)) // axios는 default가 JSON으로 값을 받아옴
+      .catch((e: ErrorCallback) => {
+         if (e) throw e;
+         console.log('에러');
+       }); //에러처리
+ }, []);

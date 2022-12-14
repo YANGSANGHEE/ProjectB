@@ -1,4 +1,4 @@
-import AxiosExample from './axiosExample';
+import AxiosExample from './AxiosExample';
 
 const LayOut = () => {
   return (
