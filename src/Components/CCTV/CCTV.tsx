@@ -1,25 +1,57 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import axios from "axios";
+const { kakao } = window;
+const Media = styled.div`
+  width: 100px;
+  height: 100px;
+  ${({ theme }) => theme.device.mobile} {
+    background-color: salmon;
+  }
+  /* 0~768px 까지 background-color salmon 색 그이후는 red */
+  background-color: red;
+`;
 const CCTV = () => {
-  const [kakao, setKakao] = useState({
-    center: {
-      lat: 36.3504119,
-      lng: 127.3845475,
-    },
-    isPanto: true,
-  });
-  const MAP = process.env.REACT_APP_KAKAO_KEY;
+  // const [map, setMap] = useState({
+  //   center: {
+  //     lat: 36.3504119,
+  //     lng: 127.3845475,
+  //   },
+  //   isPanto: true,
+  // });
+
   useEffect(() => {
-    axios
-      .get(`//dapi.kakao.com/v2/maps/sdk.js?appkey=${MAP}`) // API url 입력
-      .then(res => console.log(res.data)) // axios는 default가 JSON으로 값을 받아옴
-      .catch((e: ErrorCallback) => {
-        if (e) throw e;
-        console.log("에러");
-      }); //에러처리
-  }, []);
-  return <></>;
+    // let markers = [];
+    const container = document.getElementById("map");
+    const options = {
+      center: new kakao.maps.LatLng(36.3504119, 127.3845475),
+      level: 3,
+    };
+    const mapScript = new kakao.maps.Map(container, options);
+    console.log(mapScript);
+    const markerPosition = new kakao.maps.LatLng(36.3504119, 127.3845475);
+    const marker = new kakao.maps.Marker({
+      position: markerPosition,
+    });
+    marker.setMap(mapScript);
+    function setDraggable(draggable: any) {
+      // 마우스 드래그로 지도 이동 가능여부를 설정
+      mapScript.setDraggable(draggable);
+    }
+    console.log("loading kakaomap");
+  });
+
+  return (
+    <div
+      id="map"
+      style={{
+        width: "100%",
+        height: "800px",
+        position: "relative",
+        overflow: "hidden",
+      }}
+    ></div>
+  );
 };
 
 export default CCTV;
