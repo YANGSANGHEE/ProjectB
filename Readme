@@ -25,3 +25,6 @@ const Test = styled.div`
   height: ${calcPx(100)};
   background: ${({ theme }) => theme.Color.black};
 `;
+
+*이미지 경로 입력시 예시
+<img src="/img/CCTV.png" alt = "이미지">

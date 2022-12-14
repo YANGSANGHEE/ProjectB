@@ -13,7 +13,9 @@ const App = () => {
   return (
     <>
       <LayOut />
-      <Test></Test>
+      <img src='/img/CCTV.png' alt='CCTV'></img>\{/* 이미지 경로 참고 */}
+      <Test />
+      {/* styled component , calcPx적용 */}
     </>
   );
 };
