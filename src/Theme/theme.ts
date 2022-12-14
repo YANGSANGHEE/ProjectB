@@ -24,10 +24,15 @@ const border = {
   `,
 };
 
+const device = {
+  mobile: `@media screen and (max-width:768px)`,
+};
+
 export const theme = {
   fontSize,
   Color,
   border,
+  device,
 };
 
 export type Theme = typeof theme;

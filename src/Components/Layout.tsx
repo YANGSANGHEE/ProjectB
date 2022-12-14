@@ -1,10 +1,19 @@
 import AxiosExample from './AxiosExample';
+import styled from 'styled-components';
+
+const Media = styled.div`
+  width: 100px;
+  height: 100px;
+  ${({ theme }) => theme.device.mobile} {
+    background-color: salmon;
+  }
+  background-color: red;
+`;
 
 const LayOut = () => {
   return (
     <>
-      {' '}
-      <h1>하이패스 프로젝트</h1>
+      <Media />
       <AxiosExample />
     </>
   );

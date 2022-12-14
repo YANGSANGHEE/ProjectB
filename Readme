@@ -30,7 +30,7 @@ const Test = styled.div`
 <img src="/img/CCTV.png" alt = "이미지">
 
 *axios 예시 AxiosExample 참고
-
+-GET/POST 있음
 *api key 변수에 담아 사용하기
 ex) const MAP = process.env.REACT_APP_KAKAO_KEY;
 
@@ -43,3 +43,15 @@ ex) const MAP = process.env.REACT_APP_KAKAO_KEY;
          console.log('에러');
        }); //에러처리
  }, []);
+
+ *media query
+ ex)
+ const Media = styled.div`
+  width: 100px;
+  height: 100px;
+  ${({ theme }) => theme.device.mobile} {
+    background-color: salmon;
+  }
+  0~768px 까지 background-color salmon 색 그이후는 red
+  background-color: red;
+`;
