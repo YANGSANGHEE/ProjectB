@@ -18,7 +18,7 @@ const AxiosExample = () => {
 
   const Post = async (): Promise<void> => {
     await axios
-      .post('http://localhost:8080/testpost', {
+      .post('http://localhost:8080/post/testpost', {
         id: '그냥보냄',
         password: '1sfasd351243s',
       })
