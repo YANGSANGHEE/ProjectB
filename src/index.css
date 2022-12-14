@@ -1,0 +1,36 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 10px;
+  user-select: none;
+}
+body {
+  max-width: 768px;
+  min-width: 320px;
+  overflow-x: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 400;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+img {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  border: none;
+}
+a,
+a:link,
+a:active,
+a:visited {
+  text-decoration: none;
+}
+ol,
+ul {
+  list-style: none;
+}

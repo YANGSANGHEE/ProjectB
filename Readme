@@ -2,3 +2,26 @@
 
 react : npm run start
 express : npm run server
+
+* Styled-component / ThemeProvider
+Styled-component ThemeProvider => Theme 폴더의 theme 참고 (속성값을 객체 형식으로 불러옴)
+형식 ) ${({theme})=>theme.객체명.프로퍼티} => 프로퍼티 키값 적용
+
+ex)
+const Test = styled.div`
+  width: 100px;
+  height: 100px;
+  background: ${({ theme }) => theme.Color.black};
+`;
+
+
+*calcPx()
+피그마에 px 로 되어있는 요소들을 vw로 바꿔줌(화면너비 320px 기준)
+
+ex)
+const Test = styled.div`
+  width: ${calcPx(100)};
+  =(100/(320/100)) / 31.3vw;
+  height: ${calcPx(100)};
+  background: ${({ theme }) => theme.Color.black};
+`;
