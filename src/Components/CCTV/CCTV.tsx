@@ -43,8 +43,8 @@ const CCTV = () => {
         const mapScript = new kakao.maps.Map(container, options);
         // 카카오맵 기본 설정 좌표 실행
         const imgSrc = "/img/CCTV.png",
-          imgSize = new kakao.maps.Size(20, 30),
-          imageOption = { offset: new kakao.maps.Point(27, 69) };
+          imgSize = new kakao.maps.Size(30, 40);
+        const imageOption = { offset: new kakao.maps.Point(15, 33) };
         // 마커 디자인 변경
         const markerImg = new kakao.maps.MarkerImage(
           imgSrc,
@@ -62,7 +62,7 @@ const CCTV = () => {
             // 마커 이미지 변경
           });
           kakao.maps.event.addListener(marker, "click", function () {
-            window.open(el.cctvurl, "child", "width=320, height=720");
+            window.open(el.cctvurl, "child", "width=500, height=500");
           });
           marker.setMap(mapScript);
         });
