@@ -42,8 +42,17 @@ const CCTV = () => {
         // 초기 카카오맵 설정값
         const mapScript = new kakao.maps.Map(container, options);
         // 카카오맵 기본 설정 좌표 실행
+        const mapTypeControl = new kakao.maps.MapTypeControl();
+        // 지도와 스카이뷰를 선택해서 볼 수 있음.
+        mapScript.addControl(
+          mapTypeControl,
+          kakao.maps.ControlPosition.TOPRIGHT
+        );
+        const zoomControl = new kakao.maps.ZoomControl();
+        // 확대 축소가 가능한 컨트롤바
+        mapScript.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
         const imgSrc = "/img/CCTV.png",
-          imgSize = new kakao.maps.Size(30, 40);
+          imgSize = new kakao.maps.Size(25, 40);
         const imageOption = { offset: new kakao.maps.Point(15, 33) };
         // 마커 디자인 변경
         const markerImg = new kakao.maps.MarkerImage(
@@ -70,6 +79,7 @@ const CCTV = () => {
           // 마우스 드래그로 지도 이동 가능여부를 설정
           mapScript.setDraggable(draggable);
         };
+        setDraggable(true);
         console.log("loading kakaomap");
       })
       .catch((e: ErrorCallback) => {

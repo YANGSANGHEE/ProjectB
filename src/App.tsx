@@ -15,7 +15,7 @@ const App = () => {
     <>
       <LayOut />
       <img src="/img/CCTV.png" alt="CCTV"></img>\{/* 이미지 경로 참고 */}
-      <Test />
+      {/* <Test /> */}
       {/* styled component , calcPx적용 */}
       <CCTV />
     </>
