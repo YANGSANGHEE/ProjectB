@@ -1,5 +1,5 @@
-import AxiosExample from './AxiosExample';
-import styled from 'styled-components';
+import AxiosExample from "./AxiosExample";
+import styled from "styled-components";
 
 const Media = styled.div`
   width: 100px;
@@ -13,8 +13,8 @@ const Media = styled.div`
 const LayOut = () => {
   return (
     <>
-      <Media />
-      <AxiosExample />
+      {/* <Media />
+      <AxiosExample /> */}
     </>
   );
 };
