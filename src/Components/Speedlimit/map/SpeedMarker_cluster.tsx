@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 import axios from 'axios';
-import GetMarker from './GetMarker';
 const { kakao } = window; //불러오기에 문제없음
 import vslData from "../testData/vsl.json" //api 복사한 json데이터
 import { resolve } from 'path';
@@ -19,8 +18,8 @@ const MarkerCluster = () => {
       .then(() => {
         let container = document.getElementById('map');
         let options = {
-          center: new kakao.maps.LatLng(36.33395949, 127.3719135),
-          level: 13,
+          center: new kakao.maps.LatLng(36.3504119, 127.3845475),
+          level: 10,
         };
         // console.log(data)
         let map = new kakao.maps.Map(container, options);
@@ -34,7 +33,7 @@ const MarkerCluster = () => {
         let clusterer = new kakao.maps.MarkerClusterer({
           map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
           averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
-          minLevel: 10 // 클러스터 할 최소 지도 레벨 
+          minLevel: 9 // 클러스터 할 최소 지도 레벨 
         });
         // 마커
         const markers = data.map((value) => {
@@ -87,7 +86,7 @@ const MarkerCluster = () => {
 
   return (
   <>
-    <div id='map' style={{ width: '700px', height: '500px' }}></div>
+    <div id='map' style={{ width: '320px', height: '70vh' }}></div>
   </>
   );
 };
