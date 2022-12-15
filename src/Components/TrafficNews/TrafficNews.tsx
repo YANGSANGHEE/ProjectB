@@ -35,26 +35,36 @@ const key = "480dc33ea22b4f79ac3ea6368e1c9eac";
   const move = keyframes`
     0%{
       transform: translateX(50px);
+      opacity: 1;
     } 
     100%{
       transform: translateX(-200px);
+      /* opacity: 0; */
     }
   `
 
   const Digit:any = styled.div`
   border: solid 2px red; 
-  width: 500px;
+  width: 300px;
   height: 40px;
-  display: flex; 
+  display: flex;  
+  justify-content: center;
+  flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    align-items: center;
+  overflow: hidden;
+
   `
 
 
 
   const StyledDiv:any = styled.div`
-    width: 200px;
+    /* width: 600px; */
+  margin-right: 10px;
     height: 20px;
     border: solid 2px blue; 
-    animation: ${move} 2s linear infinite;
+    animation: ${move} 4s linear infinite;
     `  
 
 
@@ -81,7 +91,7 @@ const key = "480dc33ea22b4f79ac3ea6368e1c9eac";
       </>
      
      )
-    })}     
+    })}      
   
 
 
