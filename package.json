@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/YANGSANGHEE/ProjectB#readme",
   "dependencies": {
+    "@emotion/react": "^11.10.5",
     "@types/styled-components": "^5.1.26",
     "axios": "^1.2.1",
     "cors": "^2.8.5",
