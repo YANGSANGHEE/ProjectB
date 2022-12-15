@@ -12,32 +12,35 @@ const Media = styled.div`
   background-color: red;
 `;
 const CCTV = () => {
-  // const [map, setMap] = useState({
-  //   center: {
-  //     lat: 36.3504119,
-  //     lng: 127.3845475,
-  //   },
-  //   isPanto: true,
-  // });
+  const [map, setMap] = useState({
+    center: {
+      lat: 36.3504119,
+      lng: 127.3845475,
+    },
+    isPanto: true,
+  });
 
   useEffect(() => {
     // let markers = [];
     const container = document.getElementById("map");
     const options = {
-      center: new kakao.maps.LatLng(36.3504119, 127.3845475),
+      center: new kakao.maps.LatLng(map.center.lat, map.center.lng),
       level: 3,
     };
     const mapScript = new kakao.maps.Map(container, options);
     console.log(mapScript);
-    const markerPosition = new kakao.maps.LatLng(36.3504119, 127.3845475);
+    const markerPosition = new kakao.maps.LatLng(
+      map.center.lat,
+      map.center.lng
+    );
     const marker = new kakao.maps.Marker({
       position: markerPosition,
     });
     marker.setMap(mapScript);
-    function setDraggable(draggable: any) {
+    const setDraggable = (draggable: any) => {
       // 마우스 드래그로 지도 이동 가능여부를 설정
       mapScript.setDraggable(draggable);
-    }
+    };
     console.log("loading kakaomap");
   });
 
@@ -46,7 +49,7 @@ const CCTV = () => {
       id="map"
       style={{
         width: "100%",
-        height: "800px",
+        height: "50vh",
         position: "relative",
         overflow: "hidden",
       }}
