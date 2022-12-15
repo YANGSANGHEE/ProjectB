@@ -11,6 +11,12 @@ const Media = styled.div`
   /* 0~768px 까지 background-color salmon 색 그이후는 red */
   background-color: red;
 `;
+const CCTVIcon = styled.div`
+  width: 30px;
+  height: 30px;
+  background-image: url("/img/CCTV.png");
+  background-size: cover;
+`;
 const CCTV = () => {
   const [map, setMap] = useState({
     center: {
@@ -19,37 +25,61 @@ const CCTV = () => {
     },
     isPanto: true,
   });
-
+  const ITS = process.env.REACT_APP_ITS_KEY;
   useEffect(() => {
     // let markers = [];
-    const container = document.getElementById("map");
-    const options = {
-      center: new kakao.maps.LatLng(map.center.lat, map.center.lng),
-      level: 3,
-    };
-    const mapScript = new kakao.maps.Map(container, options);
-    console.log(mapScript);
-    const markerPosition = new kakao.maps.LatLng(
-      map.center.lat,
-      map.center.lng
-    );
-    const marker = new kakao.maps.Marker({
-      position: markerPosition,
-    });
-    marker.setMap(mapScript);
-    const setDraggable = (draggable: any) => {
-      // 마우스 드래그로 지도 이동 가능여부를 설정
-      mapScript.setDraggable(draggable);
-    };
-    console.log("loading kakaomap");
-  });
+    // let data;
+    axios
+      .get(
+        /* <object> */ `https://openapi.its.go.kr:9443/cctvInfo?apiKey=${ITS}&type=all&cctvType=2&minX=127.252183&maxX=127.538356&minY=36.194005&maxY=36.499218&getType=json`
+      )
+      .then(res => {
+        // let latitude = Number(data.market_latitude);
+        // let logitude = Number(data.market_longitude);
+        // data = res.data.body.items;
+        const cctvPlace = res.data.response.data;
+        const container = document.getElementById("map");
+        const options = {
+          center: new kakao.maps.LatLng(map.center.lat, map.center.lng),
+          level: 13,
+        };
+        const mapScript = new kakao.maps.Map(container, options);
+        // 카카오맵 기본 설정 좌표 실행
+        const imgSrc = "/img/CCTV.png",
+          imgSize = new kakao.maps.Size(50, 60),
+          imageOption = { offset: new kakao.maps.Point(27, 69) };
+        const markerImg = new kakao.maps.MarkerImage(
+          imgSrc,
+          imgSize,
+          imageOption
+        );
+        cctvPlace.map((el: any) => {
+          // new kakao.maps.LatLng(el.coordy, el.coordx);
+          const marker = new kakao.maps.Marker({
+            map: mapScript,
+            position: new kakao.maps.LatLng(el.coordy, el.coordx),
+            image: markerImg,
+          });
+          marker.setMap(mapScript);
+        });
+        const setDraggable = (draggable: any) => {
+          // 마우스 드래그로 지도 이동 가능여부를 설정
+          mapScript.setDraggable(draggable);
+        };
+        console.log("loading kakaomap");
+      })
+      .catch((e: ErrorCallback) => {
+        if (e) throw e;
+        console.log("에러");
+      });
+  }, []);
 
   return (
     <div
       id="map"
       style={{
         width: "100%",
-        height: "50vh",
+        height: "100vh",
         position: "relative",
         overflow: "hidden",
       }}
