@@ -29,22 +29,17 @@ const Maps = () => {
         // 지도에 교통정보를 표시하도록 지도타입을 추가
         // map.addOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC);
 
-        // 마커
-        kakao.maps.event.addListener(map, 'zoom_changed', () => {
-          let level = map.getlevel();
-          if (level <= 3) {
-          }else{}
+        let marker: any;
+        data.forEach((value: any) => {
+          let markerPosition = new kakao.maps.LatLng(
+            value.coordY,
+            value.coordX
+          );
+          marker = new kakao.maps.Marker({
+            position: markerPosition,
+          });
+          marker.setMap(map); "언니 너무머시써"
         });
-        // data.forEach((value: any) => {
-        //   let markerPosition = new kakao.maps.LatLng(
-        //     value.coordY,
-        //     value.coordX
-        //   );
-        //   let marker = new kakao.maps.Marker({
-        //     position: markerPosition,
-        //   });
-        //   marker.setMap(map);
-        // });
       }) // axios는 default가 JSON으로 값을 받아옴
       .catch((e: ErrorCallback) => {
         if (e) throw e;

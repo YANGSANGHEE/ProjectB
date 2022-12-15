@@ -1,23 +1,18 @@
-import AxiosExample from './AxiosExample';
-import styled from 'styled-components';
-import Speedlimit from './Speedlimit/SpeedLimit';
+import { useState } from 'react';
+import Header from './Header';
 import { calcPx } from '@/Hooks/CalcPx';
 
-const Media = styled.div`
-  width: ${calcPx(100)};
-  height: ${calcPx(100)};
-  ${({ theme }) => theme.device.mobile} {
-    background-color: salmon;
-  }
-  background-color: red;
-`;
-
 const LayOut = () => {
+  const [button, Setbutton] = useState<string>('traffic');
+
+  const getbutton = (data: string): void => {
+    Setbutton(data);
+  };
+
+  console.log(button);
   return (
     <>
-      <Media />
-      <AxiosExample />
-      <Speedlimit />
+      <Header getbutton={getbutton}></Header>
     </>
   );
 };
