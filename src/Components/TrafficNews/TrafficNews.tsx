@@ -54,10 +54,7 @@ const key = "480dc33ea22b4f79ac3ea6368e1c9eac";
     align-content: center;
     align-items: center;
   overflow: hidden;
-
   `
-
-
 
   const StyledDiv:any = styled.div`
     /* width: 600px; */
@@ -66,21 +63,21 @@ const key = "480dc33ea22b4f79ac3ea6368e1c9eac";
     border: solid 2px blue; 
     animation: ${move} 4s linear infinite;
     `  
-
-
-
-
-
+  
+  const img:any =styled.img`
+  width: 1000px;
+    z-index: 0;
+  `
   
   return (  
     <> 
     {/* 대전 뉴스·공사  */}
     
-
+  
      <Digit>
      {/* <StyledDiv>hello</StyledDiv> */}
       
-
+     <img className="img" src="/img/Siren.png" alt='siren'></img>
      {news.map((item:any , index:number)=>{
      console.log(item)
      return( 
