@@ -12,12 +12,23 @@ const Loading = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  z-index: -1;
-  ${({ theme }) => theme.flexSet.flexRowCenter}
-  &>img {
-    width: 100px;
-    height: 100px;
-    ${({ theme }) => theme.device.mobile_wide} {
+  z-index: 2;
+  ${({ theme }) => theme.flexSet.flexColumnCenter}
+  & > img {
+    margin-bottom: 2rem;
+  }
+  & > p {
+    ${({ theme }) => theme.fontSize.font_12}
+    color: #fff;
+  }
+  ${({ theme }) => theme.device.mobile} {
+    & > img {
+      width: ${calcPx(70)};
+      height: ${calcPx(115)};
+    }
+  }
+  ${({ theme }) => theme.device.mobile_wide} {
+    & > img {
       width: ${calcPxX(70)};
       height: ${calcPxX(115)};
     }
@@ -25,18 +36,15 @@ const Loading = styled.div`
 `;
 
 const Maps = () => {
-  const [loading, Setloading] = useState<boolean>(true);
   const [data, SetData] = useState<any>(null);
   const ITS = process.env.REACT_APP_ITS_KEY_SPARE;
 
   useEffect(() => {
-    Setloading(true);
     axios
       .get<object>(
         `https://openapi.its.go.kr:9443/vslInfo?apiKey=${ITS}&getType=json`
       ) // API url 입력
       .then((res) => {
-        Setloading(false);
         SetData(res.data.items);
         let container = document.getElementById('map');
         let options = {
@@ -52,7 +60,6 @@ const Maps = () => {
         map.addOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC);
       })
       .catch((e: ErrorCallback) => {
-        Setloading(true);
         if (e) throw e;
         console.log('에러');
       }); //에러처리
@@ -62,7 +69,8 @@ const Maps = () => {
     <>
       {data === null ? (
         <Loading>
-          <img src='/img/Podori_Loading.png'></img>
+          <img src='/img/Podori_Loading.png' alt='포돌이'></img>
+          <p>데이터를 불러오는 중 입니다...</p>
         </Loading>
       ) : null}
       <div

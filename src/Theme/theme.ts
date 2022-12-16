@@ -29,12 +29,11 @@ const flexSet = {
     display:flex;
     flex-direction:column;
     align-items:center;
-    justify-content:cetner;
+    justify-content: center;
   `,
 };
 const device = {
-  mobile_Y: `@media(orientation:portrait)`,
-  mobile_X: `@media(orientation:landscape)`,
+  mobile_wide: `@media (min-width:560px) and (max-width:899px)`,
   mobile: `@media (min-width:320px) and (max-width:768px)`,
 };
 export const theme = {

@@ -1,20 +1,51 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
+import styled from 'styled-components';
+import { calcPx, calcPxX } from '@/Hooks/CalcPx';
 // import GetInfo from "./GetInfo"
 const { kakao } = window; //불러오기에 문제없음
 
 const Maps = () => {
+  const [data, SetData] = useState<any>(null);
   const ITS = process.env.REACT_APP_ITS_KEY_SPARE;
-  // let latitude = Number(data.market_latitude);
-  // let logitude = Number(data.market_longitude);
+
+  const Loading = styled.div`
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.72);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    ${({ theme }) => theme.flexSet.flexColumnCenter}
+    & > img {
+      margin-bottom: 2rem;
+    }
+    & > p {
+      ${({ theme }) => theme.fontSize.font_12}
+      color: #fff;
+    }
+    ${({ theme }) => theme.device.mobile} {
+      & > img {
+        width: ${calcPx(70)};
+        height: ${calcPx(115)};
+      }
+    }
+    ${({ theme }) => theme.device.mobile_wide} {
+      & > img {
+        width: ${calcPxX(70)};
+        height: ${calcPxX(115)};
+      }
+    }
+  `;
+
   useEffect(() => {
-    let data;
     axios
       .get<object>(
         `https://openapi.its.go.kr:9443/vslInfo?apiKey=${ITS}&getType=json`
       ) // API url 입력
       .then((res) => {
-        data = res.data.body.items;
+        SetData(res.data.body.items);
         let container = document.getElementById('map');
         let options = {
           center: new kakao.maps.LatLng(36.33395949, 127.3719135),
@@ -39,7 +70,6 @@ const Maps = () => {
             position: markerPosition,
           });
           marker.setMap(map);
-          '언니 너무머시써';
         });
       }) // axios는 default가 JSON으로 값을 받아옴
       .catch((e: ErrorCallback) => {
@@ -49,14 +79,22 @@ const Maps = () => {
   }, []);
 
   return (
-    <div
-      id='map'
-      style={{
-        width: '100vw',
-        height: '100vh',
-        position: 'absolute',
-        zIndex: '-1',
-      }}></div>
+    <>
+      {data === null ? (
+        <Loading>
+          <img src='/img/Podori_Loading.png' alt='포돌이'></img>
+          <p>데이터를 불러오는 중 입니다...</p>
+        </Loading>
+      ) : null}
+      <div
+        id='map'
+        style={{
+          width: '100vw',
+          height: '100vh',
+          position: 'absolute',
+          zIndex: '-2',
+        }}></div>
+    </>
   );
 };
 export default Maps;
