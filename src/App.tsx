@@ -2,8 +2,9 @@ import '@/App.css';
 import LayOut from './Components/Layout';
 import styled from 'styled-components';
 import { calcPx } from './Hooks/CalcPx'; 
-import  TrafficNews  from './Components/TrafficNews/TrafficNews';
-import MapContainer from './Components/TrafficNews/test'
+import  TrafficMap  from './Components/TrafficNews/TrafficMap';
+import Traffic from './Components/TrafficNews/Test';
+
 
 const Test = styled.div`
   width: ${calcPx(100)};
@@ -14,11 +15,10 @@ const Test = styled.div`
 const App = () => {
   return (
     <>
-      <LayOut />
-      <img src='/img/CCTV.png' alt='CCTV'></img>\{/* 이미지 경로 참고 */} 
-      <Test />
-      {/* <MapContainer/> */}
-      <TrafficNews/>
+      <TrafficMap/>
+      <Traffic/>
+      
+  
       {/* styled component , calcPx적용 */}
     </>
   );

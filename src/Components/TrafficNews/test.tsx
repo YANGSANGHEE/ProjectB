@@ -1,27 +1,29 @@
-import React, { useEffect } from 'react';
+import axios from "axios"
+import { useEffect } from "react"
+//도시교통정보센터 
 
-declare global {
-  interface window {
-    kakao: any;
+
+
+  const Traffic = ()=> {
+    useEffect(()=> {
+        let news 
+        axios.get<any>(
+            `http://www.utic.go.kr/guide/imsOpenData.do?key=5nI1S0Ty2bIVg1k4RtGKAZLHpKL4cA2eMXoMcHWVEtaCygc5qJHXD3iBheSG93`
+        ).then((res)=> {
+            news = res 
+            console.log(res)
+            console.log(news)
+        }).catch((e) => {
+            console.log(e)
+        })
+    })
+
+    return( 
+        <>
+        <div>hello</div>
+        </>
+      
+    )
   }
-} 
 
-
-const MapContainer = () => {
-    useEffect(() => {
-        let container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-        let options = { //지도를 생성할 때 필요한 기본 옵션
-          center: new window.kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
-          level: 3 //지도의 레벨(확대, 축소 정도)
-        };
-    
-        let map = new window.kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
-    
-      }, [])
-
-    return (
-        <div id="map" style={{ width: "50vw", height: "50vh" }} />
-    );
-}
-
-export default MapContainer; 
+  export default Traffic;
