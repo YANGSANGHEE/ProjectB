@@ -37,6 +37,7 @@ const CCTV = () => {
       .then(res => {
         const cctvPlace = res.data.response.data;
         // cctv데이터 변수 선언
+        const infowindow = new window.kakao.maps.InfoWindow({ zIndex: 1 });
         const container = document.getElementById("map");
         const options = {
           center: new kakao.maps.LatLng(map.center.lat, map.center.lng),
@@ -73,23 +74,16 @@ const CCTV = () => {
             image: markerImg,
             // 마커 이미지 변경
           });
-          const cctvPlayer = document.getElementById("cctv");
-          cctvPlace.setA;
+
           kakao.maps.event.addListener(marker, "click", function () {
-            // window.open(el.cctvurl, "child", "width=500, height=500");
-            // alert("나와랏");
-            return (
-              <ReactPlayer
-                url={`${el.cctvurl}`}
-                playing={true}
-                muted={true}
-                controls={true}
-                light={false}
-                style={{
-                  zIndex: 1000,
-                }}
-              />
-            );
+            // infowindow.setContent(
+            //   "<video muted autoPlay loop>" +
+            //     `<source src=${el.cctvurl} type="video/mp4"/>` +
+            //     "<strong>Your browser does not support the video tag.</strong>" +
+            //     "</video>"
+            // );
+            // infowindow.open(el.cctvurl, "child", "width=500, height=500");
+            window.open(el.cctvurl, "child", "width=500, height=500");
           });
           marker.setMap(mapScript);
         });
@@ -120,7 +114,7 @@ const CCTV = () => {
       ></div>
       <ReactPlayer
         url={
-          "http://www.utic.go.kr/view/map/openDataCctvStream.jsp?key=GVjHkAH6NW3wdeJs3xypMhq52MGhEen3IP85ShkXpZ5dkKm81mXBfHzyduE0BFv&cctvid=E07001&cctvName=%25EA%25B0%2580%25EC%2588%2598%25EC%259B%2590%25EB%2584%25A4%25EA%25B1%25B0%25EB%25A6%25AC&kind=E&cctvip=118&cctvch=null&id=CCTV08&cctvpasswd=null&cctvport=null"
+          "http://210.99.67.118/media/CTV0008/CTV0008_20221216.151530.000.mp4"
         }
         playing={true}
         muted={true}
