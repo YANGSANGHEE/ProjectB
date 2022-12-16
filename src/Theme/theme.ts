@@ -20,7 +20,7 @@ const Color = {
 
 const border = {
   border_5px: `
-  border-radious : '5px';
+  border-radius : 5px;
   `,
 };
 
