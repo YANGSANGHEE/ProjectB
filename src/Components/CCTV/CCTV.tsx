@@ -1,6 +1,8 @@
 import styled from "styled-components";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import axios from "axios";
+import ReactPlayer from "react-player";
+// import CCTVItem from "./CCTVItem";
 const { kakao } = window;
 const Media = styled.div`
   width: 100px;
@@ -25,6 +27,7 @@ const CCTV = () => {
     },
     isPanto: true,
   });
+  const ref = useRef(null);
   const ITS = process.env.REACT_APP_ITS_KEY;
   useEffect(() => {
     axios
@@ -70,17 +73,22 @@ const CCTV = () => {
             image: markerImg,
             // 마커 이미지 변경
           });
+          const cctvPlayer = document.getElementById("cctv");
+          cctvPlace.setA;
           kakao.maps.event.addListener(marker, "click", function () {
             // window.open(el.cctvurl, "child", "width=500, height=500");
-            console.log("click");
+            // alert("나와랏");
             return (
-              <video
-                src={`${el.cctvurl}`}
+              <ReactPlayer
+                url={`${el.cctvurl}`}
+                playing={true}
+                muted={true}
+                controls={true}
+                light={false}
                 style={{
-                  width: "500px",
-                  height: "500px",
+                  zIndex: 1000,
                 }}
-              ></video>
+              />
             );
           });
           marker.setMap(mapScript);
@@ -90,6 +98,7 @@ const CCTV = () => {
           mapScript.setDraggable(draggable);
         };
         setDraggable(true);
+        // 드래그 가능
         console.log("loading kakaomap");
       })
       .catch((e: ErrorCallback) => {
@@ -99,15 +108,30 @@ const CCTV = () => {
   }, []);
 
   return (
-    <div
-      id="map"
-      style={{
-        width: "100%",
-        height: "100vh",
-        position: "relative",
-        overflow: "hidden",
-      }}
-    ></div>
+    <>
+      <div
+        id="map"
+        style={{
+          width: "100%",
+          height: "100vh",
+          position: "relative",
+          overflow: "hidden",
+        }}
+      ></div>
+      <ReactPlayer
+        url={
+          "http://www.utic.go.kr/view/map/openDataCctvStream.jsp?key=GVjHkAH6NW3wdeJs3xypMhq52MGhEen3IP85ShkXpZ5dkKm81mXBfHzyduE0BFv&cctvid=E07001&cctvName=%25EA%25B0%2580%25EC%2588%2598%25EC%259B%2590%25EB%2584%25A4%25EA%25B1%25B0%25EB%25A6%25AC&kind=E&cctvip=118&cctvch=null&id=CCTV08&cctvpasswd=null&cctvport=null"
+        }
+        playing={true}
+        muted={true}
+        controls={true}
+        light={false}
+        style={{
+          zIndex: 1000,
+        }}
+      />
+      {/* <CCTVItem /> */}
+    </>
   );
 };
 
