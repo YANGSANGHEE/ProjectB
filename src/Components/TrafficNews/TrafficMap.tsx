@@ -38,6 +38,7 @@ const key = "480dc33ea22b4f79ac3ea6368e1c9eac";
         let map = new kakao.maps.Map(container, options);
       //스카이뷰 전환 컨트롤
       let mapTypeControl = new kakao.maps.MapTypeControl();
+      map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
      }).catch((e)=> {
       console.log(e);
      })
