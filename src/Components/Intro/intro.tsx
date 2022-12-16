@@ -1,5 +1,5 @@
 const Intro = () => {
-  return <></>;
+  return <>Intro</>;
 };
 
 export default Intro;

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useState } from 'react';
 
 interface btnSet {
   name: string;
@@ -11,12 +12,13 @@ const HeaderSet = styled.div`
   background-color: #fff;
   width: 100vw;
   padding: 30px 0px 0px 25px;
-  border: 1px solid red;
+  /* border: 1px solid red; */
   display: flex;
   justify-content: space-between;
   position: fixed;
   top: 0;
   left: 0;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
   img {
     width: 7.2rem;
     height: 2.1rem;
@@ -35,14 +37,13 @@ const HeaderSet = styled.div`
         color: ${({ theme }) => theme.Color.l_gray};
         ${({ theme }) => theme.fontSize.font_12};
       }
-      & > div.line {
+      & > div {
         background: ${({ theme }) => theme.Color.l_gray};
         width: 100%;
         height: 3px;
-      }
-      &:hover {
-        & > div.line {
-          background-color: ${({ theme }) => theme.Color.green_gradient};
+        transition: 0.3s ease;
+        &.line {
+          background: ${({ theme }) => theme.Color.green_gradient};
         }
       }
     }
@@ -50,18 +51,17 @@ const HeaderSet = styled.div`
 `;
 
 const ButtonSet: btnSet[] = [
-  { name: 'traffic', con: '혼잡도' },
+  { name: 'congestion', con: '혼잡도' },
   { name: 'speed', con: '단속구간' },
   { name: 'cctv', con: 'CCTV' },
 ];
 
 const Header = ({ getbutton }: { getbutton: (data: string) => void }) => {
+  const [button, Setbutton] = useState('congestion');
   const getData = (e: React.MouseEvent<HTMLButtonElement>) => {
     getbutton(e.currentTarget.value);
+    Setbutton(e.currentTarget.value);
   };
-  // const addClass = (e: React.MouseEvent<HTMLButtonElement>) => {
-  //   e.currentTarget.classList.add('active');
-  // };
   return (
     <HeaderSet>
       <img src='/img/Logo_Top.png' alt='logo'></img>
@@ -72,7 +72,7 @@ const Header = ({ getbutton }: { getbutton: (data: string) => void }) => {
               <button value={value.name} onClick={getData}>
                 {value.con}
               </button>
-              <div className='line'></div>
+              <div className={button === value.name ? 'line' : ''}></div>
             </div>
           );
         })}

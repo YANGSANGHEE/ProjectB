@@ -18,7 +18,7 @@ const Maps = () => {
         let container = document.getElementById('map');
         let options = {
           center: new kakao.maps.LatLng(36.33395949, 127.3719135),
-          level: 13,
+          level: 5,
         };
 
         let map = new kakao.maps.Map(container, options);
@@ -38,7 +38,8 @@ const Maps = () => {
           marker = new kakao.maps.Marker({
             position: markerPosition,
           });
-          marker.setMap(map); "언니 너무머시써"
+          marker.setMap(map);
+          '언니 너무머시써';
         });
       }) // axios는 default가 JSON으로 값을 받아옴
       .catch((e: ErrorCallback) => {
@@ -47,6 +48,15 @@ const Maps = () => {
       }); //에러처리
   }, []);
 
-  return <div id='map' style={{ width: '800px', height: '500px' }}></div>;
+  return (
+    <div
+      id='map'
+      style={{
+        width: '100vw',
+        height: '100vh',
+        position: 'absolute',
+        zIndex: '-1',
+      }}></div>
+  );
 };
 export default Maps;

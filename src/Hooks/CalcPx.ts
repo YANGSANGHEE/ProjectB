@@ -8,3 +8,8 @@ export const calcPx = (Num: number): string => {
   let Counts = Number((Num / (320 / 100)).toFixed(1));
   return `${Counts}vw`;
 };
+
+export const calcPxX = (Num: number): string => {
+  let Counts = Number((Num / (568 / 100)).toFixed(1));
+  return `${Counts}vw`;
+};
