@@ -3,6 +3,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 //node.js이 기본으로 제공하는 모듈 파일/폴더/디렉터리 등의 경로를 편리하게 설정할 수 있는 기능을 제공
 const webpack = require('webpack');
+const dotenv = require('dotenv');
+dotenv.config();
 //웹팩은 기본적으로 여러 개의 자바스크립트 모듈을 하나의 파일로 묶어내는 번들러
 
 //웹팩은 다른 모듈을 사용하고 있는 최상위 자바스크립트 파일이 어디에 있는지 알아야 하며, 설정 파일에서 이를 Entry 속성으로 명시
@@ -35,10 +37,14 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: 'public/index.html',
+      env: process.env
     }),
     new webpack.ProvidePlugin({
       React: 'react',
     }),
+    new webpack.DefinePlugin({
+      "process.env": JSON.stringify(process.env)
+    })
   ],
   resolve: {
     //object import나 require로 간단히 특정 모듈의 별칭을 만들 수 있음
