@@ -1,5 +1,3 @@
-import { calcPx } from '@/Hooks/CalcPx';
-
 const fontSize = {
   font_11: `
     font-Size : 11px;
@@ -9,30 +7,46 @@ const fontSize = {
   font-Size : 12px;
 `,
 };
-
 const Color = {
-  green_gradient: 'linear-gradient(90deg, #00A542 0%, #81E600 100%)',
-  black: '#222222',
-  gray: '#868686',
-  l_gray: '#979797',
-  W_gray: '#CECECE',
+  green_gradient: "linear-gradient(90deg, #00A542 0%, #81E600 100%)",
+  black: "#222222",
+  gray: "#868686",
+  l_gray: "#979797",
+  W_gray: "#CECECE",
 };
-
 const border = {
   border_5px: `
   border-radious : '5px';
   `,
 };
-
+const flexSet = {
+  flexRowCenter: `
+    display:flex;
+    align-items:center;
+    justify-content: center;
+  `,
+  flexColumnCenter: `
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:cetner;
+  `,
+  flexColumnJcAs: `
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  `,
+};
 const device = {
   mobile: `@media screen and (max-width:768px)`,
+  mobile_wide: `@media (min-width:560px) and (max-width:899px)`,
 };
-
 export const theme = {
   fontSize,
   Color,
   border,
   device,
+  flexSet,
 };
-
 export type Theme = typeof theme;
