@@ -17,7 +17,7 @@ const key = "480dc33ea22b4f79ac3ea6368e1c9eac";
   } 
 
   const TrafficMap = () => {    
-  //  const ITS = process.env.REACT_APP_ITS_KEY2;
+
    const [news, setnews] = useState([]);   
 
  
@@ -39,6 +39,14 @@ const key = "480dc33ea22b4f79ac3ea6368e1c9eac";
       //스카이뷰 전환 컨트롤
       let mapTypeControl = new kakao.maps.MapTypeControl();
       map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+      //확대 축소 
+      var zoomControl = new kakao.maps.ZoomControl();
+map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+      // 교통정보
+      let mapTypes ={
+        trraffic: kakao.maps.MapTypeId.TRAFFIC
+      }
+      map.addOverlayMapTypeId(mapTypes.trraffic)
      }).catch((e)=> {
       console.log(e);
      })
