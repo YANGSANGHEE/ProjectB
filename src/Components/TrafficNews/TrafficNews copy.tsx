@@ -9,57 +9,31 @@ const key = "480dc33ea22b4f79ac3ea6368e1c9eac";
 
   // `https://openapi.its.go.kr:9443/eventInfo?apiKey=${ITS}=all&eventType=all&minX=127.252183&maxX=127.538356&minY=36.194005&maxY=36.499218&getType=json`
 
-  declare global {
-    interface window {
-      kakao: any;
-    }
-  } 
-
   const TrafficNews = () => {    
-  //  const ITS = process.env.REACT_APP_ITS_KEY2;
+   
+   const ITS = process.env.REACT_APP_ITS_KEY2;
    const [news, setnews] = useState([]);   
 
-  //  useEffect(() => {
-  //   //교통정보 끌고오는 api
-  //   const fatchData = async () => {
-  //     try{
-  //       const res = await axios.get(url);  
-  //       // setnews(res.data.body.items)
-  //        setnews(res.data.body.items) 
-  //     }catch(e){
-  //       console.log(e)
-  //     }
-  //   }
-  //   fatchData()
-  //  },[])   
- 
-  useEffect(()=> {
-    let news
-    axios.get<any>(
-      `https://openapi.its.go.kr:9443/eventInfo?apiKey=480dc33ea22b4f79ac3ea6368e1c9eac&type=all&eventType=all&minX=127.252183&maxX=127.538356&minY=36.194005&maxY=36.499218&getType=json`
-    
-     ).then((res)=>{
-      news =res.data.body.items;
-      console.log(news)
-      let container = document.getElementById('map');
-        let options = {
-          center: new kakao.maps.LatLng(36.3504119, 127.3845475),
-          level: 3,
-        };
-        let map = new kakao.maps.Map(container, options);
-      //스카이뷰 전환 컨트롤
-      let mapTypeControl = new kakao.maps.MapTypeControl();
-     }).catch((e)=> {
-      console.log(e);
-     })
-  
+   useEffect(() => {
 
+   
 
+    //교통정보 끌고오는 api
+    const fatchData = async () => {
+      try{
+        const res = await axios.get(url);  
+        // setnews(res.data.body.items)
+         setnews(res.data.body.items) 
+          
+      
+     
 
-  })
-
-
- 
+      }catch(e){
+        console.log(e)
+      }
+    }
+    fatchData()
+   },[]) 
 
   console.log(news)
  
@@ -106,13 +80,11 @@ const key = "480dc33ea22b4f79ac3ea6368e1c9eac";
   
   return (  
     <> 
- 
+ <div id="map" style={{ width: "50vw", height: "50vh" }} />
    
     {/* 대전 뉴스·공사  */}
-
-     <div id="map"style={{ width: "50vw", height: "50vh" ,border: "solid 2px red" }}></div>
     
-   
+  
      <Digit>
      {/* <StyledDiv>hello</StyledDiv> */}
       
