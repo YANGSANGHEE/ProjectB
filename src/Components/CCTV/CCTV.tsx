@@ -70,8 +70,18 @@ const CCTV = () => {
             image: markerImg,
             // 마커 이미지 변경
           });
+          let iwContent = `<video src=${el.cctvurl}></video>`;
+          let iwRemoveable = true;
+          let infowindow = new kakao.maps.infoWindow({
+            content: iwContent,
+            removable: iwRemoveable,
+          });
           kakao.maps.event.addListener(marker, "click", function () {
-            window.open(el.cctvurl, "child", "width=500, height=500");
+            // window.open(el.cctvurl, "child", "width=500, height=500");
+            infowindow.open(mapScript, marker);
+            // let video = document.createElement("video");
+            // video.setAttribute("src", el.cctvurl);
+            // container.appendChild(video);
           });
           marker.setMap(mapScript);
         });
