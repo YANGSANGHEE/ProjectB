@@ -55,7 +55,7 @@ const TrafficMap = () => {
 
   return (
     <>
-      <TrafficNews></TrafficNews>
+      <TrafficNews/>
       <div
         id='map'
         style={{

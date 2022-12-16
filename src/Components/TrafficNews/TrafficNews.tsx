@@ -42,12 +42,18 @@ const TrafficNews = () => {
     border: solid 2px red;
     width: 300px;
     height: 40px;
-    display: flex;
+    display: flex; 
+    background-color: aliceblue;
     justify-content: center;
     flex-direction: row;
     flex-wrap: nowrap;
     align-content: center;
-    align-items: center;
+    align-items: center; 
+    //지도위에 올라가게 설정
+  position: absolute;
+  top: 500px; left: 120px;
+  z-index: 2;
+
   `;
 
   let Wrapdiv: any = styled.div`
