@@ -2,8 +2,7 @@ import { useEffect } from 'react'
 import axios from 'axios';
 const { kakao } = window; //불러오기에 문제없음
 import vslData from "../testData/vsl.json" //api 복사한 json데이터
-import { resolve } from 'path';
-import { rejects } from 'assert';
+import StylePopup from './Enforcement';
 
 /* 줌 인 or 아웃에 따라 마커가 그룹으로 표시됨 */
 const MarkerCluster = () => {
@@ -86,6 +85,7 @@ const MarkerCluster = () => {
 
   return (
   <>
+    <StylePopup />
     <div id='map' style={{ width: '320px', height: '70vh' }}></div>
   </>
   );
