@@ -5,7 +5,7 @@ import styled, { keyframes } from 'styled-components';
 const key = '480dc33ea22b4f79ac3ea6368e1c9eac';
 
 //대전 실시간 사고·공사 api
-const url = `https://openapi.its.go.kr:9443/eventInfo?apiKey=480dc33ea22b4f79ac3ea6368e1c9eac&type=all&eventType=all&minX=127.252183&maxX=127.538356&minY=36.194005&maxY=36.499218&getType=json`;
+const url = `https://openapi.its.go.kr:9443/eventInfo?apiKey=4797961b793b49d6902fd954a18df260&type=all&eventType=all&minX=127.252183&maxX=127.538356&minY=36.194005&maxY=36.499218&getType=json`;
 
 const TrafficNews = () => {
   // const ITS = process.env.REACT_APP_ITS_KEY2;
@@ -42,7 +42,7 @@ const TrafficNews = () => {
     border: solid 2px red;
     width: 350px;
     height: 30px; 
-    border-radius: 15%;
+    border-radius: 30px;
     display: flex; 
     background-color: aliceblue;
     justify-content: center;
@@ -71,8 +71,8 @@ const TrafficNews = () => {
   `;
 
   let Siren: any = styled.div`
-    width: 35px;
-    height: 40px;
+    width: 10px;
+    height: 10px;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -80,9 +80,11 @@ const TrafficNews = () => {
     justify-content: center;
     align-items: center;
     & > img {
-      width: 80px;
-      width: 30px;
-      height: 30px;
+      width: 23px;
+      height: 23px; 
+    & >div{
+        color: gray;
+      }
     }
   `;
 
@@ -92,38 +94,28 @@ const TrafficNews = () => {
     /* border: solid 5px blue; */
     display: flex;
     /* overflow: hidden; */
-    animation: ${move} 4s linear infinite;
+    animation: ${move} 5s linear infinite;
   `;
 
   return (
     <>
-      <Digit>
+      <Digit >
         <Siren>
-          {' '}
-          <img className='img' src='/img/Siren.png' alt='siren'></img>
+          {/* {' '} */}
+          <img className='img' src='/img/Siren.png' alt='siren'></img> 
+          <div>|</div>
         </Siren>
         <WrapDiv> 
-
-    
-    
           {news.map((item: any, index: number) => {
-            // console.log(typeof item.roadName);  
-            // setArray(item.roadName)
-            // setArray(item.message)
-            // console.log(array)
-
-            return (
-             
-                
+      
+            return ( 
                 <StyledDiv>
                   {item.roadName}
                   {item.message}
-                </StyledDiv>
-             
+                </StyledDiv>    
             );
           })}
-            {/* <StyledDiv>djsljfskdfdssdfsdfdsfsdfsddsfsdfsd</StyledDiv>
-            <StyledDiv>djsljfskdfdssdfsdfdsfsdfsddsfsdfsd</StyledDiv> */}
+    
         </WrapDiv>
       </Digit>
     </>
