@@ -12,7 +12,6 @@ const MarkerCluster = () => {
   const [data, SetData] = useState<any>(null);
   const [mapE, setMapE] = useState({}); //map_def 상태고정용
   const map_def = useRef({});
-  const goCenter_def = useRef();
   const getCenter_def = useRef();
   const data_def = useRef();
 
@@ -33,10 +32,6 @@ const MarkerCluster = () => {
         let map = new kakao.maps.Map(container, options);
         map_def.current = map; //map 고정
         setMapE(map_def.current); //map 고정값 저장(없애면 작동안됨)
-
-        /* 지도 확대 축소를 제어할 수 있는 줌 컨트롤을 생성 */
-        // let zoomControl = new kakao.maps.ZoomControl();
-        // map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 
         /* 일반 <-> 스카이뷰 타입 전환 컨트롤 */
         let mapTypeControl = new kakao.maps.MapTypeControl();
@@ -87,11 +82,30 @@ const MarkerCluster = () => {
           };
           let imgSize = new kakao.maps.Size(60 * 0.5, 73 * 0.5); //마커 사이즈
           let markerImg = new kakao.maps.MarkerImage(imgSrc, imgSize);
-          return new kakao.maps.Marker({
-            position: new kakao.maps.LatLng(value.coordY, value.coordX),
+          let positions = new kakao.maps.LatLng(value.coordY, value.coordX); //마커가 표시될 좌표
+          let marker = new kakao.maps.Marker({
+            position: positions,
             image: markerImg, //마커이미지 
           });
-        });
+
+          /* 마커 마우스오버 이벤트 */
+          // 마커에 표시할 인포윈도우를 생성 
+          let infowindow = new kakao.maps.InfoWindow({
+            content: `<div>${value.coordY},${value.coordX}</div>` // 인포윈도우에 표시할 내용 -- 진행중
+          });
+          (function (marker, infowindow) {
+            // 마커에 mouseover 이벤트를 등록하고 마우스 오버 시 인포윈도우를 표시
+            kakao.maps.event.addListener(marker, 'mouseover', function () {
+              infowindow.open(map, marker);
+            });
+            // 마커에 mouseout 이벤트를 등록하고 마우스 아웃 시 인포윈도우를 닫기
+            kakao.maps.event.addListener(marker, 'mouseout', function () {
+              infowindow.close();
+            });
+          })(marker, infowindow);
+          
+          return marker; //markers의 return 
+          });
         //클러스터러에 마커 추가 & 마커 표시
         clusterer.addMarkers(markers);
       }) // axios는 default가 JSON으로 값을 받아옴
