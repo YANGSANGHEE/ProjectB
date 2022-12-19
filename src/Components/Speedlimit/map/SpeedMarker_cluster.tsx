@@ -4,22 +4,26 @@ const { kakao } = window; //불러오기에 문제없음
 import vslData from "../testData/vsl.json" //api 복사한 json데이터
 import StylePopup from './Enforcement';
 import Refresh from './Refresh';
+import Loadings from '../Loading';
 
 /* 줌 인 or 아웃에 따라 마커가 그룹으로 표시됨 */
 const MarkerCluster = () => {
   // const ITS = process.env.REACT_APP_ITS_KEY2;
+  const [data, SetData] = useState<any>(null);
   const [mapE, setMapE] = useState({}); //map_def 상태고정용
   const map_def = useRef({});
   const goCenter_def = useRef();
   const getCenter_def = useRef();
+  const data_def = useRef();
 
+  let datas = vslData.body.items;
   useEffect(() => {
-    let data = vslData.body.items;
     //* 요청 횟수 문제로 테스트 데이터 사용
     new Promise((resolve, rejects) => {
-      resolve(data);
+      resolve(datas);
     })
       .then(() => {
+        SetData(datas);
         let container = document.getElementById('map');
         let options = {
           center: new kakao.maps.LatLng(36.3504119, 127.3845475),
@@ -28,9 +32,8 @@ const MarkerCluster = () => {
         getCenter_def.current = options.center; //center값 고정
         let map = new kakao.maps.Map(container, options);
         map_def.current = map; //map 고정
-        console.log(map.panTo);
         setMapE(map_def.current); //map 고정값 저장(없애면 작동안됨)
-        
+
         /* 지도 확대 축소를 제어할 수 있는 줌 컨트롤을 생성 */
         // let zoomControl = new kakao.maps.ZoomControl();
         // map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
@@ -49,11 +52,11 @@ const MarkerCluster = () => {
           minLevel: 9 // 클러스터 할 최소 지도 레벨 
         });
         // 마커
-        const markers = data.map((value) => {
+        const markers = datas.map((value: any) => {
           let imgSrc;
-          let speed =  value.limitSpeed;
+          let speed = value.limitSpeed;
           //속도에 따라 표시되는 마커 이미지 
-          switch(speed) {
+          switch (speed) {
             case '20':
               imgSrc = "/img/limit_20.png";
               break;
@@ -82,12 +85,12 @@ const MarkerCluster = () => {
               imgSrc = "/img/limit_110.png";
               break;
           };
-          let imgSize = new kakao.maps.Size(60*0.5, 73*0.5); //마커 사이즈
+          let imgSize = new kakao.maps.Size(60 * 0.5, 73 * 0.5); //마커 사이즈
           let markerImg = new kakao.maps.MarkerImage(imgSrc, imgSize);
-            return new kakao.maps.Marker({
-                position : new kakao.maps.LatLng(value.coordY, value.coordX),
-                image : markerImg, //마커이미지 
-              });
+          return new kakao.maps.Marker({
+            position: new kakao.maps.LatLng(value.coordY, value.coordX),
+            image: markerImg, //마커이미지 
+          });
         });
         //클러스터러에 마커 추가 & 마커 표시
         clusterer.addMarkers(markers);
@@ -96,14 +99,15 @@ const MarkerCluster = () => {
         if (e) throw e;
         console.log('에러');
       }); //에러처리
-    }, []);
+  }, []);
 
   return (
-  <>
-    <StylePopup />
-    <Refresh map={map_def.current} center={getCenter_def.current} />
-    <div id='map' style={{ width: '100vw', height: '70vh' }}></div>
-  </>
+    <>
+      <Loadings data={data} />
+      <StylePopup />
+      <Refresh map={map_def.current} center={getCenter_def.current} />
+      <div id='map' style={{ width: '100vw', height: '70vh' }}></div>
+    </>
   );
 };
 export default MarkerCluster;
