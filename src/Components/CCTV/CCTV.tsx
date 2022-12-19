@@ -37,7 +37,7 @@ const CCTV = () => {
       .then(res => {
         const cctvPlace = res.data.response.data;
         // cctv데이터 변수 선언
-        const infowindow = new window.kakao.maps.InfoWindow({ zIndex: 1 });
+
         const container = document.getElementById("map");
         const options = {
           center: new kakao.maps.LatLng(map.center.lat, map.center.lng),
@@ -74,16 +74,19 @@ const CCTV = () => {
             image: markerImg,
             // 마커 이미지 변경
           });
-
+          let iwRemoveable = true;
+          // 닫기버튼 기능
+          const infowindow = new window.kakao.maps.InfoWindow({
+            zIndex: 1,
+            content:
+              "<video muted autoPlay loop>" +
+              `<source src=${el.cctvurl} type="video/mp4"/>` +
+              "</video>",
+            removable: iwRemoveable,
+          });
           kakao.maps.event.addListener(marker, "click", function () {
-            // infowindow.setContent(
-            //   "<video muted autoPlay loop>" +
-            //     `<source src=${el.cctvurl} type="video/mp4"/>` +
-            //     "<strong>Your browser does not support the video tag.</strong>" +
-            //     "</video>"
-            // );
-            // infowindow.open(el.cctvurl, "child", "width=500, height=500");
-            window.open(el.cctvurl, "child", "width=500, height=500");
+            infowindow.open(mapScript, marker);
+            // window.open(el.cctvurl, "child", "width=500, height=500");
           });
           marker.setMap(mapScript);
         });
@@ -121,7 +124,7 @@ const CCTV = () => {
         controls={true}
         light={false}
         style={{
-          zIndex: 1000,
+          zIndex: 1,
         }}
       />
       {/* <CCTVItem /> */}
