@@ -1,9 +1,11 @@
 import styled from "styled-components";
 import { useState, useEffect, useRef, useCallback } from "react";
-import axios from "axios";
+import axios, { AxiosAdapter, AxiosDefaults, AxiosResponse } from "axios";
 import ReactPlayer from "react-player";
 import { rootCertificates } from "tls";
 import CCTVItem from "./CCTVItem";
+import { prototype } from "events";
+import AxiosExample from "../AxiosExample";
 const { kakao } = window;
 const Media = styled.div`
   width: 320px;
@@ -29,13 +31,10 @@ const CCTV = () => {
       .get(
         `https://openapi.its.go.kr:9443/cctvInfo?apiKey=${ITS}&type=all&cctvType=2&minX=127.252183&maxX=127.538356&minY=36.194005&maxY=36.499218&getType=json`
       )
-      .then(res => {
+      .then((res: AxiosResponse) => {
         const cctvPlace = res.data.response.data;
         // cctv데이터 변수 선언
         const container = document.getElementById("map");
-        const root = document.getElementById("root");
-        const cctvVideo = document.getElementById("videoPlay");
-        const cctvSrc = document.getElementById("src");
         const options = {
           center: new kakao.maps.LatLng(map.center.lat, map.center.lng),
           level: 9,
@@ -49,9 +48,9 @@ const CCTV = () => {
           mapTypeControl,
           kakao.maps.ControlPosition.TOPRIGHT
         );
-        const zoomControl = new kakao.maps.ZoomControl();
-        // 확대 축소가 가능한 컨트롤바
-        mapScript.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+        // const zoomControl = new kakao.maps.ZoomControl();
+        // // 확대 축소가 가능한 컨트롤바
+        // mapScript.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
         const imgSrc = "/img/CCTV.png",
           imgSize = new kakao.maps.Size(25, 40);
         const imageOption = { offset: new kakao.maps.Point(15, 33) };
@@ -62,7 +61,6 @@ const CCTV = () => {
           imageOption
         );
         cctvPlace.map((el: any) => {
-          // new kakao.maps.LatLng(el.coordy, el.coordx);
           const marker = new kakao.maps.Marker({
             map: mapScript,
             // 카카오맵
@@ -72,23 +70,29 @@ const CCTV = () => {
             // 마커 이미지 변경
           });
           let iwContent =
-            "<video id='video' autoplay='autoplay' muted='muted' controls >" +
+            "<video id='video' autoplay='autoplay' muted='muted' controls style='width:300px; height: 200px'>" +
             `<source src=${el.cctvurl} type="video/mp4"/>` +
             "</video>";
-          // 비디오 영상구현
+          //   `
+          // <div style='width:200px; height:80px; position:relative;'>
+          //   <div id = 'close'  style='width:20px; height:20px; position:absolute; top:10px; left:10px; background:#fff;'></div>
+          //   <video id='video' autoplay='autoplay' muted='muted' controls>
+          //   <source src=${el.cctvurl} type="video/mp4"/>
+          //   </video>
+          // </div>
+          // `;
+
           const infowindow = new window.kakao.maps.InfoWindow({
             zIndex: 1,
             content: iwContent,
             removable: true,
             // 닫기버튼 기능
           });
-
+          // 비디오 영상구현
           kakao.maps.event.addListener(marker, "click", function () {
             infowindow.open(mapScript, marker);
-            // const video = document.createElement("video");
-            // root?.appendChild(video);
-            // window.open(el.cctvurl, "child", "width=500, height=500");
           });
+
           marker.setMap(mapScript);
         });
         const setDraggable = (draggable: any) => {
