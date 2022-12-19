@@ -155,7 +155,11 @@ const Intro = () => {
   }, 1000);
   console.log(window.innerWidth);
   if (window.innerWidth >= 769) {
-    return <></>;
+    return (
+      <>
+        <div>해당 페이지는 모바일만 지원됩니다.</div>
+      </>
+    );
   } else {
     return (
       <IntroWrap>
