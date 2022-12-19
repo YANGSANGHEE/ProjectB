@@ -35,6 +35,9 @@ const HeaderSet = styled.div`
         margin-bottom: 1.5rem;
         color: ${({ theme }) => theme.Color.l_gray};
         ${({ theme }) => theme.fontSize.font_12};
+        &.line {
+          color: ${({ theme }) => theme.Color.black};
+        }
       }
       & > div {
         background: ${({ theme }) => theme.Color.l_gray};
@@ -75,7 +78,10 @@ const Header = ({ getbutton }: { getbutton: (data: string) => void }) => {
           // Element에 넣을 value와 노출된 버튼 이름을 객체화 시킨 배열을 map 돌림
           return (
             <div key={key}>
-              <button value={value.name} onClick={getData}>
+              <button
+                value={value.name}
+                onClick={getData}
+                className={button === value.name ? 'line' : ''}>
                 {value.con}
               </button>
               <div className={button === value.name ? 'line' : ''}></div>

@@ -13,10 +13,14 @@ const Color = {
   gray: '#868686',
   l_gray: '#979797',
   W_gray: '#CECECE',
+  red: '#FF0000',
+  orange: '#FFB629',
+  yellow: '#FFE300',
+  green: '#39D729',
 };
 const border = {
   border_5px: `
-  border-radious : '5px';
+  border-radius : 5px;
   `,
 };
 const flexSet = {

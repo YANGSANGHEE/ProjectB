@@ -10,6 +10,7 @@ const LayOut = () => {
   const getbutton = (data: string): void => {
     Setbutton(data);
   };
+
   // header에 함수 자체를 props를 보내 탭버튼 클릭시 바뀌는 value값을 받아옴
   return (
     <>

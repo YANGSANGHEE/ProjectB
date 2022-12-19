@@ -24,6 +24,7 @@
   "homepage": "https://github.com/YANGSANGHEE/ProjectB#readme",
   "dependencies": {
     "@types/styled-components": "^5.1.26",
+    "arkit": "^1.6.4",
     "axios": "^1.2.1",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",

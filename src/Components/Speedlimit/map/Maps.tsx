@@ -1,50 +1,18 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
-import styled from 'styled-components';
-import { calcPx, calcPxX } from '@/Hooks/CalcPx';
-// import GetInfo from "./GetInfo"
+import axios, { AxiosResponse } from 'axios';
+import Loadings from '@/Common/Loading';
 const { kakao } = window; //불러오기에 문제없음
 
 const Maps = () => {
   const [data, SetData] = useState<any>(null);
   const ITS = process.env.REACT_APP_ITS_KEY_SPARE;
 
-  const Loading = styled.div`
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.72);
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 2;
-    ${({ theme }) => theme.flexSet.flexColumnCenter}
-    & > img {
-      margin-bottom: 2rem;
-    }
-    & > p {
-      ${({ theme }) => theme.fontSize.font_12}
-      color: #fff;
-    }
-    ${({ theme }) => theme.device.mobile} {
-      & > img {
-        width: ${calcPx(70)};
-        height: ${calcPx(115)};
-      }
-    }
-    ${({ theme }) => theme.device.mobile_wide} {
-      & > img {
-        width: ${calcPxX(70)};
-        height: ${calcPxX(115)};
-      }
-    }
-  `;
-
   useEffect(() => {
     axios
       .get<object>(
         `https://openapi.its.go.kr:9443/vslInfo?apiKey=${ITS}&getType=json`
       ) // API url 입력
-      .then((res) => {
+      .then((res: AxiosResponse) => {
         SetData(res.data.body.items);
         let container = document.getElementById('map');
         let options = {
@@ -80,12 +48,7 @@ const Maps = () => {
 
   return (
     <>
-      {data === null ? (
-        <Loading>
-          <img src='/img/Podori_Loading.png' alt='포돌이'></img>
-          <p>데이터를 불러오는 중 입니다...</p>
-        </Loading>
-      ) : null}
+      {data === null ? <Loadings /> : null}
       <div
         id='map'
         style={{
