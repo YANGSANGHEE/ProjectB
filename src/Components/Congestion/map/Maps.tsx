@@ -37,7 +37,9 @@ const Loading = styled.div`
 
 const Maps = () => {
   const [data, SetData] = useState<any>(null);
+  // 데이터 담기는 State
   const ITS = process.env.REACT_APP_ITS_KEY_SPARE;
+  // 환경변수로 APU key를 불러옴
 
   useEffect(() => {
     axios
@@ -46,10 +48,14 @@ const Maps = () => {
       ) // API url 입력
       .then((res) => {
         SetData(res.data.items);
+        // State data에 응답 데이터를 담음
         let container = document.getElementById('map');
+        //kakao map dom
         let options = {
           center: new kakao.maps.LatLng(36.33395949, 127.3719135),
+          //위도 경도
           level: 5,
+          //줌 단계
         };
 
         let map = new kakao.maps.Map(container, options);
@@ -68,6 +74,7 @@ const Maps = () => {
   return (
     <>
       {data === null ? (
+        //data 값이 null 일때 로딩창 띄움
         <Loading>
           <img src='/img/Podori_Loading.png' alt='포돌이'></img>
           <p>데이터를 불러오는 중 입니다...</p>
