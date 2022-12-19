@@ -3,7 +3,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import axios from "axios";
 import ReactPlayer from "react-player";
 import { rootCertificates } from "tls";
-// import CCTVItem from "./CCTVItem";
+import CCTVItem from "./CCTVItem";
 const { kakao } = window;
 const Media = styled.div`
   width: 320px;
@@ -34,10 +34,8 @@ const CCTV = () => {
         // cctv데이터 변수 선언
         const container = document.getElementById("map");
         const root = document.getElementById("root");
-        root?.appendChild<any>(container);
         const cctvVideo = document.getElementById("videoPlay");
         const cctvSrc = document.getElementById("src");
-
         const options = {
           center: new kakao.maps.LatLng(map.center.lat, map.center.lng),
           level: 9,
@@ -78,19 +76,17 @@ const CCTV = () => {
             `<source src=${el.cctvurl} type="video/mp4"/>` +
             "</video>";
           // 비디오 영상구현
-          cctvSrc.setAttribute("src", `${el.cctvurl}`);
-          console.log(cctvSrc);
           const infowindow = new window.kakao.maps.InfoWindow({
             zIndex: 1,
-            content: cctvVideo,
+            content: iwContent,
             removable: true,
             // 닫기버튼 기능
           });
 
           kakao.maps.event.addListener(marker, "click", function () {
             infowindow.open(mapScript, marker);
-            const video = document.createElement("video");
-            root?.appendChild(video);
+            // const video = document.createElement("video");
+            // root?.appendChild(video);
             // window.open(el.cctvurl, "child", "width=500, height=500");
           });
           marker.setMap(mapScript);
@@ -119,19 +115,7 @@ const CCTV = () => {
         overflow: "hidden",
       }}
     >
-      <video
-        id="videoPlay"
-        autoPlay
-        muted
-        controls
-        style={{
-          width: "50%",
-          height: "30%",
-          display: "none",
-        }}
-      >
-        <source id="src"></source>
-      </video>
+      <CCTVItem></CCTVItem>
     </div>
   );
 };
