@@ -1,9 +1,9 @@
-import { useState } from "react";
-import styled, { keyframes } from "styled-components";
+import { useState } from 'react';
+import styled, { keyframes } from 'styled-components';
 
-import { calcPx, calcPxX } from "@/Hooks/CalcPx";
-import Logo from "../../../public/img/Logo";
-import Car from "../../../public/img/intro_Traffic_car";
+import { calcPx, calcPxX } from '@/Hooks/CalcPx';
+import Logo from '../../../public/img/Logo';
+import Car from '../../../public/img/intro_Traffic_car';
 
 // 올그린 애니메이션 효과 키 프레임
 const allGreen = keyframes`
@@ -29,7 +29,7 @@ const IntroWrap = styled.div`
     // 도로 배경화면
     width: 100vw;
     height: 100vh;
-    background: url("/img/intro_bg_Y.png") no-repeat center;
+    background: url('/img/intro_bg_Y.png') no-repeat center;
     background-size: cover;
     flex-direction: column;
     ${({ theme }) => theme.flexSet.flexRowCenter};
@@ -37,7 +37,7 @@ const IntroWrap = styled.div`
       // 올 그린 이미지
       width: ${calcPx(130)};
       height: ${calcPx(13)};
-      background: url("/img/intro_AllGreen.png") no-repeat;
+      background: url('/img/intro_AllGreen.png') no-repeat;
       background-size: ${calcPx(130)} ${calcPx(13)};
       position: relative;
       bottom: 11vh;
@@ -47,7 +47,7 @@ const IntroWrap = styled.div`
       // 가운데 동그라미 이미지
       width: ${calcPx(200)};
       height: ${calcPx(200)};
-      background: url("/img/intro_Traffic.png") no-repeat;
+      background: url('/img/intro_Traffic.png') no-repeat;
       background-size: ${calcPx(200)} ${calcPx(200)};
       ${({ theme }) => theme.flexSet.flexRowCenter};
       & > div {
@@ -79,13 +79,13 @@ const IntroWrap = styled.div`
     ${({ theme }) => theme.device.mobile_wide} {
       // 가로 화면
       // 도로 배경화면
-      background: url("/img/intro_bg_X.png") no-repeat center;
+      background: url('/img/intro_bg_X.png') no-repeat center;
       background-size: cover;
       & > div:nth-child(1) {
         // 올 그린 이미지
         width: ${calcPxX(100)};
         height: ${calcPxX(12)};
-        background: url("/img/intro_AllGreen.png") no-repeat;
+        background: url('/img/intro_AllGreen.png') no-repeat;
         background-size: ${calcPxX(100)} ${calcPxX(12)};
         position: relative;
         bottom: 5vh;
@@ -94,7 +94,7 @@ const IntroWrap = styled.div`
         // 가운데 동그라미 이미지
         width: ${calcPxX(160)};
         height: ${calcPxX(140)};
-        background: url("/img/intro_Traffic.png") no-repeat center;
+        background: url('/img/intro_Traffic.png') no-repeat center;
         background-size: ${calcPxX(160)} ${calcPxX(140)};
         & > div {
           // 차 svg 감싼 div
@@ -126,24 +126,24 @@ const IntroWrap = styled.div`
 `;
 
 const Intro = () => {
-  const [redCar, setRedCar] = useState({ bgcolor: "black", matrix: "0" });
-  const [yellowCar, setYellowCar] = useState({ bgcolor: "black", matrix: "0" });
-  const [greenCar, setGreenCar] = useState({ bgcolor: "black", matrix: "0" });
+  const [redCar, setRedCar] = useState({ bgcolor: 'black', matrix: '0' });
+  const [yellowCar, setYellowCar] = useState({ bgcolor: 'black', matrix: '0' });
+  const [greenCar, setGreenCar] = useState({ bgcolor: 'black', matrix: '0' });
 
   setTimeout(() => {
     setRedCar({
-      bgcolor: "#FF4141",
-      matrix: "0 0 0 0 1 0 0 0 0 0.254902 0 0 0 0 0.254902 0 0 0 1 0",
+      bgcolor: '#FF4141',
+      matrix: '0 0 0 0 1 0 0 0 0 0.254902 0 0 0 0 0.254902 0 0 0 1 0',
     });
     setTimeout(() => {
       setYellowCar({
-        bgcolor: "#FFCB05",
-        matrix: "0 0 0 0 1 0 0 0 0 0.796078 0 0 0 0 0.0196078 0 0 0 1 0",
+        bgcolor: '#FFCB05',
+        matrix: '0 0 0 0 1 0 0 0 0 0.796078 0 0 0 0 0.0196078 0 0 0 1 0',
       });
       setTimeout(() => {
         setGreenCar({
-          bgcolor: "#00ED5F",
-          matrix: "0 0 0 0 0 0 0 0 0 1 0 0 0 0 0.0999999 0 0 0 1 0",
+          bgcolor: '#00ED5F',
+          matrix: '0 0 0 0 0 0 0 0 0 1 0 0 0 0 0.0999999 0 0 0 1 0',
         });
       }, 1000);
     }, 1000);
@@ -151,31 +151,31 @@ const Intro = () => {
 
   return (
     <IntroWrap>
-      <div id="allGreen">{/* 올그린 */}</div>
+      <div id='allGreen'>{/* 올그린 */}</div>
       <div>
         {/* 차 svg */}
         <div>
           <Car
             bgcolor={redCar.bgcolor}
-            filter="filter0_d_158_128"
+            filter='filter0_d_158_128'
             matrixValues={redCar.matrix}
-            feBlendValues="158_128"
+            feBlendValues='158_128'
           />
           <Car
             bgcolor={yellowCar.bgcolor}
-            filter="filter0_d_157_109"
+            filter='filter0_d_157_109'
             matrixValues={yellowCar.matrix}
-            feBlendValues="157_109"
+            feBlendValues='157_109'
           />
           <Car
             bgcolor={greenCar.bgcolor}
-            filter="filter0_d_45_6613"
+            filter='filter0_d_45_6613'
             matrixValues={greenCar.matrix}
-            feBlendValues="45_6613"
+            feBlendValues='45_6613'
           />
         </div>
       </div>
-      <div id="logo">
+      <div id='logo'>
         <Logo />
       </div>
       <div>해당 페이지는 모바일만 지원됩니다.</div>

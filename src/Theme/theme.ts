@@ -8,15 +8,15 @@ const fontSize = {
 `,
 };
 const Color = {
-  green_gradient: "linear-gradient(90deg, #00A542 0%, #81E600 100%)",
-  black: "#222222",
-  gray: "#868686",
-  l_gray: "#979797",
-  W_gray: "#CECECE",
+  green_gradient: 'linear-gradient(90deg, #00A542 0%, #81E600 100%)',
+  black: '#222222',
+  gray: '#868686',
+  l_gray: '#979797',
+  W_gray: '#CECECE',
 };
 const border = {
   border_5px: `
-  border-radious : '5px';
+  border-radius : 5px;
   `,
 };
 const flexSet = {
