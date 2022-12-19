@@ -9,27 +9,27 @@ const url = `https://openapi.its.go.kr:9443/eventInfo?apiKey=480dc33ea22b4f79ac3
 
 const TrafficNews = () => {
   // const ITS = process.env.REACT_APP_ITS_KEY2;
-  const [news, setnews] = useState([]);
+  const [news, setNews] = useState([]);
 
   useEffect(() => {
     //교통정보 끌고오는 api
-    const fatchData = async () => {
+    const fetchData = async () => {
       try {
         const res = await axios.get(url);
-        // setnews(res.data.body.items)
-        setnews(res.data.body.items);
+        // setNews(res.data.body.items)
+        setNews(res.data.body.items);
       } catch (e) {
         console.log(e);
       }
     };
-    fatchData();
+    fetchData();
   }, []);
 
   console.log(news);
 
   const move = keyframes`
     0%{
-      transform: translateX(50px);
+      transform: translateX(130px);
       opacity: 1;
     } 
     100%{
@@ -40,8 +40,9 @@ const TrafficNews = () => {
 
   const Digit: any = styled.div`
     border: solid 2px red;
-    width: 300px;
-    height: 40px;
+    width: 450px;
+    height: 30px; 
+    border-radius: 20%;
     display: flex; 
     background-color: aliceblue;
     justify-content: center;
@@ -51,17 +52,22 @@ const TrafficNews = () => {
     align-items: center; 
     //지도위에 올라가게 설정
   position: absolute;
-  top: 500px; left: 120px;
+  top: 500px; left: 130px;
   z-index: 2;
 
   `;
 
-  let Wrapdiv: any = styled.div`
-    border: solid 2px red;
+  let WrapDiv: any = styled.div`
+    border: solid 7px green;
     width: 300px;
-    height: 40px;
+    height: 30px;
     display: flex;
     overflow: hidden;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
   `;
 
   let Siren: any = styled.div`
@@ -82,7 +88,10 @@ const TrafficNews = () => {
 
   const StyledDiv: any = styled.div`
     margin-right: 10px;
-    border: solid 2px blue;
+    /* width: 500px; */
+    /* border: solid 5px blue; */
+    display: flex;
+    /* overflow: hidden; */
     animation: ${move} 4s linear infinite;
   `;
 
@@ -93,20 +102,29 @@ const TrafficNews = () => {
           {' '}
           <img className='img' src='/img/Siren.png' alt='siren'></img>
         </Siren>
-        <Wrapdiv>
+        <WrapDiv> 
+
+    
+    
           {news.map((item: any, index: number) => {
-            console.log(item);
+            // console.log(typeof item.roadName);  
+            // setArray(item.roadName)
+            // setArray(item.message)
+            // console.log(array)
+
             return (
-              <>
-                <></>
+             
+                
                 <StyledDiv>
                   {item.roadName}
                   {item.message}
                 </StyledDiv>
-              </>
+             
             );
           })}
-        </Wrapdiv>
+            {/* <StyledDiv>djsljfskdfdssdfsdfdsfsdfsddsfsdfsd</StyledDiv>
+            <StyledDiv>djsljfskdfdssdfsdfdsfsdfsddsfsdfsd</StyledDiv> */}
+        </WrapDiv>
       </Digit>
     </>
   );
