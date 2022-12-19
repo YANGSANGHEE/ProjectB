@@ -27,10 +27,6 @@ const Maps = () => {
     map_def.current = map;
     setMap(map_def.current);
 
-    // 일반 <-> 스카이뷰 타입 전환 컨트롤
-    let mapTypeControl = new kakao.maps.MapTypeControl();
-    console.log(mapTypeControl);
-    map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
     // 혼잡도 표시
     map.addOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC);
   }, []);
@@ -45,7 +41,7 @@ const Maps = () => {
           width: '100vw',
           height: '100vh',
           position: 'absolute',
-          zIndex: '-2',
+          zIndex: '-1',
         }}></div>
     </>
   );

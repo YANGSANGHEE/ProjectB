@@ -1,7 +1,7 @@
 import '@/App.css';
 import LayOut from './Components/Layout';
-// import Intro from './Components/Intro/Intro';
-import { useState, useEffect } from 'react';
+import Intro from './Components/Intro/intro';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Web } from './Components/Web';
 
 const App = () => {
@@ -15,7 +15,18 @@ const App = () => {
     });
   }, [width]);
 
-  return <>{width < 899 ? <LayOut /> : <Web />}</>;
+  return (
+    <>
+      <Intro />
+      {width < 899 ? (
+        <>
+          <LayOut />
+        </>
+      ) : (
+        <Web />
+      )}
+    </>
+  );
 };
 
 export default App;

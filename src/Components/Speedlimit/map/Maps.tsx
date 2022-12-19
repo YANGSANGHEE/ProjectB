@@ -105,7 +105,11 @@ const Maps = () => {
     <>
       {/* <Loadings data={data} /> */}
       <StylePopup />
-      <Refresh map={map_def.current} center={getCenter_def.current} />
+      <Refresh
+        map={map_def.current}
+        center={getCenter_def.current}
+        level={10}
+      />
       <div id='map' style={{ width: '100vw', height: '70vh' }}></div>
     </>
   );

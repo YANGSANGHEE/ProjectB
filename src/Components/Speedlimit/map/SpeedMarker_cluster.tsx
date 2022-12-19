@@ -1,4 +1,5 @@
-import { useEffect } from 'react';
+import Refresh from '@/Common/Refresh';
+import { useEffect, useRef, useState } from 'react';
 import vslData from '../testData/vsl.json'; //api 복사한 json데이터
 import StylePopup from './Enforcement';
 const { kakao } = window; //불러오기에 문제없음
@@ -6,6 +7,11 @@ const { kakao } = window; //불러오기에 문제없음
 /* 줌 인 or 아웃에 따라 마커가 그룹으로 표시됨 */
 const MarkerCluster = () => {
   // const ITS = process.env.REACT_APP_ITS_KEY2;
+  const [map, setMap] = useState<any>();
+  const [center, setCenter] = useState<any>();
+
+  const map_def = useRef({});
+  const getCenter_def = useRef();
 
   useEffect(() => {
     let data = vslData.body.items;
@@ -19,8 +25,12 @@ const MarkerCluster = () => {
           center: new kakao.maps.LatLng(36.3504119, 127.3845475),
           level: 10,
         };
+        getCenter_def.current = options.center;
+        setCenter(getCenter_def.current);
         // console.log(data)
         let map = new kakao.maps.Map(container, options);
+        map_def.current = map;
+        setMap(map_def.current);
         // 일반 <-> 스카이뷰 타입 전환 컨트롤
         let mapTypeControl = new kakao.maps.MapTypeControl();
         map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
@@ -81,11 +91,20 @@ const MarkerCluster = () => {
         console.log('에러');
       }); //에러처리
   }, []);
-
   return (
     <>
       <StylePopup />
-      <div id='map' style={{ width: '320px', height: '70vh' }}></div>
+      <Refresh map={map} center={center} level={10} />
+      <div
+        id='map'
+        style={{
+          width: '100vw',
+          height: '100vh',
+          position: 'absolute',
+          top: '0',
+          left: '0',
+          zIndex: '-1',
+        }}></div>
     </>
   );
 };

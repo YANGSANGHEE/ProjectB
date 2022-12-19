@@ -28,8 +28,8 @@ const StylePopup = () => {
 const EnforceContainer = styled.div`
   display: block;
   position: absolute;
-  top: 150px;
-  left: 40px;
+  top: 9rem;
+  left: 3rem;
   z-index: 2;
 `;
 const CloseButton = styled.div`
