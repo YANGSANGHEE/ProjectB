@@ -64,6 +64,7 @@ const CCTV = () => {
           imgSize,
           imageOption
         );
+
         cctvPlace.map((el: any) => {
           // new kakao.maps.LatLng(el.coordy, el.coordx);
           const marker = new kakao.maps.Marker({
@@ -74,14 +75,16 @@ const CCTV = () => {
             image: markerImg,
             // 마커 이미지 변경
           });
+          let iwContent =
+            "<video autoplay='autoplay' muted='muted' controls style='width=720, height=480'>" +
+            `<source src=${el.cctvurl} type="video/mp4"/>` +
+            "</video>";
+          // 비디오 영상구현
           let iwRemoveable = true;
           // 닫기버튼 기능
           const infowindow = new window.kakao.maps.InfoWindow({
             zIndex: 1,
-            content:
-              "<video muted autoPlay loop>" +
-              `<source src=${el.cctvurl} type="video/mp4"/>` +
-              "</video>",
+            content: iwContent,
             removable: iwRemoveable,
           });
           kakao.maps.event.addListener(marker, "click", function () {
