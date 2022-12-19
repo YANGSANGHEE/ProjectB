@@ -1,9 +1,15 @@
 import styled, { css } from 'styled-components';
 const { kakao } = window; 
 
-const Refresh =({event}:any)=> {
+
+const Refresh =({map, center}:any)=> {
+  const setCenter =()=> {
+    // 지도 중심으로 이동하는 함수
+    let moveLatLon = center;
+    map.panTo(moveLatLon); // 지도 중심을 부드럽게 이동시킴
+  }
   return(
-    <RefButton onClick={event}>
+    <RefButton onClick={setCenter}>
       <span>&#x21bb;</span>
     </RefButton>
   )
@@ -12,7 +18,7 @@ const Refresh =({event}:any)=> {
 const RefButton = styled.div`
   /* 포지션 */
   position: absolute;
-  top: 22vh; right: 2vw;
+  top: 22vh; right: 4vw;
   z-index: 2;
   /* 디스플레이 속성 */
   display: flex;

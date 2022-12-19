@@ -8,9 +8,10 @@ import Refresh from './Refresh';
 /* 줌 인 or 아웃에 따라 마커가 그룹으로 표시됨 */
 const MarkerCluster = () => {
   // const ITS = process.env.REACT_APP_ITS_KEY2;
-  // const [mapE, setMapE] = useState(null); //onClick 이벤트용
-  // const [boundsE, setBoundsE] = useState(null); //onClick 이벤트용
-  const map_def = useRef<any>();
+  const [mapE, setMapE] = useState({}); //map_def 상태고정용
+  const map_def = useRef({});
+  const goCenter_def = useRef();
+  const getCenter_def = useRef();
 
   useEffect(() => {
     let data = vslData.body.items;
@@ -24,31 +25,24 @@ const MarkerCluster = () => {
           center: new kakao.maps.LatLng(36.3504119, 127.3845475),
           level: 10,
         };
-        // console.log(data)
+        getCenter_def.current = options.center; //center값 고정
         let map = new kakao.maps.Map(container, options);
-        map_def.current = map;
+        map_def.current = map; //map 고정
+        console.log(map.panTo);
+        setMapE(map_def.current); //map 고정값 저장(없애면 작동안됨)
         
-        // 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
-        let zoomControl = new kakao.maps.ZoomControl();
-        map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
-        kakao.maps.event.addListener(map, 'zoom_changed', function() {        
-          let level = map.getLevel(); // 지도의 현재 레벨
-          let cenLatlng = map.getCenter(); // 지도의 중심좌표
-          let message = '현재 레벨'+level+',중심좌표'+cenLatlng;
-          console.log(message)
-        });
+        /* 지도 확대 축소를 제어할 수 있는 줌 컨트롤을 생성 */
+        // let zoomControl = new kakao.maps.ZoomControl();
+        // map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 
-        // 일반 <-> 스카이뷰 타입 전환 컨트롤
+        /* 일반 <-> 스카이뷰 타입 전환 컨트롤 */
         let mapTypeControl = new kakao.maps.MapTypeControl();
         map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
-        // 지도에 교통정보를 표시하도록 지도타입을 추가
+
+        /* 지도에 교통정보를 표시하도록 지도타입을 추가 */
         // map.addOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC);
-        
-        // 지도를 재설정할 범위정보를 가지고 있을 LatLngBounds 객체를 생성
-        let bounds = new kakao.maps.LatLngBounds(); 
-        // let points = new kakao.maps.LatLng(36.3504119, 127.3845475);
-        bounds.extend(options.center) //객체에 좌표 추가
-        // 클러스터러(마커 그룹화)
+
+        /* 클러스터러(마커 그룹화) */
         let clusterer = new kakao.maps.MarkerClusterer({
           map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
           averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
@@ -92,10 +86,10 @@ const MarkerCluster = () => {
           let markerImg = new kakao.maps.MarkerImage(imgSrc, imgSize);
             return new kakao.maps.Marker({
                 position : new kakao.maps.LatLng(value.coordY, value.coordX),
-                image : markerImg //마커이미지 
-            });
+                image : markerImg, //마커이미지 
+              });
         });
-        //클러스터러에 마커 추가
+        //클러스터러에 마커 추가 & 마커 표시
         clusterer.addMarkers(markers);
       }) // axios는 default가 JSON으로 값을 받아옴
       .catch((e: ErrorCallback) => {
@@ -103,11 +97,11 @@ const MarkerCluster = () => {
         console.log('에러');
       }); //에러처리
     }, []);
-  
+
   return (
   <>
     <StylePopup />
-    <Refresh />
+    <Refresh map={map_def.current} center={getCenter_def.current} />
     <div id='map' style={{ width: '100vw', height: '70vh' }}></div>
   </>
   );
