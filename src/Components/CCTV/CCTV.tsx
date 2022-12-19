@@ -2,22 +2,17 @@ import styled from "styled-components";
 import { useState, useEffect, useRef, useCallback } from "react";
 import axios from "axios";
 import ReactPlayer from "react-player";
+import { rootCertificates } from "tls";
 // import CCTVItem from "./CCTVItem";
 const { kakao } = window;
 const Media = styled.div`
-  width: 100px;
-  height: 100px;
+  width: 320px;
+  height: 720px;
   ${({ theme }) => theme.device.mobile} {
     background-color: salmon;
   }
   /* 0~768px 까지 background-color salmon 색 그이후는 red */
   background-color: red;
-`;
-const CCTVIcon = styled.div`
-  width: 30px;
-  height: 30px;
-  background-image: url("/img/CCTV.png");
-  background-size: cover;
 `;
 const CCTV = () => {
   const [map, setMap] = useState({
@@ -37,8 +32,12 @@ const CCTV = () => {
       .then(res => {
         const cctvPlace = res.data.response.data;
         // cctv데이터 변수 선언
-
         const container = document.getElementById("map");
+        const root = document.getElementById("root");
+        root?.appendChild<any>(container);
+        const cctvVideo = document.getElementById("videoPlay");
+        const cctvSrc = document.getElementById("src");
+
         const options = {
           center: new kakao.maps.LatLng(map.center.lat, map.center.lng),
           level: 9,
@@ -64,7 +63,6 @@ const CCTV = () => {
           imgSize,
           imageOption
         );
-
         cctvPlace.map((el: any) => {
           // new kakao.maps.LatLng(el.coordy, el.coordx);
           const marker = new kakao.maps.Marker({
@@ -76,19 +74,23 @@ const CCTV = () => {
             // 마커 이미지 변경
           });
           let iwContent =
-            "<video autoplay='autoplay' muted='muted' controls style='width=720, height=480'>" +
+            "<video id='video' autoplay='autoplay' muted='muted' controls >" +
             `<source src=${el.cctvurl} type="video/mp4"/>` +
             "</video>";
           // 비디오 영상구현
-          let iwRemoveable = true;
-          // 닫기버튼 기능
+          cctvSrc.setAttribute("src", `${el.cctvurl}`);
+          console.log(cctvSrc);
           const infowindow = new window.kakao.maps.InfoWindow({
             zIndex: 1,
-            content: iwContent,
-            removable: iwRemoveable,
+            content: cctvVideo,
+            removable: true,
+            // 닫기버튼 기능
           });
+
           kakao.maps.event.addListener(marker, "click", function () {
             infowindow.open(mapScript, marker);
+            const video = document.createElement("video");
+            root?.appendChild(video);
             // window.open(el.cctvurl, "child", "width=500, height=500");
           });
           marker.setMap(mapScript);
@@ -108,30 +110,29 @@ const CCTV = () => {
   }, []);
 
   return (
-    <>
-      <div
-        id="map"
+    <div
+      id="map"
+      style={{
+        width: "100vw",
+        height: "100vh",
+        position: "relative",
+        overflow: "hidden",
+      }}
+    >
+      <video
+        id="videoPlay"
+        autoPlay
+        muted
+        controls
         style={{
-          width: "100%",
-          height: "100vh",
-          position: "relative",
-          overflow: "hidden",
+          width: "50%",
+          height: "30%",
+          display: "none",
         }}
-      ></div>
-      <ReactPlayer
-        url={
-          "http://210.99.67.118/media/CTV0008/CTV0008_20221216.151530.000.mp4"
-        }
-        playing={true}
-        muted={true}
-        controls={true}
-        light={false}
-        style={{
-          zIndex: 1,
-        }}
-      />
-      {/* <CCTVItem /> */}
-    </>
+      >
+        <source id="src"></source>
+      </video>
+    </div>
   );
 };
 
