@@ -5,6 +5,11 @@ import { calcPx, calcPxX } from "@/Hooks/CalcPx";
 import Logo from "../../../public/img/Logo";
 import Car from "../../../public/img/intro_Traffic_car";
 
+// svg matirx 정리
+const matrixRed = "0 0 0 0 1 0 0 0 0 0.254902 0 0 0 0 0.254902 0 0 0 1 0";
+const matrixYellow = "0 0 0 0 1 0 0 0 0 0.796078 0 0 0 0 0.0196078 0 0 0 1 0";
+const matrixGreen = "0 0 0 0 0 0 0 0 0 1 0 0 0 0 0.0999999 0 0 0 1 0";
+
 // 올그린 애니메이션 효과 키 프레임
 const allGreen = keyframes`
   0% {
@@ -133,53 +138,57 @@ const Intro = () => {
   setTimeout(() => {
     setRedCar({
       bgcolor: "#FF4141",
-      matrix: "0 0 0 0 1 0 0 0 0 0.254902 0 0 0 0 0.254902 0 0 0 1 0",
+      matrix: matrixRed,
     });
     setTimeout(() => {
       setYellowCar({
         bgcolor: "#FFCB05",
-        matrix: "0 0 0 0 1 0 0 0 0 0.796078 0 0 0 0 0.0196078 0 0 0 1 0",
+        matrix: matrixYellow,
       });
       setTimeout(() => {
         setGreenCar({
           bgcolor: "#00ED5F",
-          matrix: "0 0 0 0 0 0 0 0 0 1 0 0 0 0 0.0999999 0 0 0 1 0",
+          matrix: matrixGreen,
         });
       }, 1000);
     }, 1000);
   }, 1000);
-
-  return (
-    <IntroWrap>
-      <div id="allGreen">{/* 올그린 */}</div>
-      <div>
-        {/* 차 svg */}
+  console.log(window.innerWidth);
+  if (window.innerWidth >= 769) {
+    return <></>;
+  } else {
+    return (
+      <IntroWrap>
+        <div id="allGreen">{/* 올그린 */}</div>
         <div>
-          <Car
-            bgcolor={redCar.bgcolor}
-            filter="filter0_d_158_128"
-            matrixValues={redCar.matrix}
-            feBlendValues="158_128"
-          />
-          <Car
-            bgcolor={yellowCar.bgcolor}
-            filter="filter0_d_157_109"
-            matrixValues={yellowCar.matrix}
-            feBlendValues="157_109"
-          />
-          <Car
-            bgcolor={greenCar.bgcolor}
-            filter="filter0_d_45_6613"
-            matrixValues={greenCar.matrix}
-            feBlendValues="45_6613"
-          />
+          {/* 차 svg */}
+          <div>
+            <Car
+              bgcolor={redCar.bgcolor}
+              filter="filter0_d_158_128"
+              matrixValues={redCar.matrix}
+              feBlendValues="158_128"
+            />
+            <Car
+              bgcolor={yellowCar.bgcolor}
+              filter="filter0_d_157_109"
+              matrixValues={yellowCar.matrix}
+              feBlendValues="157_109"
+            />
+            <Car
+              bgcolor={greenCar.bgcolor}
+              filter="filter0_d_45_6613"
+              matrixValues={greenCar.matrix}
+              feBlendValues="45_6613"
+            />
+          </div>
         </div>
-      </div>
-      <div id="logo">
-        <Logo />
-      </div>
-      <div>해당 페이지는 모바일만 지원됩니다.</div>
-    </IntroWrap>
-  );
+        <div id="logo">
+          <Logo />
+        </div>
+        <div>해당 페이지는 모바일만 지원됩니다.</div>
+      </IntroWrap>
+    );
+  }
 };
 export default Intro;
