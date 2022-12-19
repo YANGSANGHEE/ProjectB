@@ -27,7 +27,7 @@ const Traffic = () => {
     <>
       <div>hello</div>
     </>
-3  );
+  );
 };
 
 export default Traffic;

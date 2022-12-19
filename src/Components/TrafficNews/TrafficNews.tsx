@@ -40,9 +40,9 @@ const TrafficNews = () => {
 
   const Digit: any = styled.div`
     border: solid 2px red;
-    width: 450px;
+    width: 350px;
     height: 30px; 
-    border-radius: 20%;
+    border-radius: 15%;
     display: flex; 
     background-color: aliceblue;
     justify-content: center;
@@ -52,13 +52,13 @@ const TrafficNews = () => {
     align-items: center; 
     //지도위에 올라가게 설정
   position: absolute;
-  top: 500px; left: 130px;
+  top: 500px; left: 100px;
   z-index: 2;
 
   `;
 
   let WrapDiv: any = styled.div`
-    border: solid 7px green;
+    /* border: solid 7px green; */
     width: 300px;
     height: 30px;
     display: flex;
@@ -71,7 +71,7 @@ const TrafficNews = () => {
   `;
 
   let Siren: any = styled.div`
-    width: 50px;
+    width: 35px;
     height: 40px;
     display: flex;
     flex-direction: row;
