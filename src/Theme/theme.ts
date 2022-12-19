@@ -13,6 +13,10 @@ const Color = {
   gray: '#868686',
   l_gray: '#979797',
   W_gray: '#CECECE',
+  red: '#FF0000',
+  orange: '#FFB629',
+  yellow: '#FFE300',
+  green: '#39D729',
 };
 const border = {
   border_5px: `
@@ -42,6 +46,7 @@ const device = {
   mobile: `@media screen and (max-width:768px)`,
   mobile_wide: `@media (min-width:560px) and (max-width:899px)`,
 };
+
 export const theme = {
   fontSize,
   Color,
