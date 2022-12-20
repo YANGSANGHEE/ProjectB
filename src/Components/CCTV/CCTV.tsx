@@ -1,9 +1,7 @@
-import styled from 'styled-components';
 import { useState, useEffect, useRef } from 'react';
 import axios, { AxiosResponse } from 'axios';
 import CCTVItem from './CCTVItem';
 import Loadings from '@/Common/Loading';
-import { info } from 'console';
 const { kakao } = window;
 
 const CCTV = () => {
@@ -14,9 +12,8 @@ const CCTV = () => {
       .get(`http://localhost:8080/cctv`)
       .then((res: AxiosResponse) => {
         Setcctv(res.data);
-        console.log(res.data.url);
+        // console.log(res.data.url);
         const CCTV = res.data;
-        console.log();
         // cctv데이터 변수 선언
         const container = document.getElementById('map');
         const options = {
@@ -45,7 +42,7 @@ const CCTV = () => {
           imageOption
         );
         let arr: any = []; // 빈배열 선언
-        CCTV.forEach((el: any) => {
+        CCTV.map((el: any) => {
           const marker = new kakao.maps.Marker({
             map: mapScript,
             // 카카오맵
@@ -65,7 +62,7 @@ const CCTV = () => {
           arr.push(infowindow);
 
           const closeInfowindow = () => {
-            arr.forEach((value: any, index: number) => {
+            arr.map((value: any, index: number) => {
               arr[index].close();
             });
           };
