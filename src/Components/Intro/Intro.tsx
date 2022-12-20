@@ -3,7 +3,6 @@ import styled, { keyframes } from "styled-components";
 import { calcPx, calcPxX } from "@/Hooks/CalcPx";
 import Logo from "../../../public/img/Logo";
 import Car from "../../../public/img/intro_Traffic_car";
-//
 interface CarSet {
   bgCol: string;
   filter: string;
@@ -11,7 +10,6 @@ interface CarSet {
   feblend: string;
   [index: string]: string;
 }
-
 // 올그린 애니메이션 효과 키 프레임
 const allGreen = keyframes`
   0% {
@@ -85,7 +83,6 @@ const IntroWrap = styled.div`
       font-size: 11px;
       color: ${({ theme }) => theme.Color.gray};
     }
-
     ${({ theme }) => theme.device.mobile_wide} {
       // 가로 화면
       // 도로 배경화면
@@ -134,7 +131,6 @@ const IntroWrap = styled.div`
     }
   }
 `;
-
 const Intro = () => {
   const [redCar, setRedCar] = useState({ bgcolor: "black", matrix: "0" });
   const [yellowCar, setYellowCar] = useState({ bgcolor: "black", matrix: "0" });

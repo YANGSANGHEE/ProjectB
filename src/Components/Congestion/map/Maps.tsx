@@ -38,10 +38,10 @@ const Maps = () => {
       <div
         id='map'
         style={{
-          width: '100vw',
-          height: '100vh',
           position: 'absolute',
           zIndex: '-1',
+          width: '100vw',
+          height: '100vh',
         }}></div>
     </>
   );

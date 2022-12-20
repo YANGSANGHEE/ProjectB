@@ -17,7 +17,7 @@ const App = () => {
 
   return (
     <>
-      <Intro />
+      {/* <Intro /> */}
       {width < 899 ? (
         <>
           <LayOut />
