@@ -9,7 +9,6 @@ const StylePopup = () => {
     }
   }, []);
   const ref = useRef(null);
-  
   return (
     <EnforceContainer id='popup' ref={ref}>
       <CloseButton onClick={close}>
@@ -18,7 +17,7 @@ const StylePopup = () => {
       <Box>
         <div className='boxContainer'>
           <img src='/img/Camera.svg' />
-          <p className='title'>구간단속중</p>
+          <p className='title'>무인단속카메라단속중</p>
           <p className='desc'>Enforcement</p>
         </div>
       </Box>
@@ -35,9 +34,8 @@ const EnforceContainer = styled.div`
 `;
 const CloseButton = styled.div`
   /* 포지션 */
-  position: relative;
-  top: 13px;
-  left: 81px;
+  position: absolute;
+  top:-0.5rem; right:-0.5rem;
   z-index: 1;
   /* 디스플레이 속성 */
   display: flex;
@@ -67,7 +65,7 @@ const Box = styled.div`
   align-items: center;
   justify-content: center;
   /* 사이즈 */
-  width: 95px;
+  width: 115px;
   height: 60px;
   /* 여백 */
   /* 글자 속성 */
