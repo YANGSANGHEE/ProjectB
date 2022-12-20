@@ -1,14 +1,8 @@
 import "@/App.css";
 import LayOut from "./Components/Layout";
-import styled from "styled-components";
-import { calcPx } from "./Hooks/CalcPx";
-import CCTV from "./Components/CCTV/CCTV";
+import Intro from "./Components/Intro/intro";
 import { useState, useEffect } from "react";
-const Test = styled.div`
-  width: ${calcPx(100)};
-  height: ${calcPx(100)};
-  background: ${({ theme }) => theme.Color.black};
-`;
+import { Web } from "./Components/Web";
 
 const App = () => {
   const [width, Setwidth] = useState<number>(window.innerWidth);
@@ -23,11 +17,14 @@ const App = () => {
 
   return (
     <>
-      <LayOut />
-      <img src="/img/CCTV.png" alt="CCTV"></img>\{/* 이미지 경로 참고 */}
-      {/* <Test /> */}
-      {/* styled component , calcPx적용 */}
-      <CCTV />
+      {/* <Intro /> */}
+      {width < 899 ? (
+        <>
+          <LayOut />
+        </>
+      ) : (
+        <Web />
+      )}
     </>
   );
 };
