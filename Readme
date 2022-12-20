@@ -47,11 +47,7 @@ ex) const MAP = process.env.REACT_APP_KAKAO_KEY;
  *media query
  ex)
  const Media = styled.div`
-  width: 100px;
-  height: 100px;
   ${({ theme }) => theme.device.mobile} {
     background-color: salmon;
   }
-  0~768px 까지 background-color salmon 색 그이후는 red
-  background-color: red;
 `;
