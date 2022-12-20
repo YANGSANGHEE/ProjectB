@@ -9,6 +9,7 @@ const StylePopup = () => {
     }
   }, []);
   const ref = useRef(null);
+  
   return (
     <EnforceContainer id='popup' ref={ref}>
       <CloseButton onClick={close}>

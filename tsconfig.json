@@ -19,6 +19,6 @@
       "@/*": ["src/*"]
     }
   },
-  "include": ["src"],
+  "include": ["src", "trashbin/SpeedLimit.tsx", "trashbin/GetMarker.tsx"],
   "exclude": ["node_modules"]
 }

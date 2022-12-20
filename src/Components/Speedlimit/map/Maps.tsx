@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useEffect, useState, useRef } from 'react';
 import axios, { AxiosResponse } from 'axios';
 import Refresh from '@/Common/Refresh';
@@ -8,6 +9,18 @@ import Loadings from '@/Common/Loading';
 /* 테스트 컴포넌트에서 작동 확인 후 이전 */
 const Maps = () => {
   const ITS = process.env.REACT_APP_ITS_KEY;
+=======
+import { useEffect, useState, useRef } from 'react'
+import axios from 'axios';
+import Refresh from './Refresh';
+import StylePopup from './Enforcement';
+const { kakao } = window; //불러오기에 문제없음
+import Loadings from '../Loading';
+
+/* 테스트 컴포넌트에서 작동 확인 후 이전 */
+const Maps = () => {
+  const ITS = process.env.REACT_APP_ITS_KEY2;
+>>>>>>> f5131e01eb997ed4182139f0ca01592faf180331
   const [mapE, setMapE] = useState({}); //map_def 상태고정용
   const map_def = useRef({});
   const goCenter_def = useRef();
@@ -20,7 +33,11 @@ const Maps = () => {
       .get<object>(
         `https://openapi.its.go.kr:9443/vslInfo?apiKey=${ITS}&getType=json`
       ) // API url 입력
+<<<<<<< HEAD
       .then((res: AxiosResponse) => {
+=======
+      .then((res) => {
+>>>>>>> f5131e01eb997ed4182139f0ca01592faf180331
         datas = res.data.body.items;
         SetData(datas);
         let container = document.getElementById('map');
@@ -33,7 +50,11 @@ const Maps = () => {
         map_def.current = map; //map 고정
         // console.log(map.panTo);
         setMapE(map_def.current); //map 고정값 저장(없애면 작동안됨)
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> f5131e01eb997ed4182139f0ca01592faf180331
         /* 지도 확대 축소를 제어할 수 있는 줌 컨트롤을 생성 */
         // let zoomControl = new kakao.maps.ZoomControl();
         // map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
@@ -52,7 +73,11 @@ const Maps = () => {
           minLevel: 9, // 클러스터 할 최소 지도 레벨
         });
         // 마커
+<<<<<<< HEAD
         const markers = datas.map((value: any) => {
+=======
+        const markers = datas.map((value:any) => {
+>>>>>>> f5131e01eb997ed4182139f0ca01592faf180331
           let imgSrc;
           let speed = value.limitSpeed;
           //속도에 따라 표시되는 마커 이미지
@@ -87,10 +112,17 @@ const Maps = () => {
           }
           let imgSize = new kakao.maps.Size(60 * 0.5, 73 * 0.5); //마커 사이즈
           let markerImg = new kakao.maps.MarkerImage(imgSrc, imgSize);
+<<<<<<< HEAD
           return new kakao.maps.Marker({
             position: new kakao.maps.LatLng(value.coordY, value.coordX),
             image: markerImg, //마커이미지
           });
+=======
+            return new kakao.maps.Marker({
+                position : new kakao.maps.LatLng(value.coordY, value.coordX),
+                image : markerImg, //마커이미지 
+              });
+>>>>>>> f5131e01eb997ed4182139f0ca01592faf180331
         });
         //클러스터러에 마커 추가 & 마커 표시
         clusterer.addMarkers(markers);
@@ -99,6 +131,7 @@ const Maps = () => {
         if (e) throw e;
         console.log('에러');
       }); //에러처리
+<<<<<<< HEAD
   }, []);
 
   return (
@@ -112,6 +145,17 @@ const Maps = () => {
       />
       <div id='map' style={{ width: '100vw', height: '70vh' }}></div>
     </>
+=======
+    }, []);
+
+  return (
+  <>
+    <Loadings data={data} />
+    <StylePopup />
+    <Refresh map={map_def.current} center={getCenter_def.current} />
+    <div id='map' style={{ width: '100vw', height: '70vh' }}></div>
+  </>
+>>>>>>> f5131e01eb997ed4182139f0ca01592faf180331
   );
 };
 export default Maps;
