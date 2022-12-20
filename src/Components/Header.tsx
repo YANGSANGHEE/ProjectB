@@ -17,6 +17,7 @@ const HeaderSet = styled.div`
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 3;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
   img {
     width: 7.2rem;

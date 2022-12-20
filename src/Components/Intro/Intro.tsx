@@ -3,6 +3,7 @@ import styled, { keyframes } from "styled-components";
 import { calcPx, calcPxX } from "@/Hooks/CalcPx";
 import Logo from "../../../public/img/Logo";
 import Car from "../../../public/img/intro_Traffic_car";
+
 interface CarSet {
   bgCol: string;
   filter: string;
@@ -174,8 +175,8 @@ const Intro = () => {
       }, 4500);
     });
   }, []);
-  //무한 렌더링 되서 useEffect promise문 씀
 
+  //무한 렌더링 되서 useEffect promise문 씀
   const CarSet: CarSet[] = [
     {
       bgCol: redCar.bgcolor,
@@ -196,7 +197,6 @@ const Intro = () => {
       feblend: "45_6613",
     },
   ];
-
   console.log("렌더링중");
   return (
     <IntroWrap id="Intros" ref={ref}>
