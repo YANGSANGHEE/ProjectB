@@ -9,7 +9,7 @@ const Loading = styled.div`
   top: 0;
   left: 0;
   z-index: 3;
-  ${({ theme }) => theme.flexSet.flexColumnCenter}
+${({ theme }) => theme.flexSet.flexColumnCenter};
   & > img {
     margin-bottom: 2rem;
   }

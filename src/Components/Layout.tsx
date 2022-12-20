@@ -5,6 +5,7 @@ import Speedlimit from '@/Components/Speedlimit/map/SpeedMarker_cluster';
 import CCTV from './CCTV/CCTV';
 import TrafficNews from './TrafficNews/TrafficNews';
 import styled from 'styled-components';
+import Loadings from '@/Common/Loading';
 
 declare global {
   interface Window {
@@ -12,7 +13,8 @@ declare global {
   }
 }
 
-const Center = styled.div`
+const TrafficSet = styled.div`
+  width: 100vw;
   ${({ theme }) => theme.flexSet.flexColumnCenter}
 `;
 
@@ -24,7 +26,7 @@ const LayOut = () => {
   };
   // header에 함수 자체를 props를 보내 탭버튼 클릭시 바뀌는 value값을 받아옴
   return (
-    <Center>
+    <>
       <Header getbutton={getbutton}></Header>
       {button === 'congestion' ? (
         <Congestion />
@@ -33,8 +35,10 @@ const LayOut = () => {
       ) : button === 'cctv' ? (
         <CCTV />
       ) : null}
-      <TrafficNews />
-    </Center>
+      <TrafficSet>
+        <TrafficNews />
+      </TrafficSet>
+    </>
   );
 };
 
