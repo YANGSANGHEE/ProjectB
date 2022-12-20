@@ -42,7 +42,7 @@ const CCTV = () => {
           imageOption
         );
         let arr: any = []; // 빈배열 선언
-        CCTV.forEach((el: any) => {
+        CCTV.map((el: any) => {
           const marker = new kakao.maps.Marker({
             map: mapScript,
             // 카카오맵
@@ -51,7 +51,7 @@ const CCTV = () => {
             image: markerImg,
             // 마커 이미지 변경
           });
-          let iwContent = `<iframe title="CCTV" width="320" height="250" src="${el.url}"></iframe>`;
+          let iwContent = `<iframe title="CCTV" width="320" height="280" src="${el.url}"></iframe>`;
 
           let infowindow = new window.kakao.maps.InfoWindow({
             zIndex: 1,
@@ -62,7 +62,7 @@ const CCTV = () => {
           arr.push(infowindow);
 
           const closeInfowindow = () => {
-            arr.forEach((value: any, index: number) => {
+            arr.map((value: any, index: number) => {
               arr[index].close();
             });
           };
