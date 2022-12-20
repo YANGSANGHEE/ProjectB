@@ -132,3 +132,94 @@ const IntroWrap = styled.div`
     }
   }
 `;
+const Intro = () => {
+  const [redCar, setRedCar] = useState({ bgcolor: 'black', matrix: '0' });
+  const [yellowCar, setYellowCar] = useState({ bgcolor: 'black', matrix: '0' });
+  const [greenCar, setGreenCar] = useState({ bgcolor: 'black', matrix: '0' });
+  const ref = useRef(null);
+  //IntroWrap에 붙일 ref
+  useEffect(() => {
+    const promi = new Promise<void>((resolve, reject) => {
+      setTimeout(() => {
+        setRedCar({
+          bgcolor: '#FF4141',
+          matrix: '0 0 0 0 1 0 0 0 0 0.254902 0 0 0 0 0.254902 0 0 0 1 0',
+        });
+        resolve();
+      }, 1000);
+    });
+    promi.then(() => {
+      setTimeout(() => {
+        setYellowCar({
+          bgcolor: '#FFCB05',
+          matrix: '0 0 0 0 1 0 0 0 0 0.796078 0 0 0 0 0.0196078 0 0 0 1 0',
+        });
+      }, 1000);
+    });
+    promi.then(() => {
+      setTimeout(() => {
+        setGreenCar({
+          bgcolor: '#00ED5F',
+          matrix: '0 0 0 0 0 0 0 0 0 1 0 0 0 0 0.0999999 0 0 0 1 0',
+        });
+      }, 2000);
+    });
+    promi.then(() => {
+      setTimeout(() => {
+        const Intros = document.getElementById('Intros');
+        if (Intros !== null) {
+          Intros.style.opacity = '0';
+          Intros.style.zIndex = '-4';
+        }
+      }, 4500);
+    });
+  }, []);
+  //무한 렌더링 되서 useEffect promise문 씀
+  const CarSet: CarSet[] = [
+    {
+      bgCol: redCar.bgcolor,
+      filter: 'filter0_d_158_128',
+      matrix: redCar.matrix,
+      feblend: '158_128',
+    },
+    {
+      bgCol: yellowCar.bgcolor,
+      filter: 'filter0_d_157_109',
+      matrix: yellowCar.matrix,
+      feblend: '157_109',
+    },
+    {
+      bgCol: greenCar.bgcolor,
+      filter: 'filter0_d_45_6613',
+      matrix: greenCar.matrix,
+      feblend: '45_6613',
+    },
+  ];
+  console.log('렌더링중');
+  return (
+    <IntroWrap id='Intros' ref={ref}>
+      <div id='allGreen'>{/* 올그린 */}</div>
+      <div>
+        {/* 차 svg */}
+        <div>
+          {CarSet.map((value, key) => {
+            return (
+              <Car
+                key={key}
+                bgcolor={value.bgCol}
+                filter={value.filter}
+                matrixValues={value.matrix}
+                feBlendValues={value.feblend}
+              />
+            );
+          })}
+        </div>
+      </div>
+      <div id='logo'>
+        <Logo />
+      </div>
+      <div>해당 페이지는 모바일만 지원됩니다.</div>
+    </IntroWrap>
+  );
+};
+export default Intro;
