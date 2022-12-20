@@ -8,8 +8,8 @@ router.get('/:id', (req, res) => {
 
   if (typeof id === 'string') {
     switch (id) {
-      case 'test':
-        Query = 'SELECT * FROM hipasstest'
+      case 'cctv':
+        Query = 'SELECT * FROM daejeon_cctv'
         break;
       default:
         return null
