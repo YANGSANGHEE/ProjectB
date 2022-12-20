@@ -1,26 +1,27 @@
 import styled from 'styled-components';
-import { useState, useEffect, useRef, useCallback } from 'react';
-import axios, { AxiosAdapter, AxiosDefaults, AxiosResponse } from 'axios';
+import { useState, useEffect, useRef } from 'react';
+import axios, { AxiosResponse } from 'axios';
 import CCTVItem from './CCTVItem';
 import Loadings from '@/Common/Loading';
+import { info } from 'console';
 const { kakao } = window;
 
 const CCTV = () => {
   const [cctv, Setcctv] = useState<any>(null);
-  const ITS = process.env.REACT_APP_ITS_KEY_SPARE;
+
   useEffect(() => {
     axios
-      .get(
-        `https://openapi.its.go.kr:9443/cctvInfo?apiKey=${ITS}&type=all&cctvType=2&minX=127.252183&maxX=127.538356&minY=36.194005&maxY=36.499218&getType=json`
-      )
+      .get(`http://localhost:8080/cctv`)
       .then((res: AxiosResponse) => {
-        Setcctv(res.data.response.data);
-        const CCTV = res.data.response.data;
+        Setcctv(res.data);
+        console.log(res.data.url);
+        const CCTV = res.data;
+        console.log();
         // cctv데이터 변수 선언
         const container = document.getElementById('map');
         const options = {
           center: new kakao.maps.LatLng(36.3504119, 127.3845475),
-          level: 9,
+          level: 7,
         };
         // 초기 카카오맵 설정값
         const mapScript = new kakao.maps.Map(container, options);
@@ -43,31 +44,39 @@ const CCTV = () => {
           imgSize,
           imageOption
         );
-        CCTV.map((el: any) => {
+        let arr: any = []; // 빈배열 선언
+        CCTV.forEach((el: any) => {
           const marker = new kakao.maps.Marker({
             map: mapScript,
             // 카카오맵
-            position: new kakao.maps.LatLng(el.coordy, el.coordx),
+            position: new kakao.maps.LatLng(el.y, el.x),
             // 받아온 데이터 좌표 뿌리기
             image: markerImg,
             // 마커 이미지 변경
           });
-          let iwContent =
-            "<video id='video' autoplay='autoplay' muted='muted' controls style='width:300px; height: 200px'>" +
-            `<source src=${el.cctvurl} type="video/mp4"/>` +
-            '</video>';
+          let iwContent = `<iframe title="CCTV" width="320" height="250" src="${el.url}"></iframe>`;
 
-          const infowindow = new window.kakao.maps.InfoWindow({
+          let infowindow = new window.kakao.maps.InfoWindow({
             zIndex: 1,
             content: iwContent,
             removable: true,
             // 닫기버튼 기능
           });
+          arr.push(infowindow);
+
+          const closeInfowindow = () => {
+            arr.forEach((value: any, index: number) => {
+              arr[index].close();
+            });
+          };
+          // infowindow 다중 오픈 방지
+
           // 비디오 영상구현
           kakao.maps.event.addListener(marker, 'click', function () {
+            closeInfowindow();
+            infowindow.close();
             infowindow.open(mapScript, marker);
           });
-
           marker.setMap(mapScript);
         });
         const setDraggable = (draggable: any) => {
