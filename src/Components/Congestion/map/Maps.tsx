@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import styled from 'styled-components';
 import { calcPx, calcPxX } from '@/Hooks/CalcPx';
 // import GetInfo from "./GetInfo"
@@ -46,7 +46,7 @@ const Maps = () => {
       .get<object>(
         `https://openapi.its.go.kr:9443/vslInfo?apiKey=${ITS}&getType=json`
       ) // API url 입력
-      .then((res) => {
+      .then((res: AxiosResponse) => {
         SetData(res.data.items);
         // State data에 응답 데이터를 담음
         let container = document.getElementById('map');

@@ -1,9 +1,10 @@
 import Maps from './map/Maps';
+import Test from './Test';
 
 const Congestion = () => {
   return (
     <>
-      <Maps />
+      <Test />
     </>
   );
 };
