@@ -98,7 +98,13 @@ const MarkerClusterEnfCam = () => {
             // 마커에 표시할 인포윈도우를 생성 
           if(value["제한속도"] !== 0){
             let infowindow = new kakao.maps.InfoWindow({
-              content: `<div style="font-size:10pt, text-align: center">설치장소: ${value["설치장소"]}</div>` // 
+              content: `<div style="
+              width: fit-content;
+              padding: 2%;
+              "><span style="
+              font-size: 10pt; 
+              text-align: center;
+              "}>${value["설치장소"]}</span></div>` // 
             });
             (function (marker, infowindow) {
               // 마커에 mouseover 이벤트를 등록하고 마우스 오버 시 인포윈도우를 표시
