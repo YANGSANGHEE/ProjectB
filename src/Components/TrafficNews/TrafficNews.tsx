@@ -2,14 +2,15 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import Modal from './Modal';
-import { calcPx, calcPxX } from '@/Hooks/CalcPx';
+import { calcPx } from '@/Hooks/CalcPx';
+import e from 'express';
 
 const ITS = process.env.REACT_APP_ITS_KEY_AYEON;
 //대전 실시간 사고·공사 api
 const url = `https://openapi.its.go.kr:9443/eventInfo?apiKey=${ITS}&type=all&eventType=all&minX=127.252183&maxX=127.538356&minY=36.194005&maxY=36.499218&getType=json`;
 const TrafficNews = () => {
   // const ITS = process.env.REACT_APP_ITS_KEY2;
-  const [news, setNews] = useState([]);
+  const [news, setNews] = useState<[] | null>(null);
   useEffect(() => {
     //교통정보 끌고오는 api
     const fetchData = async () => {
@@ -23,16 +24,13 @@ const TrafficNews = () => {
     };
     fetchData();
   }, []);
-  console.log(news);
-  //popup창 useState값이 참일때 열리고 false일때 닫힘
-  const [modalOpen, setModalOpen] = useState(false);
-  const openModal = () => {
-    setModalOpen(true);
-    console.log(modalOpen);
-  };
-  const closeModal = () => {
-    setModalOpen(false);
-  };
+  console.log(news);  
+ 
+
+  const [open, setOpen] = useState(false); 
+  console.log("aaaaaaaaaaa") 
+  console.log(open)
+
   //css
   const move = keyframes`
     0%{
@@ -59,7 +57,7 @@ const TrafficNews = () => {
     ${({ theme }) => theme.flexSet.flexRowCenter};
   `;
   let WrapDiv: any = styled.div`
-    /* border: solid 7px green; */
+ 
     width: 85%;
     height: 3rem;
     overflow: hidden;
@@ -87,25 +85,32 @@ const TrafficNews = () => {
   `;
   return (
     <>
-      <Digit onClick={openModal}>
-        <Modal
-          open={modalOpen}
-          close={closeModal}
-          header='Modal heading'></Modal>
+      <Digit onClick = {() => {setOpen(!open)}}>
+          <Modal open={open}></Modal>
         <Siren>
           <img className='img' src='/img/Siren.png' alt='siren'></img>
         </Siren>
-        <WrapDiv>
-          {news.map((item: any, index: number) => {
-            return (
-              <StyledDiv key={index}>
-                <span style={{ fontSize: '12px' }}>
-                  {item.roadName}
-                  {item.message}
-                </span>
-              </StyledDiv>
-            );
-          })}
+        <WrapDiv> 
+
+  {news !== null ? (
+            news.map((item: any, index: number) => {
+              return (
+                <StyledDiv key={index}>
+                  <span id='flowtext' style={{ fontSize: '12px' }}>
+                    {item.roadName}
+                    {item.message}
+                  </span>
+                </StyledDiv>
+              );
+            })
+          ) : (
+            <StyledDiv>
+              <span id='flowtext' style={{ fontSize: '12px' }}>
+              평화로운 대전 
+              </span>
+            </StyledDiv>
+          )}
+          
         </WrapDiv>
       </Digit>
     </>
