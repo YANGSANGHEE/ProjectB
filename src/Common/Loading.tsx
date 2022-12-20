@@ -19,14 +19,14 @@ ${({ theme }) => theme.flexSet.flexColumnCenter};
   }
   ${({ theme }) => theme.device.mobile} {
     & > img {
-      width: ${calcPx(70)};
-      height: ${calcPx(115)};
+      width: ${calcPx(145)};
+      height: ${calcPx(146)};
     }
   }
   ${({ theme }) => theme.device.mobile_wide} {
     & > img {
-      width: ${calcPxX(70)};
-      height: ${calcPxX(115)};
+      width: ${calcPxX(145)};
+      height: ${calcPxX(146)};
     }
   }
 `;
