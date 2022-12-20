@@ -7,7 +7,7 @@ const { kakao } = window;
 
 const CCTV = () => {
   const [cctv, Setcctv] = useState<any>(null);
-  const ITS = process.env.REACT_APP_ITS_KEY_GEUNSU;
+  const ITS = process.env.REACT_APP_ITS_KEY_SPARE;
   useEffect(() => {
     axios
       .get(

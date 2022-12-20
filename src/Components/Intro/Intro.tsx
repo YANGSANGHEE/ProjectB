@@ -3,7 +3,7 @@ import styled, { keyframes } from 'styled-components';
 import { calcPx, calcPxX } from '@/Hooks/CalcPx';
 import Logo from '../../../public/img/Logo';
 import Car from '../../../public/img/intro_Traffic_car';
-//
+
 interface CarSet {
   bgCol: string;
   filter: string;
@@ -136,6 +136,7 @@ const Intro = () => {
   const [redCar, setRedCar] = useState({ bgcolor: 'black', matrix: '0' });
   const [yellowCar, setYellowCar] = useState({ bgcolor: 'black', matrix: '0' });
   const [greenCar, setGreenCar] = useState({ bgcolor: 'black', matrix: '0' });
+
   const ref = useRef(null);
   //IntroWrap에 붙일 ref
   useEffect(() => {
@@ -174,6 +175,7 @@ const Intro = () => {
       }, 4500);
     });
   }, []);
+
   //무한 렌더링 되서 useEffect promise문 씀
   const CarSet: CarSet[] = [
     {
