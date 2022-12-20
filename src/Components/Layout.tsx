@@ -1,14 +1,9 @@
-<<<<<<< HEAD
-import AxiosExample from "./AxiosExample";
-import styled from "styled-components";
-=======
-import { useState } from 'react';
-import Header from './Header';
-import Congestion from './Congestion/Congestion';
+import { useState } from "react";
+import Header from "./Header";
+import Congestion from "./Congestion/Congestion";
 // import Speedlimit from './Speedlimit/SpeedLimit';
-import Speedlimit from '@/Components/Speedlimit/map/SpeedMarker_cluster';
-import CCTV from './CCTV/CCTV';
->>>>>>> 6f9e58eb936016daf4c035b6788e06f064eb2ac4
+import Speedlimit from "@/Components/Speedlimit/map/SpeedMarker_cluster";
+import CCTV from "./CCTV/CCTV";
 
 declare global {
   interface Window {
@@ -17,7 +12,7 @@ declare global {
 }
 
 const LayOut = () => {
-  const [button, Setbutton] = useState<string>('congestion');
+  const [button, Setbutton] = useState<string>("congestion");
 
   const getbutton = (data: string): void => {
     Setbutton(data);
@@ -27,11 +22,11 @@ const LayOut = () => {
   return (
     <>
       <Header getbutton={getbutton}></Header>
-      {button === 'congestion' ? (
+      {button === "congestion" ? (
         <Congestion />
-      ) : button === 'speed' ? (
+      ) : button === "speed" ? (
         <Speedlimit />
-      ) : button === 'cctv' ? (
+      ) : button === "cctv" ? (
         <CCTV />
       ) : null}
     </>
