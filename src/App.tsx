@@ -3,7 +3,7 @@ import LayOut from "./Components/Layout";
 import styled from "styled-components";
 import { calcPx } from "./Hooks/CalcPx";
 import CCTV from "./Components/CCTV/CCTV";
-
+import { useState, useEffect } from "react";
 const Test = styled.div`
   width: ${calcPx(100)};
   height: ${calcPx(100)};

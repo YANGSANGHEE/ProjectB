@@ -1,11 +1,11 @@
-import styled from 'styled-components';
-import { useState, useEffect, useRef, useCallback } from 'react';
-import axios, { AxiosAdapter, AxiosDefaults, AxiosResponse } from 'axios';
-import ReactPlayer from 'react-player';
-import { rootCertificates } from 'tls';
-import CCTVItem from './CCTVItem';
-import { prototype } from 'events';
-import AxiosExample from '../AxiosExample';
+import styled from "styled-components";
+import { useState, useEffect, useRef, useCallback } from "react";
+import axios, { AxiosAdapter, AxiosDefaults, AxiosResponse } from "axios";
+import ReactPlayer from "react-player";
+import { rootCertificates } from "tls";
+import CCTVItem from "./CCTVItem";
+import { prototype } from "events";
+import AxiosExample from "../AxiosExample";
 const { kakao } = window;
 // const Media = styled.div`
 //   width: 320px;
@@ -34,7 +34,7 @@ const CCTV = () => {
       .then((res: AxiosResponse) => {
         const cctvPlace = res.data.response.data;
         // cctv데이터 변수 선언
-        const container = document.getElementById('map');
+        const container = document.getElementById("map");
         const options = {
           center: new kakao.maps.LatLng(map.center.lat, map.center.lng),
           level: 9,
@@ -48,14 +48,7 @@ const CCTV = () => {
           mapTypeControl,
           kakao.maps.ControlPosition.TOPRIGHT
         );
-<<<<<<< HEAD
         const imgSrc = "/img/CCTV.png",
-=======
-        // const zoomControl = new kakao.maps.ZoomControl();
-        // // 확대 축소가 가능한 컨트롤바
-        // mapScript.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
-        const imgSrc = '/img/CCTV.png',
->>>>>>> 7858ea638f4ed2d6f778bb28dddcf738dca90620
           imgSize = new kakao.maps.Size(25, 40);
         const imageOption = { offset: new kakao.maps.Point(15, 33) };
         // 마커 디자인 변경
@@ -76,7 +69,7 @@ const CCTV = () => {
           let iwContent =
             "<video id='video' autoplay='autoplay' muted='muted' controls style='width:300px; height: 200px'>" +
             `<source src=${el.cctvurl} type="video/mp4"/>` +
-            '</video>';
+            "</video>";
           //   `
           // <div style='width:200px; height:80px; position:relative;'>
           //   <div id = 'close'  style='width:20px; height:20px; position:absolute; top:10px; left:10px; background:#fff;'></div>
@@ -93,7 +86,7 @@ const CCTV = () => {
             // 닫기버튼 기능
           });
           // 비디오 영상구현
-          kakao.maps.event.addListener(marker, 'click', function () {
+          kakao.maps.event.addListener(marker, "click", function () {
             infowindow.open(mapScript, marker);
           });
 
@@ -105,23 +98,24 @@ const CCTV = () => {
         };
         setDraggable(true);
         // 드래그 가능
-        console.log('loading kakaomap');
+        console.log("loading kakaomap");
       })
       .catch((e: ErrorCallback) => {
         if (e) throw e;
-        console.log('에러');
+        console.log("에러");
       });
   }, []);
 
   return (
     <div
-      id='map'
+      id="map"
       style={{
-        width: '100vw',
-        height: '100vh',
-        position: 'relative',
-        overflow: 'hidden',
-      }}>
+        width: "100vw",
+        height: "100vh",
+        position: "relative",
+        overflow: "hidden",
+      }}
+    >
       <CCTVItem></CCTVItem>
     </div>
   );
