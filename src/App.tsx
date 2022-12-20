@@ -1,7 +1,7 @@
 import '@/App.css';
 import LayOut from './Components/Layout';
 import Intro from './Components/Intro/intro';
-import React, { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { Web } from './Components/Web';
 
 const App = () => {
