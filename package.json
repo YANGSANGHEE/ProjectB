@@ -23,10 +23,14 @@
   },
   "homepage": "https://github.com/YANGSANGHEE/ProjectB#readme",
   "dependencies": {
+<<<<<<< HEAD
+=======
+    "@emotion/react": "^11.10.5",
+    "@types/cors": "^2.8.13",
+>>>>>>> 571f47269ae97cd0783ef0d2a3754f86bd9854b1
     "@types/styled-components": "^5.1.26",
     "arkit": "^1.6.4",
     "axios": "^1.2.1",
-    "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "mysql": "^2.18.1",
