@@ -23,16 +23,14 @@ const TrafficNews = () => {
     };
     fetchData();
   }, []);
-  console.log(news);
-  //popup창 useState값이 참일때 열리고 false일때 닫힘
-  const [modalOpen, setModalOpen] = useState(false);
-  const openModal = () => {
-    setModalOpen(true);
-    console.log(modalOpen);
-  };
-  const closeModal = () => {
-    setModalOpen(false);
-  };
+  console.log(news); 
+
+
+
+  const [open, setOpen] = useState(false); 
+  console.log("aaaaaaaaaaa") 
+  console.log(open)
+
   //css
   const move = keyframes`
     0%{
@@ -59,7 +57,7 @@ const TrafficNews = () => {
     ${({ theme }) => theme.flexSet.flexRowCenter};
   `;
   let WrapDiv: any = styled.div`
-    /* border: solid 7px green; */
+ 
     width: 85%;
     height: 3rem;
     overflow: hidden;
@@ -87,11 +85,14 @@ const TrafficNews = () => {
   `;
   return (
     <>
-      <Digit onClick={openModal}>
-        <Modal
+      {/* <Digit onClick={openModal}> */} 
+      <Digit onClick = {() => {setOpen(!open)}}>
+        {/* <Modal
           open={modalOpen}
           close={closeModal}
-          header='Modal heading'></Modal>
+          header='Modal heading'></Modal> */} 
+
+          <Modal open={open}></Modal>
         <Siren>
           <img className='img' src='/img/Siren.png' alt='siren'></img>
         </Siren>
