@@ -94,7 +94,7 @@ const CCTV = () => {
           height: '100vh',
           position: 'relative',
           overflow: 'hidden',
-          zIndex: '-2',
+          zIndex: '1',
         }}>
         <CCTVItem></CCTVItem>
       </div>
