@@ -4,7 +4,12 @@ import vslData from '../testData/vsl.json'; //api 복사한 json데이터
 import StylePopup from './Enforcement';
 const { kakao } = window; //불러오기에 문제없음
 
-/* 줌 인 or 아웃에 따라 마커가 그룹으로 표시됨 */
+/** 
+ * ? 전국 고속도로 & 국도 기준
+ * 줌 인 or 아웃에 따라 마커가 그룹으로 표시됨
+ * 사용데이터 : its 가변속도표지정보(VSL)
+ * *221220 기준 사용하지 않음
+*/
 const MarkerCluster = () => {
   // const ITS = process.env.REACT_APP_ITS_KEY2;
   const [map, setMap] = useState<any>();
