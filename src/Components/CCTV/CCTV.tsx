@@ -48,9 +48,6 @@ const CCTV = () => {
           mapTypeControl,
           kakao.maps.ControlPosition.TOPRIGHT
         );
-        // const zoomControl = new kakao.maps.ZoomControl();
-        // // 확대 축소가 가능한 컨트롤바
-        // mapScript.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
         const imgSrc = "/img/CCTV.png",
           imgSize = new kakao.maps.Size(25, 40);
         const imageOption = { offset: new kakao.maps.Point(15, 33) };
