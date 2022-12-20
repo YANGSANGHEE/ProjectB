@@ -1,17 +1,16 @@
 const CCTVItem = () => {
   return (
     <video
-      id="videoPlay"
+      id='videoPlay'
       autoPlay
       muted
       controls
       style={{
-        width: "50%",
-        height: "30%",
-        display: "none",
-      }}
-    >
-      <source id="src"></source>
+        width: '50%',
+        height: '30%',
+        display: 'none',
+      }}>
+      <source id='src'></source>
     </video>
   );
 };

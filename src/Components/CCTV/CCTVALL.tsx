@@ -1,11 +1,11 @@
 const { kakao } = window;
-// declare global {
-//   interface Window {
-//     kakao: any;
-//   }
-// }
+declare global {
+  interface Window {
+    kakao: any;
+  }
+}
 const CCTVALL = () => {
-  const container = document.getElementById("map");
+  const container = document.getElementById('map');
   const options = {
     center: new kakao.maps.LatLng(36.3504119, 127.3845475),
     level: 9,
@@ -20,14 +20,13 @@ const CCTVALL = () => {
   mapScript.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
   return (
     <div
-      id="map"
+      id='map'
       style={{
-        width: "100vw",
-        height: "100vh",
-        position: "relative",
-        overflow: "hidden",
-      }}
-    ></div>
+        width: '100vw',
+        height: '100vh',
+        position: 'relative',
+        overflow: 'hidden',
+      }}></div>
   );
 };
 export default CCTVALL;
