@@ -1,5 +1,5 @@
 const TrafficNews = () => {
-  return <></>;
+  return <>돌발뉴스</>;
 };
 
 export default TrafficNews;

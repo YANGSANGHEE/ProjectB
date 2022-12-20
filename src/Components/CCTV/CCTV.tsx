@@ -17,6 +17,7 @@ const Media = styled.div`
   background-color: red;
 `;
 const CCTV = () => {
+<<<<<<< HEAD
   const [map, setMap] = useState({
     center: {
       lat: 36.3504119,
@@ -118,6 +119,12 @@ const CCTV = () => {
     >
       <CCTVItem></CCTVItem>
     </div>
+=======
+  return (
+    <>
+      <h1>CCTV</h1>
+    </>
+>>>>>>> 6f9e58eb936016daf4c035b6788e06f064eb2ac4
   );
 };
 

@@ -1,5 +1,11 @@
+import Maps from './map/Maps';
+
 const Congestion = () => {
-  return <></>;
+  return (
+    <>
+      <Maps />
+    </>
+  );
 };
 
 export default Congestion;
