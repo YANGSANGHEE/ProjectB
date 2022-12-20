@@ -142,25 +142,6 @@ const Intro = () => {
 
   const ref = useRef(null);
   //IntroWrap에 붙일 ref
-
-  // setTimeout(() => {
-  //   setRedCar({
-  //     bgcolor: '#FF4141',
-  //     matrix: '0 0 0 0 1 0 0 0 0 0.254902 0 0 0 0 0.254902 0 0 0 1 0',
-  //   });
-  //   setTimeout(() => {
-  //     setYellowCar({
-  //       bgcolor: '#FFCB05',
-  //       matrix: '0 0 0 0 1 0 0 0 0 0.796078 0 0 0 0 0.0196078 0 0 0 1 0',
-  //     });
-  //     setTimeout(() => {
-  //       setGreenCar({
-  //         bgcolor: '#00ED5F',
-  //         matrix: '0 0 0 0 0 0 0 0 0 1 0 0 0 0 0.0999999 0 0 0 1 0',
-  //       });
-  //     }, 1000);
-  //   }, 1000);
-  // }, 1000);
   useEffect(() => {
     const promi = new Promise<void>((resolve, reject) => {
       setTimeout(() => {
@@ -227,24 +208,6 @@ const Intro = () => {
       <div>
         {/* 차 svg */}
         <div>
-          {/* <Car
-            bgcolor={redCar.bgcolor}
-            filter='filter0_d_158_128'
-            matrixValues={redCar.matrix}
-            feBlendValues='158_128'
-          />
-          <Car
-            bgcolor={yellowCar.bgcolor}
-            filter='filter0_d_157_109'
-            matrixValues={yellowCar.matrix}
-            feBlendValues='157_109'
-          />
-          <Car
-            bgcolor={greenCar.bgcolor}
-            filter='filter0_d_45_6613'
-            matrixValues={greenCar.matrix}
-            feBlendValues='45_6613'
-          /> */}
           {CarSet.map((value, key) => {
             return (
               <Car
@@ -256,7 +219,6 @@ const Intro = () => {
               />
             );
           })}
-          {/* 맵으로 묶어봄 */}
         </div>
       </div>
       <div id="logo">
