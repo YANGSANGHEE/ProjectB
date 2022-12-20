@@ -7,7 +7,7 @@ const { kakao } = window;
 
 const CCTV = () => {
   const [cctv, Setcctv] = useState<any>(null);
-  const ITS = process.env.REACT_APP_ITS_KEY_GEUNSU;
+  const ITS = process.env.REACT_APP_ITS_KEY_SPARE;
   useEffect(() => {
     axios
       .get(
@@ -92,9 +92,11 @@ const CCTV = () => {
           height: "100vh",
           position: "relative",
           overflow: "hidden",
-          zIndex: 1,
+          zIndex: "1",
         }}
-      ></div>
+      >
+        <CCTVItem></CCTVItem>
+      </div>
     </>
   );
 };
