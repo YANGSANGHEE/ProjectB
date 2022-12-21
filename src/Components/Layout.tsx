@@ -6,7 +6,6 @@ import Speedlimit from '@/Components/Speedlimit/map/SpeedMarker_cluster_enfCam';
 import CCTV from './CCTV/CCTV';
 import TrafficNews from './TrafficNews/TrafficNews';
 import styled from 'styled-components';
-import Loadings from '@/Common/Loading';
 
 declare global {
   interface Window {

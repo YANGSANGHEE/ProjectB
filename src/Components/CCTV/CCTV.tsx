@@ -71,7 +71,6 @@ const CCTV = () => {
           // 비디오 영상구현
           kakao.maps.event.addListener(marker, 'click', function () {
             closeInfowindow();
-            infowindow.close();
             infowindow.open(mapScript, marker);
           });
           marker.setMap(mapScript);

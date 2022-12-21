@@ -31,7 +31,7 @@ const Modal = (props: any) => {
   }, []);
 
   let DataArr: Dataset[] = [];
-  
+
   const DataSet = data?.map((value: any) => {
     DataArr.push({
       address: value.elements[3].elements[0].text,

@@ -35,7 +35,8 @@ const EnforceContainer = styled.div`
 const CloseButton = styled.div`
   /* 포지션 */
   position: absolute;
-  top:-0.5rem; right:-0.5rem;
+  top: -0.5rem;
+  right: -0.5rem;
   z-index: 1;
   /* 디스플레이 속성 */
   display: flex;
