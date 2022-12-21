@@ -59,9 +59,12 @@ const CCTV = () => {
           imageOption
         );
 
-        let arr: any = []; // 빈배열 선언
+        let arr: any = [];
+        // 빈배열 선언
+
         CCTV.map((el: any) => {
           // map 메소드 활용하여 서버 데이터 요소들 분배
+
           const marker = new kakao.maps.Marker({
             map: mapScript,
             // 카카오맵
@@ -70,16 +73,32 @@ const CCTV = () => {
             image: markerImg,
             // 마커 이미지 변경
           });
+
           let iwContent = `<iframe title="CCTV" width="320" height="280" style="border: none" src="${el.url}"></iframe><div style="font-size:5px;background-color:black;color:#fff">경찰청(UTIC)(LIVE)제공</div>`;
           // 영상 띄워주는 텍스트가 담겨있는 변수
+
+          let loadingContent = `<div><iframe title="CCTV" width="320" height="300" style="border: none" src="/img/Podori_Loading.png"></iframe><p style="text-align:center">데이터를 불러오는 중 입니다...</p></div><div style="font-size:5px;background-color:black;color:#fff">경찰청(UTIC)(LIVE)제공</div>`;
+          // 로딩창 텍스트 변수
+
           const infowindow = new window.kakao.maps.InfoWindow({
+            // 영상 출력 함수
             zIndex: 1,
             content: iwContent,
             // 택스트 담긴 변수
             removable: true,
             // 닫기버튼 기능
           });
+
+          const loadingwindow = new window.kakao.maps.InfoWindow({
+            // 로딩창 출력 함수
+            zIndex: 1,
+            content: loadingContent,
+            removable: true,
+          });
+
           arr.push(infowindow);
+          // 빈 배열에 cctv영상을 띄워줄 요소들 담기
+
           const closeInfowindow = () => {
             arr.map((value: any, index: number) => {
               arr[index].close();
@@ -91,10 +110,13 @@ const CCTV = () => {
           kakao.maps.event.addListener(marker, "click", function () {
             closeInfowindow();
             infowindow.close();
-            // infowindow.addEventListener("load", function () {
-            //   return <Loadings />;
-            // });
+            if (el.url === null) {
+              // 만약에 url이 불러와지지 않았을때
+              loadingwindow.open(mapScript, marker);
+              // 로딩페이지 출력
+            }
             infowindow.open(mapScript, marker);
+            // 그다음 영상출력 페이지 출력
           });
           marker.setMap(mapScript);
         });
