@@ -77,7 +77,7 @@ const CCTV = () => {
           let iwContent = `<iframe title="CCTV" width="320" height="280" style="border: none" src="${el.url}"></iframe><div style="font-size:5px;background-color:black;color:#fff">경찰청(UTIC)(LIVE)제공</div>`;
           // 영상 띄워주는 텍스트가 담겨있는 변수
 
-          let loadingContent = `<div><iframe title="CCTV" width="320" height="300" style="border: none" src="/img/Podori_Loading.png"></iframe><p style="text-align:center">데이터를 불러오는 중 입니다...</p></div><div style="font-size:5px;background-color:black;color:#fff">경찰청(UTIC)(LIVE)제공</div>`;
+          let loadingContent = `<div><iframe title="CCTV" width="320" height="300" style="border: none" src="/img/Podori_Loading.png"></iframe><p style="text-align:center; font-size:2rem">데이터를 불러오는 중 입니다...</p></div><div style="font-size:5px;background-color:black;color:#fff">경찰청(UTIC)(LIVE)제공</div>`;
           // 로딩창 텍스트 변수
 
           const infowindow = new window.kakao.maps.InfoWindow({
@@ -110,11 +110,9 @@ const CCTV = () => {
           kakao.maps.event.addListener(marker, "click", function () {
             closeInfowindow();
             infowindow.close();
-            if (el.url === null) {
-              // 만약에 url이 불러와지지 않았을때
+            kakao.maps.event.addListener(marker, "load", function () {
               loadingwindow.open(mapScript, marker);
-              // 로딩페이지 출력
-            }
+            });
             infowindow.open(mapScript, marker);
             // 그다음 영상출력 페이지 출력
           });
