@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import Header from './Header';
 import Congestion from './Congestion/Congestion';
-// import Speedlimit from '@/Components/Speedlimit/map/SpeedMarker_cluster';
-import Speedlimit from '@/Components/Speedlimit/map/SpeedMarker_cluster_enfCam';
+import Speedlimit from '@/Components/Speedlimit/map/SpeedMarker_cluster';
 import CCTV from './CCTV/CCTV';
 import TrafficNews from './TrafficNews/TrafficNews';
 import styled from 'styled-components';

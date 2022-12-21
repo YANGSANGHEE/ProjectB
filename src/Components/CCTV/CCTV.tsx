@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import axios, { AxiosResponse } from 'axios';
 import CCTVItem from './CCTVItem';
 import Loadings from '@/Common/Loading';
@@ -29,9 +29,6 @@ const CCTV = () => {
           mapTypeControl,
           kakao.maps.ControlPosition.TOPRIGHT
         );
-        // const zoomControl = new kakao.maps.ZoomControl();
-        // // 확대 축소가 가능한 컨트롤바
-        // mapScript.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
         const imgSrc = '/img/CCTV.png',
           imgSize = new kakao.maps.Size(25, 40);
         const imageOption = { offset: new kakao.maps.Point(15, 33) };
@@ -51,7 +48,7 @@ const CCTV = () => {
             image: markerImg,
             // 마커 이미지 변경
           });
-          let iwContent = `<iframe title="CCTV" width="320" height="250" src="${el.url}"></iframe>`;
+          let iwContent = `<iframe title="CCTV" width="320" height="280" src="${el.url}"></iframe>`;
 
           let infowindow = new window.kakao.maps.InfoWindow({
             zIndex: 1,
@@ -72,6 +69,7 @@ const CCTV = () => {
           kakao.maps.event.addListener(marker, 'click', function () {
             closeInfowindow();
             infowindow.open(mapScript, marker);
+            console.log('click');
           });
           marker.setMap(mapScript);
         });
