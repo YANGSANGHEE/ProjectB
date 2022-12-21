@@ -61,6 +61,8 @@ const CCTV = () => {
 
         let arr: any = [];
         // 빈배열 선언
+        let loadArr: any = [];
+        // 로딩용 빈배열
 
         CCTV.map((el: any) => {
           // map 메소드 활용하여 서버 데이터 요소들 분배
@@ -77,7 +79,7 @@ const CCTV = () => {
           let iwContent = `<iframe title="CCTV" width="320" height="280" style="border: none" src="${el.url}"></iframe><div style="font-size:5px;background-color:black;color:#fff">경찰청(UTIC)(LIVE)제공</div>`;
           // 영상 띄워주는 텍스트가 담겨있는 변수
 
-          let loadingContent = `<div><iframe title="CCTV" width="320" height="300" style="border: none" src="/img/Podori_Loading.png"></iframe><p style="text-align:center; font-size:2rem">데이터를 불러오는 중 입니다...</p></div><div style="font-size:5px;background-color:black;color:#fff">경찰청(UTIC)(LIVE)제공</div>`;
+          let loadingContent = `<div style="display:flex; flex-direction:column; justify-content:center; align-items:center"><iframe title="CCTV" width="325" height="285" style="border: none; padding-left:20px;" src="/img/Podori_Loading.png"></iframe><p style="text-align:center; font-size:2rem">데이터를 불러오는 중 입니다...</p></div><div style="font-size:5px;background-color:black;color:#fff">경찰청(UTIC)(LIVE)제공</div>`;
           // 로딩창 텍스트 변수
 
           const infowindow = new window.kakao.maps.InfoWindow({
@@ -91,13 +93,17 @@ const CCTV = () => {
 
           const loadingwindow = new window.kakao.maps.InfoWindow({
             // 로딩창 출력 함수
-            zIndex: 1,
+            zIndex: 2,
+            // 영상화면보다 더 앞에 출력
             content: loadingContent,
-            removable: true,
+            removable: false,
+            // 닫기기능 없음
           });
 
           arr.push(infowindow);
           // 빈 배열에 cctv영상을 띄워줄 요소들 담기
+          loadArr.push(loadingwindow);
+          // 빈 배열에 로딩창 띄워줄 요소들 담기
 
           const closeInfowindow = () => {
             arr.map((value: any, index: number) => {
@@ -106,15 +112,28 @@ const CCTV = () => {
           };
           // infowindow 다중 오픈 방지
 
+          const closeLoadingwindow = () => {
+            loadArr.map((value: any, index: number) => {
+              loadArr[index].close();
+            });
+          };
+          // loadingwindow 다중 오픈 방지
+
           // 비디오 영상구현
           kakao.maps.event.addListener(marker, "click", function () {
             closeInfowindow();
-            infowindow.close();
-            kakao.maps.event.addListener(marker, "load", function () {
-              loadingwindow.open(mapScript, marker);
-            });
+            // 영상 다중오픈방지 함수 호출
+            closeLoadingwindow();
+            // 로딩 다중오픈방지 함수 호출
+
+            loadingwindow.open(mapScript, marker);
             infowindow.open(mapScript, marker);
-            // 그다음 영상출력 페이지 출력
+            // 두개 일단 동시에 오픈
+
+            setTimeout(() => {
+              loadingwindow.close();
+            }, 2500);
+            // 2.5초뒤 로딩창만 닫기
           });
           marker.setMap(mapScript);
         });

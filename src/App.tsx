@@ -1,6 +1,6 @@
 import "@/App.css";
 import LayOut from "./Components/Layout";
-import Intro from "./Components/Intro/intro";
+import Intro from "./Components/Intro/Intro";
 import { useState, useEffect } from "react";
 import { Web } from "./Components/Web";
 
@@ -17,7 +17,7 @@ const App = () => {
 
   return (
     <>
-      {/* <Intro /> */}
+      <Intro />
       {width < 899 ? (
         <>
           <LayOut />
