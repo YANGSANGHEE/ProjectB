@@ -1,9 +1,7 @@
-import styled from "styled-components";
 import { useState, useEffect, useRef } from "react";
 import axios, { AxiosResponse } from "axios";
 import CCTVItem from "./CCTVItem";
 import Loadings from "@/Common/Loading";
-import { info } from "console";
 const { kakao } = window;
 
 const CCTV = () => {
@@ -14,9 +12,8 @@ const CCTV = () => {
       .get(`http://localhost:8080/cctv`)
       .then((res: AxiosResponse) => {
         Setcctv(res.data);
-        console.log(res.data.url);
+        // console.log(res.data.url);
         const CCTV = res.data;
-        console.log();
         // cctv데이터 변수 선언
         const container = document.getElementById("map");
         const options = {

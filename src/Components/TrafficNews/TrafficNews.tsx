@@ -2,20 +2,19 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import Modal from './Modal';
-import { calcPx, calcPxX } from '@/Hooks/CalcPx';
+import { calcPx } from '@/Hooks/CalcPx';
 
 const ITS = process.env.REACT_APP_ITS_KEY_AYEON;
 //대전 실시간 사고·공사 api
 const url = `https://openapi.its.go.kr:9443/eventInfo?apiKey=${ITS}&type=all&eventType=all&minX=127.252183&maxX=127.538356&minY=36.194005&maxY=36.499218&getType=json`;
 const TrafficNews = () => {
   // const ITS = process.env.REACT_APP_ITS_KEY2;
-  const [news, setNews] = useState([]);
+  const [news, setNews] = useState<[] | null>(null);
   useEffect(() => {
     //교통정보 끌고오는 api
     const fetchData = async () => {
       try {
         const res = await axios.get(url);
-        // setNews(res.data.body.items)
         setNews(res.data.body.items);
       } catch (e) {
         console.log(e);
@@ -96,16 +95,24 @@ const TrafficNews = () => {
           <img className='img' src='/img/Siren.png' alt='siren'></img>
         </Siren>
         <WrapDiv>
-          {news.map((item: any, index: number) => {
-            return (
-              <StyledDiv key={index}>
-                <span style={{ fontSize: '12px' }}>
-                  {item.roadName}
-                  {item.message}
-                </span>
-              </StyledDiv>
-            );
-          })}
+          {news !== null ? (
+            news.map((item: any, index: number) => {
+              return (
+                <StyledDiv key={index}>
+                  <span id='flowtext' style={{ fontSize: '12px' }}>
+                    {item.roadName}
+                    {item.message}
+                  </span>
+                </StyledDiv>
+              );
+            })
+          ) : (
+            <StyledDiv>
+              <span id='flowtext' style={{ fontSize: '12px' }}>
+                실시간 돌발상황
+              </span>
+            </StyledDiv>
+          )}
         </WrapDiv>
       </Digit>
     </>

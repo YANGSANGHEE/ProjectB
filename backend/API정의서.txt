@@ -1,0 +1,2 @@
+localhost:8080/cctv : DB 연동 CCTV 위치 및 URL 데이터
+localhost:8080/outbreak : 돌발상황정보(사고,공사) 데이터
