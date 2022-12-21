@@ -48,7 +48,7 @@ const CCTV = () => {
             image: markerImg,
             // 마커 이미지 변경
           });
-          let iwContent = `<iframe title="CCTV" width="320" height="280" src="${el.url}"></iframe>`;
+          let iwContent = `<iframe title="CCTV" width="320" height="280" src="${el.url}"></iframe><div style="font-size:5px;background-color:black;color:#fff">경찰청(UTIC)(LIVE)제공</div>`;
 
           let infowindow = new window.kakao.maps.InfoWindow({
             zIndex: 1,
@@ -57,7 +57,6 @@ const CCTV = () => {
             // 닫기버튼 기능
           });
           arr.push(infowindow);
-
           const closeInfowindow = () => {
             arr.map((value: any, index: number) => {
               arr[index].close();
@@ -70,7 +69,6 @@ const CCTV = () => {
             closeInfowindow();
             infowindow.close();
             infowindow.open(mapScript, marker);
-            console.log("click");
           });
           marker.setMap(mapScript);
         });
