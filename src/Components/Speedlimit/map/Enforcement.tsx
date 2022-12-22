@@ -15,17 +15,10 @@ const StylePopup = () => {
         <p>&times;</p>
       </CloseButton>
       <Box>
-<<<<<<< HEAD
         <div className="boxContainer">
           <img src="./img/Camera.svg" />
-          <p className="title">구간단속중</p>
+          <p className="title">무인단속카메라단속중</p>
           <p className="desc">Enforcement</p>
-=======
-        <div className='boxContainer'>
-          <img src='./img/Camera.svg' />
-          <p className='title'>무인단속카메라단속중</p>
-          <p className='desc'>Enforcement</p>
->>>>>>> 559ba34f8a05d5f82da340342708ccd4f7934001
         </div>
       </Box>
     </EnforceContainer>
