@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
 import axios, { AxiosResponse } from 'axios';
-import CCTVItem from './CCTVItem';
 import Loadings from '@/Common/Loading';
 import Refresh from '@/Common/Refresh';
 const { kakao } = window;

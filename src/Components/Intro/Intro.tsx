@@ -38,7 +38,7 @@ const IntroWrap = styled.div`
     transition: ease 0.5s;
     width: 100vw;
     height: 100vh;
-    background: url('/img/intro_bg_Y.png') no-repeat center;
+    background: url('./img/intro_bg_Y.png') no-repeat center;
     background-size: cover;
     flex-direction: column;
     ${({ theme }) => theme.flexSet.flexRowCenter};
@@ -46,7 +46,7 @@ const IntroWrap = styled.div`
       // 올 그린 이미지
       width: ${calcPx(130)};
       height: ${calcPx(13)};
-      background: url('/img/intro_AllGreen.png') no-repeat;
+      background: url('./img/intro_AllGreen.png') no-repeat;
       background-size: ${calcPx(130)} ${calcPx(13)};
       position: relative;
       bottom: 11vh;
@@ -56,7 +56,7 @@ const IntroWrap = styled.div`
       // 가운데 동그라미 이미지
       width: ${calcPx(200)};
       height: ${calcPx(200)};
-      background: url('/img/intro_Traffic.png') no-repeat;
+      background: url('./img/intro_Traffic.png') no-repeat;
       background-size: ${calcPx(200)} ${calcPx(200)};
       ${({ theme }) => theme.flexSet.flexRowCenter};
       & > div {
