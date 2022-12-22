@@ -1,73 +1,137 @@
-import styled from 'styled-components';
-import { useState, useEffect, useRef, useCallback } from 'react';
-import axios, { AxiosAdapter, AxiosDefaults, AxiosResponse } from 'axios';
+import { useState, useEffect, useRef } from 'react';
+import axios, { AxiosResponse } from 'axios';
 import CCTVItem from './CCTVItem';
 import Loadings from '@/Common/Loading';
+import Refresh from '@/Common/Refresh';
 const { kakao } = window;
 
 const CCTV = () => {
-  const [cctv, Setcctv] = useState<any>(null);
-  const ITS = process.env.REACT_APP_ITS_KEY_SPARE;
+  const [cctv, Setcctv] = useState(null);
+  const [mapE, setMapE] = useState({}); //map_def 상태고정용
+
+  const map_def = useRef({});
+  const getCenter_def = useRef();
+
   useEffect(() => {
     axios
-      .get(
-        `https://openapi.its.go.kr:9443/cctvInfo?apiKey=${ITS}&type=all&cctvType=2&minX=127.252183&maxX=127.538356&minY=36.194005&maxY=36.499218&getType=json`
-      )
+      .get(`http://localhost:8080/cctv`)
       .then((res: AxiosResponse) => {
-        Setcctv(res.data.response.data);
-        const CCTV = res.data.response.data;
+        Setcctv(res.data);
+
+        const CCTV = res.data;
         // cctv데이터 변수 선언
         const container = document.getElementById('map');
         const options = {
           center: new kakao.maps.LatLng(36.3504119, 127.3845475),
-          level: 9,
+          level: 7,
         };
         // 초기 카카오맵 설정값
+
+        getCenter_def.current = options.center;
+        //center값 고정
+
         const mapScript = new kakao.maps.Map(container, options);
+        map_def.current = mapScript;
+
+        //map 고정
+        setMapE(map_def.current); //map 고정값 저장(없애면 작동안됨)
         // 카카오맵 기본 설정 좌표 실행
+
         const mapTypeControl = new kakao.maps.MapTypeControl();
         // 지도와 스카이뷰를 선택해서 볼 수 있음.
         mapScript.addControl(
           mapTypeControl,
           kakao.maps.ControlPosition.TOPRIGHT
         );
-        // const zoomControl = new kakao.maps.ZoomControl();
-        // // 확대 축소가 가능한 컨트롤바
-        // mapScript.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
-        const imgSrc = '/img/CCTV.png',
+
+        const imgSrc = './img/CCTV.png',
           imgSize = new kakao.maps.Size(25, 40);
+        // cctv 아이콘 크기
         const imageOption = { offset: new kakao.maps.Point(15, 33) };
-        // 마커 디자인 변경
+        // 좌표에 찍히는 마커 포인트 설정
         const markerImg = new kakao.maps.MarkerImage(
+          // 마커 디자인 변경 함수
           imgSrc,
           imgSize,
           imageOption
         );
+
+        let arr: any = [];
+        // 빈배열 선언
+        let loadArr: any = [];
+        // 로딩용 빈배열
+
         CCTV.map((el: any) => {
+          // map 메소드 활용하여 서버 데이터 요소들 분배
+
           const marker = new kakao.maps.Marker({
             map: mapScript,
             // 카카오맵
-            position: new kakao.maps.LatLng(el.coordy, el.coordx),
+            position: new kakao.maps.LatLng(el.y, el.x),
             // 받아온 데이터 좌표 뿌리기
             image: markerImg,
             // 마커 이미지 변경
           });
-          let iwContent =
-            "<video id='video' autoplay='autoplay' muted='muted' controls style='width:300px; height: 200px'>" +
-            `<source src=${el.cctvurl} type="video/mp4"/>` +
-            '</video>';
+
+          let iwContent = `<iframe title="CCTV" width="320" height="280" style="border: none" src="${el.url}"></iframe><div style="font-size:5px;background-color:black;color:#fff">경찰청(UTIC)(LIVE)제공</div>`;
+          // 영상 띄워주는 텍스트가 담겨있는 변수
+
+          let loadingContent = `<div style="display:flex; flex-direction:column; justify-content:center; align-items:center"><iframe title="CCTV" width="325" height="285" style="border: none; padding-left:20px;" src="./img/Podori_Loading.png"></iframe><p style="text-align:center; font-size:2rem">데이터를 불러오는 중 입니다...</p></div><div style="font-size:5px;background-color:black;color:#fff">경찰청(UTIC)(LIVE)제공</div>`;
+          // 로딩창 텍스트 변수
 
           const infowindow = new window.kakao.maps.InfoWindow({
+            // 영상 출력 함수
             zIndex: 1,
             content: iwContent,
+            // 택스트 담긴 변수
             removable: true,
             // 닫기버튼 기능
           });
-          // 비디오 영상구현
-          kakao.maps.event.addListener(marker, 'click', function () {
-            infowindow.open(mapScript, marker);
+
+          const loadingwindow = new window.kakao.maps.InfoWindow({
+            // 로딩창 출력 함수
+            zIndex: 2,
+            // 영상화면보다 더 앞에 출력
+            content: loadingContent,
+            removable: false,
+            // 닫기기능 없음
           });
 
+          arr.push(infowindow);
+          // 빈 배열에 cctv영상을 띄워줄 요소들 담기
+          loadArr.push(loadingwindow);
+          // 빈 배열에 로딩창 띄워줄 요소들 담기
+
+          const closeInfowindow = () => {
+            arr.map((value: any, index: number) => {
+              arr[index].close();
+            });
+          };
+          // infowindow 다중 오픈 방지
+
+          const closeLoadingwindow = () => {
+            loadArr.map((value: any, index: number) => {
+              loadArr[index].close();
+            });
+          };
+          // loadingwindow 다중 오픈 방지
+
+          // 비디오 영상구현
+          kakao.maps.event.addListener(marker, 'click', function () {
+            closeInfowindow();
+            // 영상 다중오픈방지 함수 호출
+            closeLoadingwindow();
+            // 로딩 다중오픈방지 함수 호출
+
+            loadingwindow.open(mapScript, marker);
+            infowindow.open(mapScript, marker);
+            // 두개 일단 동시에 오픈
+
+            setTimeout(() => {
+              loadingwindow.close();
+            }, 2500);
+            // 2.5초뒤 로딩창만 닫기
+          });
           marker.setMap(mapScript);
         });
         const setDraggable = (draggable: any) => {
@@ -76,7 +140,6 @@ const CCTV = () => {
         };
         setDraggable(true);
         // 드래그 가능
-        console.log('loading kakaomap');
       })
       .catch((e: ErrorCallback) => {
         if (e) throw e;
@@ -87,6 +150,7 @@ const CCTV = () => {
   return (
     <>
       {cctv === null ? <Loadings /> : null}
+      <Refresh map={mapE} center={getCenter_def.current} level={7} />
       <div
         id='map'
         style={{
@@ -94,10 +158,8 @@ const CCTV = () => {
           height: '100vh',
           position: 'relative',
           overflow: 'hidden',
-          zIndex: '1',
-        }}>
-        <CCTVItem></CCTVItem>
-      </div>
+          zIndex: '2',
+        }}></div>
     </>
   );
 };
