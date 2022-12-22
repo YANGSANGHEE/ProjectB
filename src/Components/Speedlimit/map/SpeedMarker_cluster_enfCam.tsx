@@ -4,7 +4,6 @@ const { kakao } = window; //불러오기에 문제없음
 import Refresh from '@/Common/Refresh';
 import StylePopup from './Enforcement';
 import enfCamData from "../testData/unmanned_enforcement_cam_dajeon.json"
-import InfoContentStyle from './InfoContentStyle';
 /**
  * ? 대전 교통 단속카메라 기준
  * 줌 인 or 아웃에 따라 마커가 그룹으로 표시됨(클러스터)
@@ -31,7 +30,7 @@ const MarkerClusterEnfCam = () => {
         let container = document.getElementById('map');
         let options = {
           center: new kakao.maps.LatLng(36.3504119, 127.3845475),
-          level: 9,
+          level: 7,
         };
         getCenter_def.current = options.center; //center값 고정
         setCenter(getCenter_def.current);
@@ -96,53 +95,76 @@ const MarkerClusterEnfCam = () => {
             position: positions,
             image: markerImg, //마커이미지 
           });
-          /* 마커 마우스오버 이벤트 */
+          /* 마커 마우스오버 이벤트 - 인포윈도우 */
           // 마커에 표시할 인포윈도우를 생성 
           if (value["제한속도"] !== 0) {
             let infowindow = new kakao.maps.InfoWindow({
-              // content: `<div style="
-              // width: fit-content;
-              // padding: 2%;
-              // ">테스트<span style="
-              // font-size: 10pt; 
-              // text-align: center;
-              // "}>${value["설치장소"]}</span></div>`,
               content: `
-              <div class="Wrap">
-                <p class="descCon">
-                  <span class="title"> 소재지도로명 | </span>
-                  <span class="desc">${value["소재지도로명주소"]}</span>
-                </p>
-                <p class="descCon"> 
-                  <span class="title"> 설치장소 | </span>
-                  <span class="desc">${value["설치장소"]}</span>
-                </p>
-              </div>`,
+              <div style="
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              ">
+                <div style="
+                width: 95%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 3%;">
+                  <span style="
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  font-size: 10pt;
+                  width: 100%;
+                  padding-bottom: 1%;
+                  border-bottom: #CECECE 1px solid;
+                  text-align: center;
+                  color: #32A48E;
+                  "><img src='https://www.svgrepo.com/show/404469/cctv-cctv-camera-monitoring-camera-security-camera-surveillance.svg' 
+                  style="
+                  width: 25px;
+                  padding-right: 1%;
+                  "
+                  />단속중 ···</span>
+                  <span style="
+                  font-size: 10pt;
+                  text-align: center;
+                  padding-top: 1%;
+                  ">${value["설치장소"]}
+                  </span>
+                </div>
+              </div>
+              `,
               removable: true
             });
-
             const infoStyles =()=> {
+              /* 인포윈도우 기본 스타일 */
               let infowinDefault = infowindow.a;
-              let Wrap:any = document.querySelector<HTMLElement>(".Wrap");
-              let descCon:any = document.querySelector<HTMLElement>(".descCon");
-              let title:any = document.querySelector<HTMLElement>("span.title");
-              let desc:any = document.querySelector<HTMLElement>(".desc");
-
               infowinDefault.style.backgroundColor = "#FFF";
               infowinDefault.style.border = "none";
               infowinDefault.style.borderRadius = "5px";
               infowinDefault.style.opacity = "80%";
-              infowinDefault.style.padding = "2%";
-              infowinDefault.children[0].style.background = "none";
-
-              Wrap.style.display = "flex";
-              Wrap.style.flexDirection = "column";
-              // Wrap.style.alignItems = "center";
-              Wrap.style.padding = "2%";
-
-              title.style.fontWeight = "600";
+              infowinDefault.style.maxWidth = "270px";
+              infowinDefault.style.boxShadow = "rgba(0, 0, 0, 0.2) 1.95px 1.95px 2.6px";
+              /* 닫기 버튼 */
+              infowinDefault.children[2].src = "https://www.svgrepo.com/show/12848/x-symbol.svg";
+              infowinDefault.children[2].style.right = "1rem";
+              infowinDefault.children[2].style.top = "1rem";
+              infowinDefault.children[2].style.width = "10px";
+              infowinDefault.children[2].style.opacity = "50%";
             }
-            
+            infoStyles();
+
+            const infoStylesArrow =()=>{
+              let infowinDefault = infowindow.a;
+              /* 아래 화살표 */
+              infowinDefault.children[0].style.background = "url('https://www.svgrepo.com/show/4166/up-arrow.svg') 0% 0% / 11px 9px no-repeat"; 
+              infowinDefault.children[0].style.marginTop = "0.5%";
+              infowinDefault.children[0].style.rotate = "180deg";
+              // console.log(infowinDefault.children[0].style.background)
+            }
+
             arr.push(infowindow);
             const CloseEvent = () => {
               arr.map((value, index) => arr[index].close());
@@ -150,8 +172,7 @@ const MarkerClusterEnfCam = () => {
             kakao.maps.event.addListener(marker, 'click', function () {
               CloseEvent();
               infowindow.open(map, marker);
-              infoStyles();
-              console.dir(infowindow.a.children[2]);
+              infoStylesArrow();
             });
           }
             return marker; //markers의 return 
@@ -168,7 +189,7 @@ const MarkerClusterEnfCam = () => {
   return (
     <>
       <StylePopup />
-      <Refresh map={map} center={center} level={9} />
+      <Refresh map={map} center={center} level={7} />
       <div
         id='map'
         style={{
