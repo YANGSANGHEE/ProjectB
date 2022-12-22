@@ -29,14 +29,6 @@ const TrafficNews = () => {
   });
 
   //popup창 useState값이 참일때 열리고 false일때 닫힘
-  const [modalOpen, setModalOpen] = useState(false);
-  const openModal = () => {
-    setModalOpen(true);
-  };
-  const closeModal = () => {
-    setModalOpen(false);
-  };
-
   const [open, setOpen] = useState(false);
 
   //css
@@ -89,15 +81,19 @@ const TrafficNews = () => {
       position: relative;
     }
   `;
+
+  const falseSet = (val: boolean): any => {
+    setOpen(val);
+  };
   return (
     <>
+      <Modal open={open} falseSet={falseSet}></Modal>
       <Digit
         onClick={() => {
           setOpen(!open);
         }}>
-        <Modal open={open}></Modal>
         <Siren>
-          <img className='img' src='/img/Siren.png' alt='siren'></img>
+          <img className='img' src='./img/Siren.png' alt='siren'></img>
         </Siren>
         <WrapDiv>
           {news !== null ? (

@@ -73,7 +73,7 @@ const Header = ({ getbutton }: { getbutton: (data: string) => void }) => {
 
   return (
     <HeaderSet>
-      <img src='/img/Logo_Top.png' alt='logo'></img>
+      <img src='./img/Logo_Top.png' alt='logo'></img>
       <div>
         {ButtonSet.map((value, key) => {
           // Element에 넣을 value와 노출된 버튼 이름을 객체화 시킨 배열을 map 돌림

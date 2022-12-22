@@ -17,7 +17,7 @@ const Maps = () => {
     let options = {
       center: new kakao.maps.LatLng(36.3504119, 127.3845475),
       //위도 경도
-      level: 5,
+      level: 7,
       //줌 단계
     };
     getCenter_def.current = options.center;
@@ -34,7 +34,7 @@ const Maps = () => {
   return (
     <>
       <Infos />
-      <Refresh map={map} center={center} level={5} />
+      <Refresh map={map} center={center} level={7} />
       <div
         id='map'
         style={{

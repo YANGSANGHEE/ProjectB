@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 const { kakao } = window; //불러오기에 문제없음
 // import vslData from "../testData/vsl.json" //api 복사한 json데이터
 import Refresh from '@/Common/Refresh';
@@ -29,7 +29,7 @@ const MarkerClusterEnfCam = () => {
         let container = document.getElementById('map');
         let options = {
           center: new kakao.maps.LatLng(36.3504119, 127.3845475),
-          level: 9,
+          level: 7,
         };
         getCenter_def.current = options.center; //center값 고정
         setCenter(getCenter_def.current);
@@ -60,34 +60,34 @@ const MarkerClusterEnfCam = () => {
           //속도에 따라 표시되는 마커 이미지
           switch (speed) {
             case 20:
-              imgSrc = '/img/limit_20.png';
+              imgSrc = './img/limit_20.png';
               break;
             case 30:
-              imgSrc = '/img/limit_30.png';
+              imgSrc = './img/limit_30.png';
               break;
             case 40:
-              imgSrc = '/img/limit_40.png';
+              imgSrc = './img/limit_40.png';
               break;
             case 50:
-              imgSrc = '/img/limit_50.png';
+              imgSrc = './img/limit_50.png';
               break;
             case 60:
-              imgSrc = '/img/limit_60.png';
+              imgSrc = './img/limit_60.png';
               break;
             case 70:
-              imgSrc = '/img/limit_70.png';
+              imgSrc = './img/limit_70.png';
               break;
             case 80:
-              imgSrc = '/img/limit_80.png';
+              imgSrc = './img/limit_80.png';
               break;
             case 100:
-              imgSrc = '/img/limit_100.png';
+              imgSrc = './img/limit_100.png';
               break;
             case 110:
-              imgSrc = '/img/limit_110.png';
+              imgSrc = './img/limit_110.png';
               break;
             default:
-              imgSrc = '/img/limit_0.png'; //투명 이미지
+              imgSrc = './img/limit_0.png'; //투명 이미지
           }
           let imgSize = new kakao.maps.Size(60 * 0.5, 73 * 0.5); //마커 사이즈
           let markerImg = new kakao.maps.MarkerImage(imgSrc, imgSize);
@@ -139,7 +139,7 @@ const MarkerClusterEnfCam = () => {
   return (
     <>
       <StylePopup />
-      <Refresh map={map} center={center} level={9} />
+      <Refresh map={map} center={center} level={7} />
       <div
         id='map'
         style={{
