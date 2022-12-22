@@ -2,6 +2,7 @@
 
 react : npm run start
 express : npm run server
+동시실행 : npm run dev (npm i npm install concurrently 해야함!)
 
 * Styled-component / ThemeProvider
 Styled-component ThemeProvider => Theme 폴더의 theme 참고 (속성값을 객체 형식으로 불러옴)
