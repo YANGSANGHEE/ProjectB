@@ -5,10 +5,10 @@ import Modal from './Modal';
 import { calcPx } from '@/Hooks/CalcPx';
 
 const ITS = process.env.REACT_APP_ITS_KEY_SPARE;
-
 //대전 실시간 사고·공사 api
 const url = `https://openapi.its.go.kr:9443/eventInfo?apiKey=${ITS}&type=all&eventType=all&minX=127.252183&maxX=127.538356&minY=36.194005&maxY=36.499218&getType=json`;
 const TrafficNews = () => {
+  // const ITS = process.env.REACT_APP_ITS_KEY2;
   const [news, setNews] = useState<[] | null>(null);
   useEffect(() => {
     //교통정보 끌고오는 api
@@ -37,6 +37,8 @@ const TrafficNews = () => {
     setModalOpen(false);
   };
 
+  const [open, setOpen] = useState(false);
+
   //css
   const move = keyframes`
     0%{
@@ -62,7 +64,6 @@ const TrafficNews = () => {
     ${({ theme }) => theme.flexSet.flexRowCenter};
   `;
   let WrapDiv: any = styled.div`
-    /* border: solid 7px green; */
     width: 85%;
     height: 3rem;
     overflow: hidden;
@@ -90,11 +91,11 @@ const TrafficNews = () => {
   `;
   return (
     <>
-      <Digit onClick={openModal}>
-        <Modal
-          open={modalOpen}
-          close={closeModal}
-          header='Modal heading'></Modal>
+      <Digit
+        onClick={() => {
+          setOpen(!open);
+        }}>
+        <Modal open={open}></Modal>
         <Siren>
           <img className='img' src='/img/Siren.png' alt='siren'></img>
         </Siren>
@@ -102,10 +103,7 @@ const TrafficNews = () => {
           {news !== null ? (
             news.map((item: any, index: number) => {
               return (
-                <div
-                  id={`index${index}`}
-                  key={index}
-                  ref={(Element) => (ref.current[index] = Element)}>
+                <div key={index}>
                   <span id='flowtext' style={{ fontSize: '12px' }}>
                     {item.roadName}
                     {item.message}

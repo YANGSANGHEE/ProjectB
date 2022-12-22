@@ -39,7 +39,7 @@ const Maps = () => {
         id='map'
         style={{
           position: 'absolute',
-          zIndex: '-1',
+          zIndex: '2',
           width: '100vw',
           height: '100vh',
         }}></div>

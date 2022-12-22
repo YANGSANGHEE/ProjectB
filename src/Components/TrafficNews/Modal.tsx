@@ -9,15 +9,10 @@ interface Dataset {
 
 const Modal = (props: any) => {
   // 열기, 닫기, 모달 헤더 텍스트를 부모로부터 받아옴
-  const { open, close, header } = props;
   const [modalClose, setModalclose] = useState(true);
   const [data, setData] = useState<[] | null>(null);
 
-  const closeModal = () => {
-    setModalclose(false);
-    console.log(modalClose);
-  };
-  // res.data.elements[0].elements
+  const { open } = props;
 
   useEffect(() => {
     axios
@@ -32,7 +27,7 @@ const Modal = (props: any) => {
 
   let DataArr: Dataset[] = [];
 
-  const DataSet = data?.map((value: any) => {
+  data?.map((value: any) => {
     DataArr.push({
       address: value.elements[3].elements[0].text,
       title: value.elements[13].elements[0].text,
@@ -40,6 +35,7 @@ const Modal = (props: any) => {
   });
 
   console.log(DataArr);
+
   const Section: any = styled.div`
     border: solid 2px red;
     width: 80vw;
@@ -50,27 +46,29 @@ const Modal = (props: any) => {
     left: 19px;
     z-index: 1;
   `;
+
   return (
-    // 모달이 열릴때 openModal 클래스가 생성된다.
-    <div className={open ? 'openModal modal' : 'modal'}>
-      {open ? (
-        <Section>
-          <div>
-            <header>
-              {header}
-              <button className='close' onClick={close}>
-                &times;
-              </button>
-            </header>
-            <main>{props.children}</main>
-            <footer>
-              <button className='close' onClick={closeModal}>
-                close
-              </button>
-            </footer>
-          </div>
-        </Section>
-      ) : null}
+    // 클릭시 open 값이 true면 팝업창 출력 false면 팝업창 닫음
+    <div>
+      <div>
+        {open ? (
+          <Section>
+            <div>
+              <header>
+                <button
+                  className='close'
+                  onClick={() => {
+                    !open;
+                  }}>
+                  &times;
+                </button>
+              </header>
+            </div>
+          </Section>
+        ) : (
+          ''
+        )}
+      </div>
     </div>
   );
 };

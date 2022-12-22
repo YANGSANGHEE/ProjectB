@@ -20,7 +20,7 @@ const RefButton = styled.div`
   position: absolute;
   top: 9rem;
   right: 2rem;
-  z-index: 2;
+  z-index: 3;
   /* 디스플레이 속성 */
   display: flex;
   align-items: center;

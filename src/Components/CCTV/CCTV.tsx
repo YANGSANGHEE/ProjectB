@@ -158,7 +158,7 @@ const CCTV = () => {
           height: '100vh',
           position: 'relative',
           overflow: 'hidden',
-          zIndex: '1',
+          zIndex: '2',
         }}></div>
     </>
   );
