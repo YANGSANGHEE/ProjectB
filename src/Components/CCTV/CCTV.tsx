@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 import axios, { AxiosResponse } from "axios";
-import CCTVItem from "./CCTVItem";
 import Loadings from "@/Common/Loading";
 import Refresh from "@/Common/Refresh";
 const { kakao } = window;
@@ -153,7 +152,9 @@ const CCTV = () => {
   return (
     <>
       {cctv === null ? <Loadings /> : null}
+      {/* 화면 미출력시 로딩창 컴포넌트 출력 */}
       <Refresh map={mapE} center={getCenter_def.current} level={7} />
+      {/* 새로고침 클릭시 Effect 내부에 지정해 놓은 좌표와 7레벨의 확대범위로 리셋됨 */}
       <div
         id="map"
         style={{
