@@ -1,6 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
-import { useState } from 'react';
+import React from "react";
+import styled from "styled-components";
+import { useState } from "react";
 
 interface btnSet {
   name: string;
@@ -54,15 +54,15 @@ const HeaderSet = styled.div`
 `;
 
 const ButtonSet: btnSet[] = [
-  { name: 'congestion', con: '혼잡도' },
-  { name: 'speed', con: '단속구간' },
-  { name: 'cctv', con: 'CCTV' },
+  { name: "congestion", con: "혼잡도" },
+  { name: "speed", con: "단속구간" },
+  { name: "cctv", con: "CCTV" },
 ];
 // Element에 넣을 value와 노출된 버튼 이름을 객체화 시킨 배열
 
 const Header = ({ getbutton }: { getbutton: (data: string) => void }) => {
   //getbutton : 부모컴포넌트(Layout에서 자식 컴포넌트에서 바뀌는 값을 props로 받아오기 위한 함수)
-  const [button, Setbutton] = useState('congestion');
+  const [button, Setbutton] = useState("congestion");
   //기본 활성화 버튼 세팅 (혼잡도)
 
   const getData = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -73,7 +73,7 @@ const Header = ({ getbutton }: { getbutton: (data: string) => void }) => {
 
   return (
     <HeaderSet>
-      <img src='/img/Logo_Top.png' alt='logo'></img>
+      <img src="./img/Logo_Top.png" alt="logo"></img>
       <div>
         {ButtonSet.map((value, key) => {
           // Element에 넣을 value와 노출된 버튼 이름을 객체화 시킨 배열을 map 돌림
@@ -82,10 +82,11 @@ const Header = ({ getbutton }: { getbutton: (data: string) => void }) => {
               <button
                 value={value.name}
                 onClick={getData}
-                className={button === value.name ? 'line' : ''}>
+                className={button === value.name ? "line" : ""}
+              >
                 {value.con}
               </button>
-              <div className={button === value.name ? 'line' : ''}></div>
+              <div className={button === value.name ? "line" : ""}></div>
               {/* class name과 button(현재 congestion)과 값이 같으면 line이라는 class가 붙음(버튼활성화 CSS) */}
             </div>
           );

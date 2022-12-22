@@ -1,24 +1,24 @@
-import { useCallback, useRef } from 'react';
-import styled, { css } from 'styled-components';
+import { useCallback, useRef } from "react";
+import styled, { css } from "styled-components";
 
 const StylePopup = () => {
   const close = useCallback(() => {
-    let popup: HTMLElement | null = document.getElementById('popup');
+    let popup: HTMLElement | null = document.getElementById("popup");
     if (popup !== null) {
-      popup.style.display = 'none';
+      popup.style.display = "none";
     }
   }, []);
   const ref = useRef(null);
   return (
-    <EnforceContainer id='popup' ref={ref}>
+    <EnforceContainer id="popup" ref={ref}>
       <CloseButton onClick={close}>
         <p>&times;</p>
       </CloseButton>
       <Box>
-        <div className='boxContainer'>
-          <img src='/img/Camera.svg' />
-          <p className='title'>구간단속중</p>
-          <p className='desc'>Enforcement</p>
+        <div className="boxContainer">
+          <img src="./img/Camera.svg" />
+          <p className="title">구간단속중</p>
+          <p className="desc">Enforcement</p>
         </div>
       </Box>
     </EnforceContainer>

@@ -1,9 +1,9 @@
-import styled from 'styled-components';
-import { useState, useEffect, useRef } from 'react';
-import axios, { AxiosResponse } from 'axios';
-import CCTVItem from './CCTVItem';
-import Loadings from '@/Common/Loading';
-import { info } from 'console';
+import styled from "styled-components";
+import { useState, useEffect, useRef } from "react";
+import axios, { AxiosResponse } from "axios";
+import CCTVItem from "./CCTVItem";
+import Loadings from "@/Common/Loading";
+import { info } from "console";
 const { kakao } = window;
 
 const CCTV = () => {
@@ -18,7 +18,7 @@ const CCTV = () => {
         const CCTV = res.data;
         console.log();
         // cctv데이터 변수 선언
-        const container = document.getElementById('map');
+        const container = document.getElementById("map");
         const options = {
           center: new kakao.maps.LatLng(36.3504119, 127.3845475),
           level: 7,
@@ -35,7 +35,7 @@ const CCTV = () => {
         // const zoomControl = new kakao.maps.ZoomControl();
         // // 확대 축소가 가능한 컨트롤바
         // mapScript.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
-        const imgSrc = '/img/CCTV.png',
+        const imgSrc = "./img/CCTV.png",
           imgSize = new kakao.maps.Size(25, 40);
         const imageOption = { offset: new kakao.maps.Point(15, 33) };
         // 마커 디자인 변경
@@ -72,7 +72,7 @@ const CCTV = () => {
           // infowindow 다중 오픈 방지
 
           // 비디오 영상구현
-          kakao.maps.event.addListener(marker, 'click', function () {
+          kakao.maps.event.addListener(marker, "click", function () {
             closeInfowindow();
             infowindow.close();
             infowindow.open(mapScript, marker);
@@ -85,11 +85,11 @@ const CCTV = () => {
         };
         setDraggable(true);
         // 드래그 가능
-        console.log('loading kakaomap');
+        console.log("loading kakaomap");
       })
       .catch((e: ErrorCallback) => {
         if (e) throw e;
-        console.log('에러');
+        console.log("에러");
       });
   }, []);
 
@@ -97,14 +97,15 @@ const CCTV = () => {
     <>
       {cctv === null ? <Loadings /> : null}
       <div
-        id='map'
+        id="map"
         style={{
-          width: '100vw',
-          height: '100vh',
-          position: 'relative',
-          overflow: 'hidden',
-          zIndex: '1',
-        }}>
+          width: "100vw",
+          height: "100vh",
+          position: "relative",
+          overflow: "hidden",
+          zIndex: "1",
+        }}
+      >
         <CCTVItem></CCTVItem>
       </div>
     </>

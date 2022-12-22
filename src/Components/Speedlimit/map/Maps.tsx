@@ -1,9 +1,9 @@
-import { useEffect, useState, useRef } from 'react';
-import axios, { AxiosResponse } from 'axios';
-import Refresh from '@/Common/Refresh';
-import StylePopup from './Enforcement';
+import { useEffect, useState, useRef } from "react";
+import axios, { AxiosResponse } from "axios";
+import Refresh from "@/Common/Refresh";
+import StylePopup from "./Enforcement";
 const { kakao } = window; //불러오기에 문제없음
-import Loadings from '@/Common/Loading';
+import Loadings from "@/Common/Loading";
 
 /* 테스트 컴포넌트에서 작동 확인 후 이전 */
 const Maps = () => {
@@ -23,7 +23,7 @@ const Maps = () => {
       .then((res: AxiosResponse) => {
         datas = res.data.body.items;
         SetData(datas);
-        let container = document.getElementById('map');
+        let container = document.getElementById("map");
         let options = {
           center: new kakao.maps.LatLng(36.3504119, 127.3845475),
           level: 10,
@@ -57,32 +57,32 @@ const Maps = () => {
           let speed = value.limitSpeed;
           //속도에 따라 표시되는 마커 이미지
           switch (speed) {
-            case '20':
-              imgSrc = '/img/limit_20.png';
+            case "20":
+              imgSrc = "./img/limit_20.png";
               break;
-            case '30':
-              imgSrc = '/img/limit_30.png';
+            case "30":
+              imgSrc = "./img/limit_30.png";
               break;
-            case '40':
-              imgSrc = '/img/limit_40.png';
+            case "40":
+              imgSrc = "./img/limit_40.png";
               break;
-            case '50':
-              imgSrc = '/img/limit_50.png';
+            case "50":
+              imgSrc = "./img/limit_50.png";
               break;
-            case '60':
-              imgSrc = '/img/limit_60.png';
+            case "60":
+              imgSrc = "./img/limit_60.png";
               break;
-            case '70':
-              imgSrc = '/img/limit_70.png';
+            case "70":
+              imgSrc = "./img/limit_70.png";
               break;
-            case '80':
-              imgSrc = '/img/limit_80.png';
+            case "80":
+              imgSrc = "./img/limit_80.png";
               break;
-            case '100':
-              imgSrc = '/img/limit_100.png';
+            case "100":
+              imgSrc = "./img/limit_100.png";
               break;
-            case '110':
-              imgSrc = '/img/limit_110.png';
+            case "110":
+              imgSrc = "./img/limit_110.png";
               break;
           }
           let imgSize = new kakao.maps.Size(60 * 0.5, 73 * 0.5); //마커 사이즈
@@ -97,7 +97,7 @@ const Maps = () => {
       }) // axios는 default가 JSON으로 값을 받아옴
       .catch((e: ErrorCallback) => {
         if (e) throw e;
-        console.log('에러');
+        console.log("에러");
       }); //에러처리
   }, []);
 
@@ -110,7 +110,7 @@ const Maps = () => {
         center={getCenter_def.current}
         level={10}
       />
-      <div id='map' style={{ width: '100vw', height: '70vh' }}></div>
+      <div id="map" style={{ width: "100vw", height: "70vh" }}></div>
     </>
   );
 };

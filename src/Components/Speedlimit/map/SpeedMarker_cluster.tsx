@@ -1,7 +1,7 @@
-import Refresh from '@/Common/Refresh';
-import { useEffect, useRef, useState } from 'react';
-import vslData from '../testData/vsl.json'; //api 복사한 json데이터
-import StylePopup from './Enforcement';
+import Refresh from "@/Common/Refresh";
+import { useEffect, useRef, useState } from "react";
+import vslData from "../testData/vsl.json"; //api 복사한 json데이터
+import StylePopup from "./Enforcement";
 const { kakao } = window; //불러오기에 문제없음
 
 /* 줌 인 or 아웃에 따라 마커가 그룹으로 표시됨 */
@@ -20,7 +20,7 @@ const MarkerCluster = () => {
       resolve(data);
     })
       .then(() => {
-        let container = document.getElementById('map');
+        let container = document.getElementById("map");
         let options = {
           center: new kakao.maps.LatLng(36.3504119, 127.3845475),
           level: 10,
@@ -49,32 +49,32 @@ const MarkerCluster = () => {
           let speed = value.limitSpeed;
           //속도에 따라 표시되는 마커 이미지
           switch (speed) {
-            case '20':
-              imgSrc = '/img/limit_20.png';
+            case "20":
+              imgSrc = "./img/limit_20.png";
               break;
-            case '30':
-              imgSrc = '/img/limit_30.png';
+            case "30":
+              imgSrc = "./img/limit_30.png";
               break;
-            case '40':
-              imgSrc = '/img/limit_40.png';
+            case "40":
+              imgSrc = "./img/limit_40.png";
               break;
-            case '50':
-              imgSrc = '/img/limit_50.png';
+            case "50":
+              imgSrc = "./img/limit_50.png";
               break;
-            case '60':
-              imgSrc = '/img/limit_60.png';
+            case "60":
+              imgSrc = "./img/limit_60.png";
               break;
-            case '70':
-              imgSrc = '/img/limit_70.png';
+            case "70":
+              imgSrc = "./img/limit_70.png";
               break;
-            case '80':
-              imgSrc = '/img/limit_80.png';
+            case "80":
+              imgSrc = "./img/limit_80.png";
               break;
-            case '100':
-              imgSrc = '/img/limit_100.png';
+            case "100":
+              imgSrc = "./img/limit_100.png";
               break;
-            case '110':
-              imgSrc = '/img/limit_110.png';
+            case "110":
+              imgSrc = "./img/limit_110.png";
               break;
           }
           let imgSize = new kakao.maps.Size(60 * 0.5, 73 * 0.5); //마커 사이즈
@@ -88,7 +88,7 @@ const MarkerCluster = () => {
       }) // axios는 default가 JSON으로 값을 받아옴
       .catch((e: ErrorCallback) => {
         if (e) throw e;
-        console.log('에러');
+        console.log("에러");
       }); //에러처리
   }, []);
   return (
@@ -96,15 +96,16 @@ const MarkerCluster = () => {
       <StylePopup />
       <Refresh map={map} center={center} level={10} />
       <div
-        id='map'
+        id="map"
         style={{
-          width: '100vw',
-          height: '100vh',
-          position: 'absolute',
-          top: '0',
-          left: '0',
-          zIndex: '-1',
-        }}></div>
+          width: "100vw",
+          height: "100vh",
+          position: "absolute",
+          top: "0",
+          left: "0",
+          zIndex: "-1",
+        }}
+      ></div>
     </>
   );
 };

@@ -1,8 +1,8 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import styled, { keyframes } from 'styled-components';
-import Modal from './Modal';
-import { calcPx, calcPxX } from '@/Hooks/CalcPx';
+import axios from "axios";
+import { useEffect, useState } from "react";
+import styled, { keyframes } from "styled-components";
+import Modal from "./Modal";
+import { calcPx, calcPxX } from "@/Hooks/CalcPx";
 
 const ITS = process.env.REACT_APP_ITS_KEY_AYEON;
 //대전 실시간 사고·공사 api
@@ -91,15 +91,16 @@ const TrafficNews = () => {
         <Modal
           open={modalOpen}
           close={closeModal}
-          header='Modal heading'></Modal>
+          header="Modal heading"
+        ></Modal>
         <Siren>
-          <img className='img' src='/img/Siren.png' alt='siren'></img>
+          <img className="img" src="./img/Siren.png" alt="siren"></img>
         </Siren>
         <WrapDiv>
           {news.map((item: any, index: number) => {
             return (
               <StyledDiv key={index}>
-                <span style={{ fontSize: '12px' }}>
+                <span style={{ fontSize: "12px" }}>
                   {item.roadName}
                   {item.message}
                 </span>
