@@ -33,7 +33,7 @@ const Modal = (props: any) => {
     });
   });
 
-  console.log(DataArr);
+  // console.log(DataArr);
 
   const Section: any = styled.section`
     width: 100vw;

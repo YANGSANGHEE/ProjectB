@@ -197,7 +197,7 @@ const Intro = () => {
       feblend: '45_6613',
     },
   ];
-  console.log('렌더링중');
+  // console.log('렌더링중');
   return (
     <IntroWrap id='Intros' ref={ref}>
       <div id='allGreen'>{/* 올그린 */}</div>
