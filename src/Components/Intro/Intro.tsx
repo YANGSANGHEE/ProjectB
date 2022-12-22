@@ -87,13 +87,13 @@ const IntroWrap = styled.div`
     ${({ theme }) => theme.device.mobile_wide} {
       // 가로 화면
       // 도로 배경화면
-      background: url("./img/Intro_bg_X.png") no-repeat center;
+      background: url("./img/intro_bg_X.png") no-repeat center;
       background-size: cover;
       & > div:nth-child(1) {
         // 올 그린 이미지
         width: ${calcPxX(100)};
         height: ${calcPxX(12)};
-        background: url("./img/Intro_AllGreen.png") no-repeat;
+        background: url("./img/intro_AllGreen.png") no-repeat;
         background-size: ${calcPxX(100)} ${calcPxX(12)};
         position: relative;
         bottom: 5vh;

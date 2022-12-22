@@ -6,7 +6,8 @@
   "scripts": {
     "start": "webpack-dev-server --config config/webpack.dev.js",
     "build": "webpack --config config/webpack.prod.js",
-    "server": "nodemon backend/app.js"
+    "server": "nodemon backend/app.js",
+    "dev": "concurrently \"npm run start\" \"npm run server\""
   },
   "browserslist": [
     "ie 11"
@@ -23,6 +24,8 @@
   },
   "homepage": "https://github.com/YANGSANGHEE/ProjectB#readme",
   "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@types/cors": "^2.8.13",
     "@types/styled-components": "^5.1.26",
     "arkit": "^1.6.4",
     "axios": "^1.2.1",
@@ -33,7 +36,9 @@
     "package": "^1.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "styled-components": "^5.3.6"
+    "request": "^2.88.2",
+    "styled-components": "^5.3.6",
+    "xml-js": "^1.6.11"
   },
   "devDependencies": {
     "@babel/cli": "^7.19.3",

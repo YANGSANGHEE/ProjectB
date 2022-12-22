@@ -15,10 +15,17 @@ const StylePopup = () => {
         <p>&times;</p>
       </CloseButton>
       <Box>
+<<<<<<< HEAD
         <div className="boxContainer">
           <img src="./img/Camera.svg" />
           <p className="title">구간단속중</p>
           <p className="desc">Enforcement</p>
+=======
+        <div className='boxContainer'>
+          <img src='./img/Camera.svg' />
+          <p className='title'>무인단속카메라단속중</p>
+          <p className='desc'>Enforcement</p>
+>>>>>>> 559ba34f8a05d5f82da340342708ccd4f7934001
         </div>
       </Box>
     </EnforceContainer>
@@ -30,13 +37,13 @@ const EnforceContainer = styled.div`
   position: absolute;
   top: 9rem;
   left: 3rem;
-  z-index: 2;
+  z-index: 3;
 `;
 const CloseButton = styled.div`
   /* 포지션 */
-  position: relative;
-  top: 13px;
-  left: 81px;
+  position: absolute;
+  top: -0.5rem;
+  right: -0.5rem;
   z-index: 1;
   /* 디스플레이 속성 */
   display: flex;
@@ -66,7 +73,7 @@ const Box = styled.div`
   align-items: center;
   justify-content: center;
   /* 사이즈 */
-  width: 95px;
+  width: 115px;
   height: 60px;
   /* 여백 */
   /* 글자 속성 */
