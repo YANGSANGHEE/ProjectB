@@ -1,10 +1,10 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import styled, { keyframes } from 'styled-components';
 import Modal from './Modal';
 import { calcPx } from '@/Hooks/CalcPx';
 
-const ITS = process.env.REACT_APP_ITS_KEY_AYEON;
+const ITS = process.env.REACT_APP_ITS_KEY_SPARE;
 //대전 실시간 사고·공사 api
 const url = `https://openapi.its.go.kr:9443/eventInfo?apiKey=${ITS}&type=all&eventType=all&minX=127.252183&maxX=127.538356&minY=36.194005&maxY=36.499218&getType=json`;
 const TrafficNews = () => {
@@ -22,16 +22,15 @@ const TrafficNews = () => {
     };
     fetchData();
   }, []);
-  console.log(news);
+
+  let ref = useRef<null[] | HTMLDivElement[]>([]);
+  useEffect(() => {
+    ref.current;
+  });
+
   //popup창 useState값이 참일때 열리고 false일때 닫힘
-  const [modalOpen, setModalOpen] = useState(false);
-  const openModal = () => {
-    setModalOpen(true);
-    console.log(modalOpen);
-  };
-  const closeModal = () => {
-    setModalOpen(false);
-  };
+  const [open, setOpen] = useState(false);
+
   //css
   const move = keyframes`
     0%{
@@ -40,7 +39,6 @@ const TrafficNews = () => {
     }
     100%{
       transform: translateX(-200px);
-      /* opacity: 0; */
     }
   `;
   const Digit: any = styled.div`
@@ -58,13 +56,18 @@ const TrafficNews = () => {
     ${({ theme }) => theme.flexSet.flexRowCenter};
   `;
   let WrapDiv: any = styled.div`
-    /* border: solid 7px green; */
     width: 85%;
     height: 3rem;
     overflow: hidden;
     flex-wrap: wrap;
     align-content: center;
     ${({ theme }) => theme.flexSet.flexColumnCenter}
+    &>div {
+      height: 100%;
+      padding-right: 10px;
+      animation: ${move} 10s linear infinite;
+      ${({ theme }) => theme.flexSet.flexRowCenter}
+    }
   `;
   let Siren: any = styled.div`
     flex-wrap: nowrap;
@@ -78,40 +81,38 @@ const TrafficNews = () => {
       position: relative;
     }
   `;
-  const StyledDiv: any = styled.div`
-    height: 100%;
-    margin-right: 10px;
-    animation: ${move} 10s linear infinite;
-    ${({ theme }) => theme.flexSet.flexRowCenter}
-  `;
+
+  const falseSet = (val: boolean): any => {
+    setOpen(val);
+  };
   return (
     <>
-      <Digit onClick={openModal}>
-        <Modal
-          open={modalOpen}
-          close={closeModal}
-          header='Modal heading'></Modal>
+      <Modal open={open} falseSet={falseSet}></Modal>
+      <Digit
+        onClick={() => {
+          setOpen(!open);
+        }}>
         <Siren>
-          <img className='img' src='/img/Siren.png' alt='siren'></img>
+          <img className='img' src='./img/Siren.png' alt='siren'></img>
         </Siren>
         <WrapDiv>
           {news !== null ? (
             news.map((item: any, index: number) => {
               return (
-                <StyledDiv key={index}>
+                <div key={index}>
                   <span id='flowtext' style={{ fontSize: '12px' }}>
                     {item.roadName}
                     {item.message}
                   </span>
-                </StyledDiv>
+                </div>
               );
             })
           ) : (
-            <StyledDiv>
+            <div id='flow_wrap'>
               <span id='flowtext' style={{ fontSize: '12px' }}>
                 실시간 돌발상황
               </span>
-            </StyledDiv>
+            </div>
           )}
         </WrapDiv>
       </Digit>

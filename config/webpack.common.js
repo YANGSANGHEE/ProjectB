@@ -21,13 +21,13 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
-        test: /.(jpe?g|png|gif)$/i,
+        test: /.(jpe?g|png|gif|svg)$/i,
         use: [
           {
-            loader: 'url-loader',
+            loader: 'file-loader',
             options: {
               limit: 8192,
-              name: '/public/img/[name].[hash:8].[ext]',
+              name: '/img/[name].[ext]',
             },
           },
         ],

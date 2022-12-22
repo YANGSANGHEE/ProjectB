@@ -1,7 +1,15 @@
+<<<<<<< HEAD
 import { useState, useEffect, useRef } from "react";
 import axios, { AxiosResponse } from "axios";
 import Loadings from "@/Common/Loading";
 import Refresh from "@/Common/Refresh";
+=======
+import { useState, useEffect, useRef } from 'react';
+import axios, { AxiosResponse } from 'axios';
+import CCTVItem from './CCTVItem';
+import Loadings from '@/Common/Loading';
+import Refresh from '@/Common/Refresh';
+>>>>>>> 559ba34f8a05d5f82da340342708ccd4f7934001
 const { kakao } = window;
 
 const CCTV = () => {
@@ -19,9 +27,7 @@ const CCTV = () => {
 
         const CCTV = res.data;
         // cctv데이터 변수 선언
-
-        const container = document.getElementById("map");
-
+        const container = document.getElementById('map');
         const options = {
           center: new kakao.maps.LatLng(36.3504119, 127.3845475),
           level: 7,
@@ -45,8 +51,7 @@ const CCTV = () => {
           kakao.maps.ControlPosition.TOPRIGHT
         );
 
-        const imgSrc = "/img/CCTV.png",
-          // 피그마에서 제작한 이미지파일
+        const imgSrc = './img/CCTV.png',
           imgSize = new kakao.maps.Size(25, 40);
         // cctv 아이콘 크기
         const imageOption = { offset: new kakao.maps.Point(15, 33) };
@@ -78,7 +83,11 @@ const CCTV = () => {
           let iwContent = `<iframe title="CCTV" width="320" height="280" style="border: none" src="${el.url}"></iframe><div style="font-size:5px;background-color:black;color:#fff">경찰청(UTIC)(LIVE)제공</div>`;
           // 영상 띄워주는 텍스트가 담겨있는 변수
 
+<<<<<<< HEAD
           let loadingContent = `<div style="display:flex; flex-direction:column; justify-content:center; align-items:center"><iframe title="CCTV" width="325" height="285" style="border: none; padding-left:20px;" src="/img/Podori_Loading.png"></iframe><p style="text-align:center; font-size:2rem">데이터를 불러오는 중 입니다...</p></div>`;
+=======
+          let loadingContent = `<div style="display:flex; flex-direction:column; justify-content:center; align-items:center"><iframe title="CCTV" width="325" height="285" style="border: none; padding-left:20px;" src="./img/Podori_Loading.png"></iframe><p style="text-align:center; font-size:2rem">데이터를 불러오는 중 입니다...</p></div><div style="font-size:5px;background-color:black;color:#fff">경찰청(UTIC)(LIVE)제공</div>`;
+>>>>>>> 559ba34f8a05d5f82da340342708ccd4f7934001
           // 로딩창 텍스트 변수
 
           const infowindow = new window.kakao.maps.InfoWindow({
@@ -119,7 +128,7 @@ const CCTV = () => {
           // loadingwindow 다중 오픈 방지
 
           // 비디오 영상구현
-          kakao.maps.event.addListener(marker, "click", function () {
+          kakao.maps.event.addListener(marker, 'click', function () {
             closeInfowindow();
             // 영상 다중오픈방지 함수 호출
             closeLoadingwindow();
@@ -145,7 +154,7 @@ const CCTV = () => {
       })
       .catch((e: ErrorCallback) => {
         if (e) throw e;
-        console.log("에러");
+        console.log('에러');
       });
   }, []);
 
@@ -156,15 +165,14 @@ const CCTV = () => {
       <Refresh map={mapE} center={getCenter_def.current} level={7} />
       {/* 새로고침 클릭시 Effect 내부에 지정해 놓은 좌표와 7레벨의 확대범위로 리셋됨 */}
       <div
-        id="map"
+        id='map'
         style={{
-          width: "100vw",
-          height: "100vh",
-          position: "relative",
-          overflow: "hidden",
-          zIndex: "1",
-        }}
-      ></div>
+          width: '100vw',
+          height: '100vh',
+          position: 'relative',
+          overflow: 'hidden',
+          zIndex: '2',
+        }}></div>
     </>
   );
 };

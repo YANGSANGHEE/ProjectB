@@ -1,11 +1,10 @@
-import { useState } from "react";
-import Header from "./Header";
-import Congestion from "./Congestion/Congestion";
-import Speedlimit from "@/Components/Speedlimit/map/SpeedMarker_cluster";
-import CCTV from "./CCTV/CCTV";
-import TrafficNews from "./TrafficNews/TrafficNews";
-import styled from "styled-components";
-import Loadings from "@/Common/Loading";
+import { useState } from 'react';
+import Header from './Header';
+import Congestion from './Congestion/Congestion';
+import Speedlimit from '@/Components/Speedlimit/map/SpeedMarker_cluster_enfCam';
+import CCTV from './CCTV/CCTV';
+import TrafficNews from './TrafficNews/TrafficNews';
+import styled from 'styled-components';
 
 declare global {
   interface Window {
@@ -19,7 +18,7 @@ const TrafficSet = styled.div`
 `;
 
 const LayOut = () => {
-  const [button, Setbutton] = useState<string>("congestion");
+  const [button, Setbutton] = useState<string>('congestion');
 
   const getbutton = (data: string): void => {
     Setbutton(data);
@@ -28,11 +27,11 @@ const LayOut = () => {
   return (
     <>
       <Header getbutton={getbutton}></Header>
-      {button === "congestion" ? (
+      {button === 'congestion' ? (
         <Congestion />
-      ) : button === "speed" ? (
+      ) : button === 'speed' ? (
         <Speedlimit />
-      ) : button === "cctv" ? (
+      ) : button === 'cctv' ? (
         <CCTV />
       ) : null}
       <TrafficSet>

@@ -14,7 +14,7 @@ const Information = styled.div`
   position: absolute;
   top: 9rem;
   left: 3rem;
-  z-index: 1;
+  z-index: 3;
   background-color: rgba(255, 255, 255, 0.8);
   max-width: 18rem;
   width: ${calcPx(130)};

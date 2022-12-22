@@ -4,7 +4,12 @@ import vslData from '../testData/vsl.json'; //api 복사한 json데이터
 import StylePopup from './Enforcement';
 const { kakao } = window; //불러오기에 문제없음
 
-/* 줌 인 or 아웃에 따라 마커가 그룹으로 표시됨 */
+/** 
+ * ? 전국 고속도로 & 국도 기준
+ * 줌 인 or 아웃에 따라 마커가 그룹으로 표시됨
+ * 사용데이터 : its 가변속도표지정보(VSL)
+ * *221220 기준 사용하지 않음
+*/
 const MarkerCluster = () => {
   // const ITS = process.env.REACT_APP_ITS_KEY2;
   const [map, setMap] = useState<any>();
@@ -50,31 +55,31 @@ const MarkerCluster = () => {
           //속도에 따라 표시되는 마커 이미지
           switch (speed) {
             case '20':
-              imgSrc = '/img/limit_20.png';
+              imgSrc = './img/limit_20.png';
               break;
             case '30':
-              imgSrc = '/img/limit_30.png';
+              imgSrc = './img/limit_30.png';
               break;
             case '40':
-              imgSrc = '/img/limit_40.png';
+              imgSrc = './img/limit_40.png';
               break;
             case '50':
-              imgSrc = '/img/limit_50.png';
+              imgSrc = './img/limit_50.png';
               break;
             case '60':
-              imgSrc = '/img/limit_60.png';
+              imgSrc = './img/limit_60.png';
               break;
             case '70':
-              imgSrc = '/img/limit_70.png';
+              imgSrc = './img/limit_70.png';
               break;
             case '80':
-              imgSrc = '/img/limit_80.png';
+              imgSrc = './img/limit_80.png';
               break;
             case '100':
-              imgSrc = '/img/limit_100.png';
+              imgSrc = './img/limit_100.png';
               break;
             case '110':
-              imgSrc = '/img/limit_110.png';
+              imgSrc = './img/limit_110.png';
               break;
           }
           let imgSize = new kakao.maps.Size(60 * 0.5, 73 * 0.5); //마커 사이즈
