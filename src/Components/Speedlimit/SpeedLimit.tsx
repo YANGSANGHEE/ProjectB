@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import { useEffect, useState } from 'react';
-import Maps from './map/Maps';
+import Maps from './unUseFile/Maps';
 
 const Speedlimit = () => {
   const [vsl, setVsl] = useState([]);
