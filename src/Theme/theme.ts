@@ -8,15 +8,15 @@ const fontSize = {
 `,
 };
 const Color = {
-  green_gradient: "linear-gradient(90deg, #00A542 0%, #81E600 100%)",
-  black: "#222222",
-  gray: "#868686",
-  l_gray: "#979797",
-  W_gray: "#CECECE",
-  red: "#FF0000",
-  orange: "#FFB629",
-  yellow: "#FFE300",
-  green: "#39D729",
+  green_gradient: 'linear-gradient(90deg, #00A542 0%, #81E600 100%)',
+  black: '#222222',
+  gray: '#868686',
+  l_gray: '#979797',
+  W_gray: '#CECECE',
+  red: '#FF0000',
+  orange: '#FFB629',
+  yellow: '#FFE300',
+  green: '#39D729',
 };
 const border = {
   border_5px: `

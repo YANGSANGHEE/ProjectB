@@ -37,9 +37,9 @@ const App = () => {
 
   return (
     <>
-      <Intro />
       {width < 899 ? (
         <>
+          <Intro />
           <LayOut />
         </>
       ) : (

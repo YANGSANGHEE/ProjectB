@@ -6,7 +6,8 @@
   "scripts": {
     "start": "webpack-dev-server --config config/webpack.dev.js",
     "build": "webpack --config config/webpack.prod.js",
-    "server": "nodemon backend/app.js"
+    "server": "nodemon backend/app.js",
+    "dev": "concurrently \"npm run start\" \"npm run server\""
   },
   "browserslist": [
     "ie 11"

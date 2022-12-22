@@ -5,4 +5,6 @@ export const Web = styled.main`
   height: 100vh;
   background: url('./img/web.png') center no-repeat;
   background-size: cover;
+  position: absolute;
+  z-index: 100;
 `;
