@@ -98,7 +98,7 @@ const Box = styled.div`
       margin: 0;
     }
     .desc {
-      font-size: 0.1rem;
+      font-size: 0.7rem;
       font-weight: lighter;
       margin: 0;
     }
