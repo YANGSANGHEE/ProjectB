@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import { useCallback, useEffect, useState, useRef } from 'react';
 const { kakao } = window; //불러오기에 문제없음
 // import vslData from "../testData/vsl.json" //api 복사한 json데이터
 import Refresh from '@/Common/Refresh';
@@ -20,6 +20,7 @@ const MarkerClusterEnfCam = () => {
 
   // console.log(enfCamData.map(val => {return val["제한속도"]}))
   let datas = enfCamData;
+  let arr: any = [];
   useEffect(() => {
     //* 요청 횟수 문제로 테스트 데이터 사용
     new Promise((resolve, rejects) => {
@@ -51,9 +52,7 @@ const MarkerClusterEnfCam = () => {
           minLevel: 6, // 클러스터 할 최소 지도 레벨
         });
         // 마커
-
         let arr: any[] = [];
-
         const markers = enfCamData.map((value: any) => {
           let imgSrc;
           let speed: number = value['제한속도'];
@@ -96,33 +95,87 @@ const MarkerClusterEnfCam = () => {
             position: positions,
             image: markerImg, //마커이미지
           });
-
-          /* 마커 마우스오버 이벤트 */
+          /* 마커 마우스오버 이벤트 - 인포윈도우 */
           // 마커에 표시할 인포윈도우를 생성
           if (value['제한속도'] !== 0) {
             let infowindow = new kakao.maps.InfoWindow({
-              content: `<div style="
-              width: fit-content;
-              padding: 2%;
-              "><span style="
-              font-size: 10pt; 
-              text-align: center;
-              "}>${value['설치장소']}</span></div>`, //
+              content: `
+              <div style="
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              ">
+                <div style="
+                width: 95%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 3%;">
+                  <span style="
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  font-size: 10pt;
+                  width: 100%;
+                  padding-bottom: 1%;
+                  border-bottom: #CECECE 1px solid;
+                  text-align: center;
+                  color: #32A48E;
+                  "><img src='https://www.svgrepo.com/show/404469/cctv-cctv-camera-monitoring-camera-security-camera-surveillance.svg' 
+                  style="
+                  width: 25px;
+                  padding-right: 1%;
+                  "
+                  />단속중 ···</span>
+                  <span style="
+                  font-size: 10pt;
+                  text-align: center;
+                  padding-top: 1%;
+                  ">${value['설치장소']}
+                  </span>
+                </div>
+              </div>
+              `,
               removable: true,
             });
+            const infoStyles = () => {
+              /* 인포윈도우 기본 스타일 */
+              let infowinDefault = infowindow.a;
+              infowinDefault.style.backgroundColor = '#FFF';
+              infowinDefault.style.border = 'none';
+              infowinDefault.style.borderRadius = '5px';
+              infowinDefault.style.opacity = '80%';
+              infowinDefault.style.maxWidth = '270px';
+              infowinDefault.style.boxShadow =
+                'rgba(0, 0, 0, 0.2) 1.95px 1.95px 2.6px';
+              /* 닫기 버튼 */
+              infowinDefault.children[2].src =
+                'https://www.svgrepo.com/show/12848/x-symbol.svg';
+              infowinDefault.children[2].style.right = '1rem';
+              infowinDefault.children[2].style.top = '1rem';
+              infowinDefault.children[2].style.width = '10px';
+              infowinDefault.children[2].style.opacity = '50%';
+            };
+            infoStyles();
+
+            const infoStylesArrow = () => {
+              let infowinDefault = infowindow.a;
+              /* 아래 화살표 */
+              infowinDefault.children[0].style.background =
+                "url('https://www.svgrepo.com/show/4166/up-arrow.svg') 0% 0% / 11px 9px no-repeat";
+              infowinDefault.children[0].style.marginTop = '0.5%';
+              infowinDefault.children[0].style.rotate = '180deg';
+              // console.log(infowinDefault.children[0].style.background)
+            };
 
             arr.push(infowindow);
             const CloseEvent = () => {
               arr.map((value, index) => arr[index].close());
             };
-
             kakao.maps.event.addListener(marker, 'click', function () {
               CloseEvent();
               infowindow.open(map, marker);
-              infowindow.a.style.backgroundColor = '#FFF';
-              infowindow.a.style.border = 'none';
-              infowindow.a.style.borderRadius = '5px';
-              infowindow.a.style.opacity = '80%';
+              infoStylesArrow();
             });
           }
           return marker; //markers의 return
@@ -148,7 +201,7 @@ const MarkerClusterEnfCam = () => {
           position: 'absolute',
           top: '0',
           left: '0',
-          zIndex: '2',
+          zIndex: '-1',
         }}></div>
     </>
   );
