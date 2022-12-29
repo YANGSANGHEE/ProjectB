@@ -52,3 +52,7 @@ ex) const MAP = process.env.REACT_APP_KAKAO_KEY;
     background-color: salmon;
   }
 `;
+
+
+*아마존 배포 URL (모바일만 이용 가능)
+http://43.201.86.175/

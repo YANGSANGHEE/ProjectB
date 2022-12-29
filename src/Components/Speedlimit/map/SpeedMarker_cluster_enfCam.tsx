@@ -59,31 +59,31 @@ const MarkerClusterEnfCam = () => {
           //속도에 따라 표시되는 마커 이미지
           switch (speed) {
             case 20:
-              imgSrc = './img/limit_20.png';
+              imgSrc = 'https://i.ibb.co/71cLrzy/limit-20.png';
               break;
             case 30:
-              imgSrc = './img/limit_30.png';
+              imgSrc = 'https://i.ibb.co/wLxbcMQ/limit-30.png';
               break;
             case 40:
-              imgSrc = './img/limit_40.png';
+              imgSrc = 'https://i.ibb.co/ygpbNH3/limit-40.png';
               break;
             case 50:
-              imgSrc = './img/limit_50.png';
+              imgSrc = 'https://i.ibb.co/wcNdBFs/limit-50.png';
               break;
             case 60:
-              imgSrc = './img/limit_60.png';
+              imgSrc = 'https://i.ibb.co/1QNJd7f/limit-60.png';
               break;
             case 70:
-              imgSrc = './img/limit_70.png';
+              imgSrc = 'https://i.ibb.co/qWq36wW/limit-70.png';
               break;
             case 80:
-              imgSrc = './img/limit_80.png';
+              imgSrc = 'https://i.ibb.co/pZ75RXQ/limit-80.png';
               break;
             case 100:
-              imgSrc = './img/limit_100.png';
+              imgSrc = 'https://i.ibb.co/WkSrDJD/limit-100.png';
               break;
             case 110:
-              imgSrc = './img/limit_110.png';
+              imgSrc = 'https://i.ibb.co/5kgWzHF/limit-110.png';
               break;
             default:
               imgSrc = './img/limit_0.png'; //투명 이미지

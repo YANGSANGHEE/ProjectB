@@ -13,7 +13,7 @@ const CCTV = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/cctv`)
+      .get(`http://43.201.86.175/api/cctv`)
       .then((res: AxiosResponse) => {
         Setcctv(res.data);
 
@@ -43,7 +43,7 @@ const CCTV = () => {
           kakao.maps.ControlPosition.TOPRIGHT
         );
 
-        const imgSrc = './img/CCTV.png',
+        const imgSrc = 'https://i.ibb.co/wQhBP95/CCTV.png',
           imgSize = new kakao.maps.Size(25, 40);
         // cctv 아이콘 크기
         const imageOption = { offset: new kakao.maps.Point(15, 33) };
@@ -75,7 +75,7 @@ const CCTV = () => {
           let iwContent = `<iframe title="CCTV" width="320" height="280" style="border: none" src="${el.url}"></iframe><div style="font-size:5px;background-color:black;color:#fff">경찰청(UTIC)(LIVE)제공</div>`;
           // 영상 띄워주는 텍스트가 담겨있는 변수
 
-          let loadingContent = `<div style="display:flex; flex-direction:column; justify-content:center; align-items:center"><iframe title="CCTV" width="325" height="285" style="border: none; padding-left:20px;" src="./img/Podori_Loading.png"></iframe><p style="text-align:center; font-size:2rem">데이터를 불러오는 중 입니다...</p></div><div style="font-size:5px;background-color:black;color:#fff">경찰청(UTIC)(LIVE)제공</div>`;
+          let loadingContent = `<div style="display:flex; flex-direction:column; justify-content:center; align-items:center"><iframe title="CCTV" width="325" height="285" style="border: none; padding-left:20px;" src="https://i.ibb.co/SK3cknC/Podori-Loading.png'"></iframe><p style="text-align:center; font-size:2rem">데이터를 불러오는 중 입니다...</p></div><div style="font-size:5px;background-color:black;color:#fff">경찰청(UTIC)(LIVE)제공</div>`;
           // 로딩창 텍스트 변수
 
           const infowindow = new window.kakao.maps.InfoWindow({

@@ -38,7 +38,7 @@ const IntroWrap = styled.div`
     transition: ease 0.5s;
     width: 100vw;
     height: 100vh;
-    background: url('./img/intro_bg_Y.png') no-repeat center;
+    background: url('https://i.ibb.co/fFHh6Gw/Intro-bg-y.png') no-repeat center;
     background-size: cover;
     flex-direction: column;
     ${({ theme }) => theme.flexSet.flexRowCenter};
@@ -46,7 +46,7 @@ const IntroWrap = styled.div`
       // 올 그린 이미지
       width: ${calcPx(130)};
       height: ${calcPx(13)};
-      background: url('./img/intro_AllGreen.png') no-repeat;
+      background: url('https://i.ibb.co/4KqxGjk/Intro-All-Green.png') no-repeat;
       background-size: ${calcPx(130)} ${calcPx(13)};
       position: relative;
       bottom: 11vh;
@@ -56,7 +56,7 @@ const IntroWrap = styled.div`
       // 가운데 동그라미 이미지
       width: ${calcPx(200)};
       height: ${calcPx(200)};
-      background: url('./img/intro_Traffic.png') no-repeat;
+      background: url('https://i.ibb.co/tY2r0qh/intro-Traffic.png') no-repeat;
       background-size: ${calcPx(200)} ${calcPx(200)};
       ${({ theme }) => theme.flexSet.flexRowCenter};
       & > div {
@@ -87,13 +87,15 @@ const IntroWrap = styled.div`
     ${({ theme }) => theme.device.mobile_wide} {
       // 가로 화면
       // 도로 배경화면
-      background: url('./img/intro_bg_X.png') no-repeat center;
+      background: url('https://i.ibb.co/SBB2nVk/Intro-bg-x.png') no-repeat
+        center;
       background-size: cover;
       & > div:nth-child(1) {
         // 올 그린 이미지
         width: ${calcPxX(100)};
         height: ${calcPxX(12)};
-        background: url('./img/intro_AllGreen.png') no-repeat;
+        background: url('https://i.ibb.co/4KqxGjk/Intro-All-Green.png')
+          no-repeat;
         background-size: ${calcPxX(100)} ${calcPxX(12)};
         position: relative;
         bottom: 5vh;
@@ -101,9 +103,10 @@ const IntroWrap = styled.div`
       & > div:nth-child(2) {
         // 가운데 동그라미 이미지
         width: ${calcPxX(160)};
-        height: ${calcPxX(140)};
-        background: url('./img/intro_Traffic.png') no-repeat center;
-        background-size: ${calcPxX(160)} ${calcPxX(140)};
+        height: ${calcPxX(162.8)};
+        background: url('https://i.ibb.co/tY2r0qh/intro-Traffic.png') no-repeat
+          center;
+        background-size: cover;
         & > div {
           // 차 svg 감싼 div
           width: ${calcPx(200)};
@@ -132,7 +135,7 @@ const IntroWrap = styled.div`
     }
   }
 `;
-const Intro = () => {
+const Intro = ({ SetTruth }: { SetTruth: (val: boolean) => void }) => {
   const [redCar, setRedCar] = useState({ bgcolor: 'black', matrix: '0' });
   const [yellowCar, setYellowCar] = useState({ bgcolor: 'black', matrix: '0' });
   const [greenCar, setGreenCar] = useState({ bgcolor: 'black', matrix: '0' });
@@ -171,6 +174,7 @@ const Intro = () => {
         if (Intros !== null) {
           Intros.style.opacity = '0';
           Intros.style.zIndex = '-4';
+          SetTruth(true);
         }
       }, 4500);
     });

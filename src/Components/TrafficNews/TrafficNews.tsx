@@ -34,13 +34,13 @@ const TrafficNews = () => {
   //css
   const move = keyframes`
     0%{
-      transform: translateX(130px);
-      opacity: 1;
+      transform: translateX(150px);
     }
     100%{
-      transform: translateX(-200px);
+      transform: translateX(-300px);
     }
   `;
+
   const Digit: any = styled.div`
     width: ${calcPx(280)};
     height: 3.8rem;
@@ -51,7 +51,7 @@ const TrafficNews = () => {
     padding-right: 0 1rem;
     //지도위에 올라가게 설정
     position: absolute;
-    bottom: 2rem;
+    bottom: 3%;
     z-index: 2;
     ${({ theme }) => theme.flexSet.flexRowCenter};
   `;
@@ -62,11 +62,17 @@ const TrafficNews = () => {
     flex-wrap: wrap;
     align-content: center;
     ${({ theme }) => theme.flexSet.flexColumnCenter}
-    &>div {
+    &>div.flow {
       height: 100%;
       padding-right: 10px;
       animation: ${move} 10s linear infinite;
       ${({ theme }) => theme.flexSet.flexRowCenter}
+    }
+    & > div.flow_stop {
+      ${({ theme }) => theme.flexSet.flexRowCenter}
+      &>span {
+        ${({ theme }) => theme.fontSize.font_12}
+      }
     }
   `;
   let Siren: any = styled.div`
@@ -93,14 +99,17 @@ const TrafficNews = () => {
           setOpen(!open);
         }}>
         <Siren>
-          <img className='img' src='./img/Siren.png' alt='siren'></img>
+          <img
+            className='img'
+            src='https://i.ibb.co/DR3r17L/Siren.png'
+            alt='siren'></img>
         </Siren>
         <WrapDiv>
-          {news !== null ? (
+          {news !== null && news !== [] ? (
             news.map((item: any, index: number) => {
               return (
-                <div key={index}>
-                  <span id='flowtext' style={{ fontSize: '12px' }}>
+                <div className='flow' key={index}>
+                  <span style={{ fontSize: '12px' }}>
                     {item.roadName}
                     {item.message}
                   </span>
@@ -108,10 +117,8 @@ const TrafficNews = () => {
               );
             })
           ) : (
-            <div id='flow_wrap'>
-              <span id='flowtext' style={{ fontSize: '12px' }}>
-                실시간 돌발상황
-              </span>
+            <div className='flow_stop'>
+              <span>오늘도 평화로운 대전입니다 :) 안전운전 하세요!</span>
             </div>
           )}
         </WrapDiv>
