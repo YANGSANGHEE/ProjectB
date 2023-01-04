@@ -28,6 +28,7 @@ const TrafficNews = () => {
     ref.current;
   });
 
+  console.log(news);
   //popup창 useState값이 참일때 열리고 false일때 닫힘
   const [open, setOpen] = useState(false);
 
@@ -97,15 +98,17 @@ const TrafficNews = () => {
       <Digit
         onClick={() => {
           setOpen(!open);
-        }}>
+        }}
+      >
         <Siren>
           <img
             className='img'
             src='https://i.ibb.co/DR3r17L/Siren.png'
-            alt='siren'></img>
+            alt='siren'
+          ></img>
         </Siren>
         <WrapDiv>
-          {news !== null && news !== [] ? (
+          {news !== null && news.length !== 0 ? (
             news.map((item: any, index: number) => {
               return (
                 <div className='flow' key={index}>
